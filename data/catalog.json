@@ -1,6 +1,23 @@
 {
   "schemaVersion": "dashboard_catalog.v1",
   "title": "GlobalGrid2050",
-  "description": "Launch-ready page index only. Keep empty until federation output is ready for launch.",
-  "areas": []
+  "description": "Launch-ready page index only. Federation spider links promoted above the red line after manual approval.",
+  "areas": [
+    {
+      "name": "Federation & Spider",
+      "tags": ["spider", "dependency", "federation", "map"],
+      "children": [
+        {
+          "name": "The Spider Dependency Map",
+          "url": "https://ventusltd.github.io/data-federation-map-for-globalgrid2050-all-repos/dashboard/sandbox/spider_full_po_test.html",
+          "note": "live"
+        },
+        {
+          "name": "Spider Printer",
+          "url": "https://ventusltd.github.io/data-federation-map-for-globalgrid2050-all-repos/dashboard/sandbox/federation_radial_uniform.html",
+          "note": "print view"
+        }
+      ]
+    }
+  ]
 }
