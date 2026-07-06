@@ -1,5 +1,6 @@
 (function () {
   const CATALOG_URL = './data/catalog.json';
+  const REGISTRY_URL = 'https://ventusltd.github.io/registry_of_all_content_in_repos_and_dependencies/';
   const menu = document.getElementById('menu');
   const searchInput = document.getElementById('gridSearch');
 
@@ -105,9 +106,38 @@
     box.addEventListener('input', () => sessionStorage.setItem(key, box.value));
   }
 
+  function initRegistryAccess() {
+    const footer = document.querySelector('.footer');
+    if (!footer || document.getElementById('registryAccess')) return;
+
+    const row = document.createElement('p');
+    row.id = 'registryAccess';
+    row.style.display = 'none';
+    row.style.fontSize = '13px';
+    row.style.opacity = '0.75';
+    row.innerHTML = `<a href="${REGISTRY_URL}">Registry of all content, repos and dependencies</a>`;
+    footer.appendChild(row);
+
+    let typed = '';
+    function reveal() {
+      row.style.display = '';
+      row.scrollIntoView({ block: 'nearest' });
+    }
+
+    document.addEventListener('keydown', event => {
+      if (event.ctrlKey && event.shiftKey && event.key.toLowerCase() === 'r') {
+        reveal();
+        return;
+      }
+      typed = (typed + event.key.toLowerCase()).slice(-8);
+      if (typed === 'registry') reveal();
+    });
+  }
+
   async function init() {
     initChecklist();
     initSessionNotes();
+    initRegistryAccess();
 
     try {
       const response = await fetch(CATALOG_URL, { cache: 'no-store' });
