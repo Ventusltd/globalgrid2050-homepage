@@ -5,100 +5,34 @@
 <title>GlobalGrid2050</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="./assets/dashboard.css?v=20260706-spider-1">
+<style>
+  body {
+    background: #000;
+    color: #fff;
+    font-family: Courier, monospace;
+    padding: 40px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  #gridSearch {
+    width: 100%;
+    padding: 12px;
+    background: #111;
+    color: white;
+    border: 1px solid #444;
+    font-family: Courier, monospace;
+    font-size: 18px;
+    box-sizing: border-box;
+  }
+
+  #gridSearch:focus {
+    outline: none;
+    border-color: #66ccff;
+  }
+</style>
 </head>
 <body>
-<h1>GlobalGrid2050</h1>
-
-<h2>Launch-ready Pages</h2>
-<div class="launch-flagship" style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin:10px 0 14px;padding:12px 0;border-bottom:1px solid #333;">
-  <a href="https://ventusltd.github.io/data-federation-map-for-globalgrid2050-all-repos/dashboard/sandbox/spider_full_po_test.html" style="color:#00e5ff;font-weight:bold;font-size:28px;line-height:1.15;text-decoration:none;">The Spider 🕷 — Dependency Map</a>
-  <a href="https://ventusltd.github.io/data-federation-map-for-globalgrid2050-all-repos/dashboard/sandbox/federation_radial_uniform.html" style="color:#00e5ff;font-weight:bold;font-size:18px;line-height:1.15;text-decoration:none;">Spider Printer</a>
-  <span class="dev-status" style="color:#ff3333;font-size:17px;font-weight:bold;">Federation in progress · live</span>
-</div>
-<input type="text" id="gridSearch" placeholder="Search launch-ready pages..." autocomplete="off">
-<div id="menu" aria-live="polite"></div>
-
-<!-- TEMP SESSION BOARD START 2026-06-29 -->
-<hr class="red-line" style="border:0;border-top:5px solid #ff3333;margin:36px 0 24px;">
-
-<section class="session-work" aria-labelledby="session-work-title" style="color:#ff3333;border:2px solid #ff3333;padding:16px;font-size:16px;line-height:1.35;">
-  <h2 id="session-work-title" style="color:#ff3333;margin:0 0 12px;font-size:28px;line-height:1.15;">29 June 2026 Federation Build Board</h2>
-  <p style="margin:0 0 14px;color:#ff3333;">Everything below this red line is temporary working memory. Tick the active workstream. Keep the most important task at the top.</p>
-
-  <h3 style="color:#ff3333;margin:18px 0 10px;font-size:20px;">Actions</h3>
-  <div id="taskChecklist" class="checklist-rows">
-    <label class="check-row" style="display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;padding:8px 0;color:#ff3333;"><input class="task-check" type="checkbox" data-session-item="finish-gb-electricity-data" style="width:18px;height:18px;margin-top:2px;accent-color:#ff3333;"><span>Finish GB electricity data.</span></label>
-    <label class="check-row" style="display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;padding:8px 0;color:#ff3333;"><input class="task-check" type="checkbox" data-session-item="finish-interconnector-parquet-port" style="width:18px;height:18px;margin-top:2px;accent-color:#ff3333;"><span>Finish interconnector data port to the new Parquet system.</span></label>
-    <label class="check-row" style="display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;padding:8px 0;color:#ff3333;"><input class="task-check" type="checkbox" data-session-item="create-electricity-ui-repo" style="width:18px;height:18px;margin-top:2px;accent-color:#ff3333;"><span>Create new UI repo for electricity prices and generation history.</span></label>
-    <label class="check-row" style="display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;padding:8px 0;color:#ff3333;"><input class="task-check" type="checkbox" data-session-item="wire-data-to-new-ui" style="width:18px;height:18px;margin-top:2px;accent-color:#ff3333;"><span>Wire the clean data to the new UI.</span></label>
-    <label class="check-row" style="display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;padding:8px 0;color:#ff3333;"><input class="task-check" type="checkbox" data-session-item="split-generation-and-interconnectors" style="width:18px;height:18px;margin-top:2px;accent-color:#ff3333;"><span>Make sure domestic/onshore generation and interconnector flows are split correctly so users are not confused.</span></label>
-    <label class="check-row" style="display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;padding:8px 0;color:#ff3333;"><input class="task-check" type="checkbox" data-session-item="add-first-independent-app-to-launch-section" style="width:18px;height:18px;margin-top:2px;accent-color:#ff3333;"><span>Add the first completed independent app to the blue launch section above the red line.</span></label>
-    <label class="check-row" style="display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;padding:8px 0;color:#ff3333;"><input class="task-check" type="checkbox" data-session-item="analyse-next-monolith-port" style="width:18px;height:18px;margin-top:2px;accent-color:#ff3333;"><span>Analyse the next item to be moved from the GlobalGrid2050 monolith.</span></label>
-    <label class="check-row" style="display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;padding:8px 0;color:#ff3333;"><input class="task-check" type="checkbox" data-session-item="old-monolith-reference" style="width:18px;height:18px;margin-top:2px;accent-color:#ff3333;"><span>Keep the old monolith live and frozen as reference until a deliberate human cutover decision is made.</span></label>
-    <label class="check-row" style="display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;padding:8px 0;color:#ff3333;"><input class="task-check" type="checkbox" data-session-item="restart-safe-automations" style="width:18px;height:18px;margin-top:2px;accent-color:#ff3333;"><span>Restart needed automations only after data files are growing safely and no repo is becoming too large or slow.</span></label>
-    <label class="check-row" style="display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;padding:8px 0;color:#ff3333;"><input class="task-check" type="checkbox" data-session-item="fault-headroom-private-wire-data-centres" style="width:18px;height:18px;margin-top:2px;accent-color:#ff3333;"><span>Work towards fault headroom, private wire and data centre use cases.</span></label>
-    <label class="check-row" style="display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;padding:8px 0;color:#ff3333;"><input class="task-check" type="checkbox" data-session-item="finish-topology-design-tools" style="width:18px;height:18px;margin-top:2px;accent-color:#ff3333;"><span>Finish detailed topology design tools.</span></label>
-    <label class="check-row" style="display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;padding:8px 0;color:#ff3333;"><input class="task-check" type="checkbox" data-session-item="pipeline-actions-and-focus-projects" style="width:18px;height:18px;margin-top:2px;accent-color:#ff3333;"><span>Implement pipeline actions and qualify focus projects through a pipeline dashboard.</span></label>
-    <label class="check-row" style="display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;padding:8px 0;color:#ff3333;"><input class="task-check" type="checkbox" data-session-item="port-uk-renewables-pipeline-dashboard" style="width:18px;height:18px;margin-top:2px;accent-color:#ff3333;"><span>Port the UK renewables pipeline dashboard to its own self-contained repo with monthly auto-update.</span></label>
-  </div>
-
-  <h3 style="color:#ff3333;margin:22px 0 10px;font-size:20px;">Live scratchpad</h3>
-  <textarea id="sessionNotes" rows="18" spellcheck="true" style="width:100%;box-sizing:border-box;background:#080000;color:#ff3333;border:1px solid #ff3333;font-family:Courier,monospace;font-size:15px;line-height:1.4;padding:10px;">CURRENT ACTIONS:
-Finish GB electricity data.
-Finish interconnector data port to the new Parquet system.
-Create new UI repo for electricity prices and generation history.
-Wire clean data to the new UI.
-Keep domestic/onshore generation and interconnector flows split correctly.
-Add first completed independent app above the red line.
-Analyse next monolith item to port.
-Keep the old monolith live and frozen as reference until a deliberate human cutover decision is made.
-Restart automations only when data growth is safe.
-Work towards fault headroom, private wire and data centres.
-Finish detailed topology design tools.
-Implement pipeline actions and focus-project dashboard.
-Port UK renewables pipeline dashboard to its own monthly-updating repo.
-
-SMALL PRINT:
-To change this board, edit index.html here:
-https://github.com/Ventusltd/globalgrid2050-hompage/blob/main/index.html
-
-Only edit between TEMP SESSION BOARD START and TEMP SESSION BOARD END.
-Move a check-row block higher to make it more important.
-Copy a check-row block to add a task.
-Delete a check-row block to remove a task.
-Or ask ChatGPT to reorder/add/delete the task.
-</textarea>
-
-  <h3 style="color:#ff3333;margin:22px 0 10px;font-size:20px;">Progress notes</h3>
-  <div id="progressNotes" style="border:1px solid #ff3333;background:#100000;color:#ff3333;padding:12px;font-size:14px;line-height:1.45;">
-    <p style="margin:0 0 10px;"><strong>Federation trace note, 29 June 2026:</strong> the original live pages on <code>globalgrid2050.com</code> stay as they are. The old monolith is not being cut over or retired now. Its high-frequency workflows have been frozen or controlled so it can remain a reference source while the leaner federation is built beside it.</p>
-    <p style="margin:0 0 10px;"><strong>New mental model:</strong> treat the old monolith as the dense big bang archive that created the project, not as the whole universe. The federation is the new mapped universe: homepage doctrine, data products, UI staging repos and future launch entries.</p>
-    <p style="margin:0 0 10px;"><strong>New UI staging repo:</strong> <a href="https://github.com/Ventusltd/gb-electricity-ui" style="color:#ff7777;text-decoration:underline;">gb-electricity-ui</a>. This currently contains simplified blank staging shells for <code>/uk_energy_tracking_v6/</code> and <code>/uk_energy_tracking_v6/generation_history/</code>. These are not exact full clones yet. Data loading is deliberately disabled.</p>
-    <p style="margin:0 0 10px;"><strong>Pages status:</strong> GitHub Pages has now been activated for <code>gb-electricity-ui</code>. The links below are staging/test links only and remain below the red line until tested and explicitly approved for launch.</p>
-    <p style="margin:0 0 10px;"><strong>Data ownership:</strong> <a href="https://github.com/Ventusltd/data-gb-electricity" style="color:#ff7777;text-decoration:underline;">data-gb-electricity</a> owns GB generation and price data. <a href="https://github.com/Ventusltd/data-interconnectors" style="color:#ff7777;text-decoration:underline;">data-interconnectors</a> owns interconnector flow data. UI repos consume data after proof; they must not become hidden data repos.</p>
-    <p style="margin:0 0 10px;"><strong>Doctrine:</strong> the federation data discipline lives in this homepage repo. Current pointers include <a href="./AI_READ_FIRST.md" style="color:#ff7777;text-decoration:underline;">AI_READ_FIRST.md</a>, <a href="./DATA_DISCIPLINE.md" style="color:#ff7777;text-decoration:underline;">DATA_DISCIPLINE.md</a> and <a href="./docs/DATA_DISCIPLINE_MANUAL.md" style="color:#ff7777;text-decoration:underline;">docs/DATA_DISCIPLINE_MANUAL.md</a>. Green is not proof. File count is not proof. Size is not proof. The proof is the declared data law tested on the declared key.</p>
-    <p style="margin:0 0 10px;"><strong>Below-red-line test links only:</strong></p>
-    <ul style="margin:0 0 10px 22px;padding:0;">
-      <li><a href="https://github.com/Ventusltd/globalgrid2050-hompage" style="color:#ff7777;text-decoration:underline;">Homepage repo</a> · <a href="https://ventusltd.github.io/globalgrid2050-hompage/" style="color:#ff7777;text-decoration:underline;">homepage staging page</a></li>
-      <li><a href="https://ventusltd.github.io/data-federation-map-for-globalgrid2050-all-repos/live_sandbox/football_one_card/" style="color:#ff7777;text-decoration:underline;">Project match summary canvas</a> · sandbox one-object tracker for porting work</li>
-      <li><a href="https://github.com/Ventusltd/gb-electricity-ui" style="color:#ff7777;text-decoration:underline;">GB electricity UI repo</a> · <a href="https://ventusltd.github.io/gb-electricity-ui/" style="color:#ff7777;text-decoration:underline;">UI staging root</a></li>
-      <li><a href="https://ventusltd.github.io/gb-electricity-ui/uk_energy_tracking_v6/" style="color:#ff7777;text-decoration:underline;">GB electricity tracker staging shell</a></li>
-      <li><a href="https://ventusltd.github.io/gb-electricity-ui/uk_energy_tracking_v6/generation_history/" style="color:#ff7777;text-decoration:underline;">Generation history staging shell</a></li>
-      <li><a href="https://github.com/Ventusltd/data-gb-electricity" style="color:#ff7777;text-decoration:underline;">GB electricity data repo</a></li>
-      <li><a href="https://github.com/Ventusltd/data-interconnectors" style="color:#ff7777;text-decoration:underline;">Interconnector data repo</a></li>
-      <li><a href="https://github.com/Ventusltd/globalgrid2050" style="color:#ff7777;text-decoration:underline;">Old monolith reference archive</a> · leave live originals untouched</li>
-    </ul>
-    <p style="margin:0;"><strong>Next trace task:</strong> create a proper cross-repo site map so every app, data repo, UI repo, source repo and staging URL has one recorded owner, status, data source, live URL and next action. Nothing moves above the red line until human approval.</p>
-  </div>
-
-  <p style="margin:10px 0 0;color:#ff3333;font-size:14px;">Edit link: <a href="https://github.com/Ventusltd/globalgrid2050-hompage/blob/main/index.html" style="color:#ff3333;text-decoration:underline;">GitHub index.html</a></p>
-</section>
-<!-- TEMP SESSION BOARD END 2026-06-29 -->
-
-<div class="footer">
-  <p><strong>Disclaimer:</strong> Content provided for general technical documentation and research purposes only.</p>
-</div>
-
-<script src="./assets/dashboard.js?v=20260706-spider-1" defer></script>
+<input type="text" id="gridSearch" placeholder="Search everything..." autocomplete="off" aria-label="Search GlobalGrid2050">
 </body>
 </html>
