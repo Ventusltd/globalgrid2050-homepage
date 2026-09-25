@@ -30,24 +30,6 @@
       ]
     },
     {
-      "id": "electrical-scene-explorer",
-      "title": "Electrical Scene Explorer",
-      "subtitle": "Drawing prototype",
-      "description": "Explore an illustrative electrical scene in 3D, inspect array geometry and follow modelled cable routes. Prototype, not a surveyed site or approved engineering design.",
-      "launch_label": "Open drawing prototype",
-      "operative_release_id": "prototype-20260925",
-      "releases": [
-        {
-          "id": "prototype-20260925",
-          "label": "Drawing prototype - 25 September 2026",
-          "url": "https://ventusltd.github.io/graphics-engines-open-source/",
-          "published_at": "2026-09-25",
-          "status": "available",
-          "source_ref": "https://github.com/Ventusltd/graphics-engines-open-source"
-        }
-      ]
-    },
-    {
       "id": "gridatlas",
       "title": "GridAtlas",
       "subtitle": "Explore the electricity network",
@@ -196,6 +178,25 @@
           "source_ref": "https://github.com/Ventusltd/globalgrid2050/tree/7c64560d282f3412a3dfd79939e236a37ee5e8da"
         }
       ]
+    },
+    {
+      "id": "electrical-scene-explorer",
+      "title": "Electrical Scene Explorer",
+      "subtitle": "Solar Design Studio drawing prototype",
+      "description": "Explore an illustrative electrical scene in 3D, inspect array geometry and follow modelled cable routes. Prototype, not a surveyed site or approved engineering design.",
+      "launch_label": "Open drawing prototype",
+      "operative_release_id": "prototype-20260925",
+      "releases": [
+        {
+          "id": "prototype-20260925",
+          "label": "Drawing prototype - 25 September 2026",
+          "url": "https://ventusltd.github.io/graphics-engines-open-source/",
+          "published_at": "2026-09-25",
+          "status": "available",
+          "source_ref": "https://github.com/Ventusltd/graphics-engines-open-source"
+        }
+      ],
+      "parent_id": "solar-design-studio"
     },
     {
       "id": "identity-registry",
@@ -407,10 +408,6 @@
     "items": [
       {
         "entity_id": "kuiper",
-        "open": false
-      },
-      {
-        "entity_id": "electrical-scene-explorer",
         "open": false
       },
       {
