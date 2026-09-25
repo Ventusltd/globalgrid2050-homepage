@@ -144,13 +144,16 @@ def validate(data):
     require(isinstance(development, list), "development must be an array")
     seen_development = set()
     for entry in development:
-        fields(entry, {"entity_id", "label", "status", "url"}, set(), "development entry")
+        fields(entry, {"entity_id", "label", "status", "url"}, {"description", "evidence_summary"}, "development entry")
         identifier(entry["entity_id"], "development.entity_id")
         eid = entry["entity_id"]
         require(eid in entities, f"development: unknown entity {eid}")
         require(eid not in seen_development, f"development: duplicate entity {eid}")
         seen_development.add(eid)
         nonempty(entry["label"], "development.label")
+        for key in ("description", "evidence_summary"):
+            if key in entry:
+                nonempty(entry[key], f"development.{key}")
         require(entry["status"] == "In development", "development.status must be 'In development'")
         https_url(entry["url"], "development.url")
 

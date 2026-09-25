@@ -30,7 +30,22 @@ jobs:
           python3 scripts/releases.py validate
           python3 -m unittest discover -s tests
           node --check assets/versioned-homepage.js
+      - name: Check desktop and mobile browser behaviour
+        timeout-minutes: 5
+        run: |
+          npm install --prefix "$RUNNER_TEMP/homepage-browser" --no-save --ignore-scripts playwright@1.62.1
+          "$RUNNER_TEMP/homepage-browser/node_modules/.bin/playwright" install --with-deps chromium
+          PLAYWRIGHT_MODULE="$RUNNER_TEMP/homepage-browser/node_modules/playwright" node tests/homepage-browser.cjs
+      - name: Preserve browser evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: homepage-browser-evidence
+          path: browser-evidence
+          if-no-files-found: warn
       - name: Assemble bounded homepage bundle
+        # Browser checks run before this bundle can be published.
+        # No local workstation security settings are involved.
         run: |
           mkdir -p _site/assets _site/data
           cp index.html .nojekyll _site/

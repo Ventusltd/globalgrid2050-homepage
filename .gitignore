@@ -23,6 +23,7 @@ node_modules/
 dist/
 build/
 coverage/
+browser-evidence/
 
 # Python helper tooling if added later
 __pycache__/

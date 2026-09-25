@@ -101,11 +101,11 @@ class ReleaseContractTests(unittest.TestCase):
         data = fixture()
         data["entities"][0]["releases"][0]["published_at"] = None
         data["entities"][0]["releases"][0].update(archive_url="https://example.com/commit/abc/manifest.json", archive_kind="manifest")
-        data["development"] = [{"entity_id": "tool", "label": "Tool development", "status": "In development", "url": "https://example.com/repo/"}]
+        data["development"] = [{"entity_id": "tool", "label": "Tool development", "status": "In development", "url": "https://example.com/repo/", "description": "A compact development highlight.", "evidence_summary": "Synthetic fixture tested."}]
         releases.validate(data)
         promoted = releases.promote(data, "tool", "B", "Verified")
         self.assertEqual(promoted["entities"][0]["releases"][0]["archive_kind"], "manifest")
-        for key, value in (("entity_id", "missing"), ("status", "available"), ("url", "javascript:evil")):
+        for key, value in (("entity_id", "missing"), ("status", "available"), ("url", "javascript:evil"), ("description", " "), ("evidence_summary", 12)):
             invalid = copy.deepcopy(data)
             invalid["development"][0][key] = value
             with self.subTest(key=key), self.assertRaises(ValueError):
