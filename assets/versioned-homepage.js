@@ -7,8 +7,30 @@
   const search = document.getElementById('homepageSearch');
   const status = document.getElementById('searchStatus');
   const catalogueBody = document.getElementById('catalogueRows');
+  const searchText = new WeakMap();
   function matchesQuery(entity, query) {
-    return [entity.id, entity.title, entity.subtitle, entity.description, ...entity.releases.map(release => [release.id, release.label, release.url, release.status, release.source_ref].join(' '))].join(' ').toLocaleLowerCase().includes(query);
+    if (!searchText.has(entity)) searchText.set(entity, [entity.id, entity.title, entity.subtitle, entity.description, ...entity.releases.map(release => [release.id, release.label, release.url, release.status, release.source_ref].join(' '))].join(' ').toLocaleLowerCase());
+    return searchText.get(entity).includes(query);
+  }
+  async function fetchJson(url) {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 8000);
+    try {
+      const response = await fetch(url, { signal: controller.signal });
+      if (!response.ok) throw new Error('Catalogue unavailable');
+      return await response.json();
+    } finally { clearTimeout(timeout); }
+  }
+  function onDemand(details, populate) {
+    let ready = false;
+    const hydrate = () => {
+      if (ready) return;
+      populate();
+      ready = true;
+    };
+    details.querySelector('summary').addEventListener('click', hydrate);
+    details.addEventListener('toggle', () => { if (details.open) hydrate(); });
+    return hydrate;
   }
   const node = (tag, text, className) => {
     const element = document.createElement(tag);
@@ -125,6 +147,11 @@
     }
     document.getElementById('highlights').hidden = presentation.highlights.length === 0;
     const records = [];
+    const childrenByParent = new Map();
+    for (const entity of data.entities) {
+      if (!childrenByParent.has(entity.parent_id)) childrenByParent.set(entity.parent_id, []);
+      childrenByParent.get(entity.parent_id).push(entity);
+    }
     function entityNode(entity, position, open) {
       const details = node('details', undefined, 'entity');
       details.id = entity.id;
@@ -141,12 +168,14 @@
       const history = node('details', undefined, 'versions');
       const other = entity.releases.filter(release => release.id !== operative.id).sort((a, b) => (Date.parse(b.published_at) || 0) - (Date.parse(a.published_at) || 0));
       history.append(node('summary', 'Versions (' + other.length + ')'));
-      if (other.length) other.forEach(release => history.append(releaseRow(release, false)));
-      else history.append(node('p', 'No earlier versions listed.'));
+      const hydrateHistory = onDemand(history, () => {
+        if (other.length) other.forEach(release => history.append(releaseRow(release, false)));
+        else history.append(node('p', 'No earlier versions listed.'));
+      });
       inside.append(history);
-      const record = { entity, details, history, children: [] };
+      const record = { entity, details, history, hydrateHistory, children: [] };
       records.push(record);
-      for (const child of data.entities.filter(candidate => candidate.parent_id === entity.id)) {
+      for (const child of childrenByParent.get(entity.id) || []) {
         const childNode = entityNode(child, '↳', false);
         record.children.push(child.id);
         inside.append(childNode);
@@ -171,11 +200,11 @@
       name.append(node('small', entity.id, 'entity-key'));
       const versions = node('details', undefined, 'table-versions');
       versions.append(node('summary', operative.label));
-      for (const release of entity.releases) {
+      onDemand(versions, () => { for (const release of entity.releases) {
         const version = releaseRow(release, release.id === operative.id);
         version.append(node('small', release.id, 'entity-key'));
         versions.append(version);
-      }
+      } });
       const versionCell = node('td');
       versionCell.append(versions);
       row.append(name, node('td', entity.subtitle || byId.get(entity.parent_id)?.title || '\u2014'), versionCell);
@@ -207,6 +236,7 @@
         if (query) {
           record.details.open = match;
           record.history.open = record.entity.releases.some(release => release.id !== record.entity.operative_release_id && [release.label, release.url, release.status, release.source_ref].join(' ').toLocaleLowerCase().includes(query));
+          if (record.history.open) record.hydrateHistory();
         }
       }
       if (!query && saved) {
@@ -220,16 +250,10 @@
       status.textContent = query ? count ? count + ' matching apps and versions.' : 'No matching tools or versions.' : '';
     });
   }
-  Promise.all([configUrl, presentationUrl].map(url => fetch(url).then(response => {
-    if (!response.ok) throw new Error('Catalogue unavailable');
-    return response.json();
-  }))).then(([data, presentation]) => {
+  Promise.all([configUrl, presentationUrl].map(fetchJson)).then(([data, presentation]) => {
     render(data, presentation);
     // Activity is optional: a missing feed must never hide the main collection.
-    fetch(activityUrl).then(response => {
-      if (!response.ok) throw new Error('Apps unavailable');
-      return response.json();
-    }).then(feed => {
+    fetchJson(activityUrl).then(feed => {
       if (!Array.isArray(feed.items)) throw new Error('Invalid app list');
       for (const item of feed.items) {
         if (typeof item.label !== 'string' || !item.label.trim()) throw new Error('Missing app label');
