@@ -1,0 +1,83 @@
+{
+  "format": "JSON-compatible YAML; parsed with Python standard-library json",
+  "owner": "Ventusltd",
+  "window_days": 30,
+  "max_items": 12,
+  "max_candidates": 20,
+  "repository_listing_limit": 100,
+  "commits_per_repository": 100,
+  "max_html_bytes": 2000000,
+  "exclude_repositories": [
+    "globalgrid2050-homepage",
+    "globalgrid2050-hompage",
+    "cvaa",
+    "law",
+    "chatgpt-audits",
+    "reports",
+    "registry_of_all_content_in_repos_and_dependencies",
+    "seed-data",
+    "architecture",
+    "youengineer-code-review"
+  ],
+  "exclude_repository_prefixes": [
+    "data-",
+    "data_"
+  ],
+  "exclude_commit_prefixes": [
+    "chore: refresh homepage ticker",
+    "chore: refresh active pages"
+  ],
+  "candidates": [
+    {
+      "repository": "gridatlas",
+      "label": "GridAtlas",
+      "url": "https://ventusltd.github.io/gridatlas/atlas/"
+    },
+    {
+      "repository": "globalgrid2050",
+      "label": "Kuiper",
+      "url": "https://globalgrid2050.com/kuiper/"
+    },
+    {
+      "repository": "globalgrid2050",
+      "label": "Pipeline News",
+      "url": "https://globalgrid2050.com/uk_renewables_pipeline/202609082224/"
+    },
+    {
+      "repository": "globalgrid2050",
+      "label": "Solar Design Studio",
+      "url": "https://globalgrid2050.com/solar-bess-topology-v7/gis-sld-financial-sandbox/index.html"
+    },
+    {
+      "repository": "globalgrid2050-ip-and-mac-addresses",
+      "label": "Identity Registry",
+      "url": "https://ventusltd.github.io/globalgrid2050-ip-and-mac-addresses/"
+    },
+    {
+      "repository": "sld",
+      "label": "SLD Library",
+      "url": "https://ventusltd.github.io/sld/"
+    },
+    {
+      "repository": "ventus-grid-engine",
+      "label": "VENTUS Grid Engine",
+      "url": "https://ventusltd.github.io/ventus-grid-engine/"
+    },
+    {
+      "repository": "globalgrid2050",
+      "label": "Electricity Market Intelligence",
+      "url": "https://globalgrid2050.com/uk_energy_tracking_v6/"
+    },
+    {
+      "repository": "globalgrid2050",
+      "label": "Metals & Cable Prices",
+      "url": "https://globalgrid2050.com/copper_and_aluminium_prices_historic_trends/"
+    },
+    {
+      "repository": "globalgrid2050",
+      "label": "Cable Engineering",
+      "url": "https://globalgrid2050.com/ac_cables_knowledge/"
+    }
+  ],
+  "method_note": "Rank live app routes by their repository's default-branch commits in the last 30 days. Shared-repository apps share counts; this is not per-app activity. At most 100 commits are read per repository; capped counts are lower bounds and do not resolve ordering beyond the cap. Discover additional public Pages repositories from one page of at most 100 public repositories ordered by pushed time; inspect at most 20 routes including curated routes. This is a bounded sample, not a complete owner-wide ranking. Ignore only configured self-refresh commit prefixes; other automation commits count. URL is the unique output key."
+}

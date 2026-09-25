@@ -1,9 +1,14 @@
 (function () {
   'use strict';
   const configUrl = new URL('../data/homepage.json', document.currentScript.src);
+  const activityUrl = new URL('../data/active-pages.json', document.currentScript.src);
   const mount = document.getElementById('nests');
   const search = document.getElementById('homepageSearch');
   const status = document.getElementById('searchStatus');
+  const catalogueBody = document.getElementById('catalogueRows');
+  function matchesQuery(entity, query) {
+    return [entity.title, entity.subtitle, entity.description, ...entity.releases.map(release => [release.label, release.url, release.status, release.source_ref].join(' '))].join(' ').toLocaleLowerCase().includes(query);
+  }
   const node = (tag, text, className) => {
     const element = document.createElement(tag);
     if (text !== undefined) element.textContent = text;
@@ -16,9 +21,14 @@
     if (url.protocol !== 'https:' || url.username || url.password) throw new Error('Unsafe URL');
     return value;
   }
+  function appUrl(value) {
+    const url = new URL(safeUrl(value));
+    if (/(^|\.)github\.com$/i.test(url.hostname) || /(^|\.)githubusercontent\.com$/i.test(url.hostname)) throw new Error('Expected an app URL');
+    return value;
+  }
   function link(label, url, className) {
     const a = node('a', label, className);
-    a.href = safeUrl(url);
+    a.href = appUrl(url);
     return a;
   }
   function validate(data) {
@@ -63,27 +73,22 @@
   function releaseRow(release, operative) {
     const row = node('div', undefined, 'release');
     row.append(node('span', operative ? 'Operative' : release.status === 'candidate' ? 'Candidate' : 'Archived', 'release-state'));
-    const target = operative ? release.url : release.archive_url || release.url;
-    const recordLabel = !operative && release.archive_kind === 'manifest' ? ' · Release record' : '';
-    row.append(link(release.label + recordLabel, target, 'release-link'));
-    if (release.published_at) {
-      const time = node('time', release.published_at);
-      time.dateTime = release.published_at;
-      row.append(time);
+    let target = release.url;
+    if (!operative && release.archive_url && release.archive_kind !== 'manifest') {
+      try { target = appUrl(release.archive_url); } catch (_) { /* Keep the app link. */ }
     }
-    row.append(node('span', target, 'release-url'));
-    if (operative && release.archive_url) row.append(link(release.archive_kind === 'manifest' ? 'Release record' : 'Archived copy', release.archive_url));
+    row.append(link(release.label, target, 'release-link'));
     return row;
   }
   function developmentStrip(items) {
     if (!items.length) return;
     const strip = node('section', undefined, 'development-strip');
-    strip.setAttribute('aria-label', 'GlobalGrid2050 apps and build status');
+    strip.setAttribute('aria-label', 'Explore our apps');
     const label = node('span', 'GLOBALGRID2050', 'development-label');
     const viewport = node('div', undefined, 'development-viewport');
     const track = node('div', undefined, 'development-track');
     const group = node('div', undefined, 'development-group');
-    items.forEach(item => group.append(link(item.label + ' · ' + item.status, item.url)));
+    items.forEach(item => group.append(link(item.label, item.url)));
     track.append(group);
     const clone = group.cloneNode(true);
     clone.setAttribute('aria-hidden', 'true');
@@ -92,17 +97,7 @@
     clone.addEventListener('pointerdown', event => event.preventDefault());
     track.append(clone);
     viewport.append(track);
-    const pause = node('button', 'Pause', 'ticker-pause');
-    pause.type = 'button';
-    pause.setAttribute('aria-label', 'Pause development ticker');
-    pause.setAttribute('aria-pressed', 'false');
-    pause.addEventListener('click', () => {
-      const paused = strip.classList.toggle('is-paused');
-      pause.textContent = paused ? 'Resume' : 'Pause';
-      pause.setAttribute('aria-label', paused ? 'Resume development ticker' : 'Pause development ticker');
-      pause.setAttribute('aria-pressed', String(paused));
-    });
-    strip.append(label, viewport, pause);
+    strip.append(label, viewport);
     document.querySelector('header').after(strip);
   }
   function render(data) {
@@ -140,31 +135,20 @@
     const fragment = document.createDocumentFragment();
     data.view.items.forEach((item, index) => fragment.append(entityNode(byId.get(item.entity_id), String(index + 1).padStart(2, '0'), item.open)));
     mount.replaceChildren(fragment);
-    document.getElementById('archiveLink').href = safeUrl(data.view.archive_url);
-    const development = (data.development || []).slice(0, 3);
-    const highlights = node('section', undefined, 'build-highlights');
-    highlights.setAttribute('aria-labelledby', 'buildHeading');
-    const heading = node('h2', 'In build');
-    heading.id = 'buildHeading';
-    const cards = node('div', undefined, 'build-list');
-    const buildRecords = development.map(item => {
-      const card = node('article', undefined, 'build-card');
-      const title = node('h3');
-      title.append(link(item.label + ' ↗', item.url));
-      card.append(node('span', item.status, 'build-state'), title);
-      if (item.description) card.append(node('p', item.description));
-      if (item.evidence_summary) card.append(node('p', item.evidence_summary, 'build-evidence'));
-      cards.append(card);
-      return {card, text:[item.label, item.status, item.description, item.evidence_summary, item.url].join(' ').toLocaleLowerCase()};
+    catalogueBody.replaceChildren();
+    const catalogueRows = data.entities.map(entity => {
+      const operative = entity.releases.find(release => release.id === entity.operative_release_id);
+      const row = node('tr');
+      row.dataset.entityId = entity.id;
+      const name = node('th');
+      name.scope = 'row';
+      name.append(link(entity.title, operative.url));
+      row.append(name, node('td', entity.subtitle || byId.get(entity.parent_id)?.title || '\u2014'), node('td', operative.label));
+      catalogueBody.append(row);
+      return { entity, row };
     });
-    highlights.append(heading, cards);
-    highlights.hidden = !buildRecords.length;
-    mount.before(highlights);
-    const available = data.view.items.slice(0, 8).map(item => {
-      const entity = byId.get(item.entity_id);
-      return {label:entity.title,status:'Available',url:entity.releases.find(release=>release.id===entity.operative_release_id).url};
-    });
-    developmentStrip([...available, ...development]);
+    document.getElementById('catalogue').hidden = false;
+    document.getElementById('archiveLink').href = appUrl(data.view.archive_url);
     document.getElementById('searchControls').hidden = false;
     let saved = null;
     search.addEventListener('input', () => {
@@ -172,7 +156,7 @@
       if (query && !saved) saved = new Map(Array.from(mount.querySelectorAll('details'), detail => [detail, detail.open]));
       const matches = new Map();
       for (const record of records.slice().reverse()) {
-        const ownMatch = [record.entity.title, record.entity.subtitle, record.entity.description, ...record.entity.releases.map(release => [release.label, release.url, release.status, release.source_ref].join(' '))].join(' ').toLocaleLowerCase().includes(query);
+        const ownMatch = matchesQuery(record.entity, query);
         const match = ownMatch || record.children.some(id => matches.get(id));
         matches.set(record.entity.id, match);
         record.details.hidden = !match;
@@ -185,17 +169,33 @@
         saved.forEach((open, detail) => { detail.open = open; });
         saved = null;
       }
-      buildRecords.forEach(record => {record.card.hidden = Boolean(query) && !record.text.includes(query);});
-      const builds = buildRecords.filter(record=>!record.card.hidden).length;
-      highlights.hidden = builds === 0;
-      const count = [...matches.values()].filter(Boolean).length;
-      status.textContent = query ? count || builds ? count + ' matching tools and variants; ' + builds + ' builds.' : 'No matching tools, versions or builds.' : '';
+      let count = 0;
+      for (const record of catalogueRows) {
+        record.row.hidden = !matchesQuery(record.entity, query);
+        if (!record.row.hidden) count++;
+      }
+      document.getElementById('catalogueEmpty').hidden = count > 0;
+      status.textContent = query ? count ? count + ' matching apps and versions.' : 'No matching tools or versions.' : '';
     });
   }
   fetch(configUrl).then(response => {
     if (!response.ok) throw new Error('Catalogue unavailable');
     return response.json();
-  }).then(render).catch(error => {
+  }).then(data => {
+    render(data);
+    // Activity is optional: a missing feed must never hide the main collection.
+    fetch(activityUrl).then(response => {
+      if (!response.ok) throw new Error('Apps unavailable');
+      return response.json();
+    }).then(feed => {
+      if (!Array.isArray(feed.items)) throw new Error('Invalid app list');
+      for (const item of feed.items) {
+        if (typeof item.label !== 'string' || !item.label.trim()) throw new Error('Missing app label');
+        appUrl(item.url);
+      }
+      developmentStrip(feed.items);
+    }).catch(() => { /* Keep the collection available without a ticker. */ });
+  }).catch(error => {
     status.textContent = 'Version details are unavailable. The main links below remain available.';
     console.error('Homepage catalogue:', error);
   });
