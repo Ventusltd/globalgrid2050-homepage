@@ -128,8 +128,19 @@ await unavailable.goto(base);await unavailable.waitForFunction(()=>document.getE
 assert.equal(await unavailable.locator('.highlight-card').count(),presentation.highlights.length);
 assert.equal(await unavailable.locator('#nests > details').count(),catalogue.view.items.length);
 await unavailable.close();receipt.checks.push('unavailable catalogue preserves static highlights and app links');
-const badMetadata=await browser.newPage();const unknown=structuredClone(metadata);unknown.records['unknown-entity']=structuredClone(metadata.records.kuiper);
-await badMetadata.route('**/data/entity-types.json',route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify(unknown)}));
-await badMetadata.goto(base);await badMetadata.waitForFunction(()=>document.getElementById('searchStatus').textContent.includes('unavailable'));assert.equal(await badMetadata.locator('#searchControls').isVisible(),false);assert.equal(await badMetadata.locator('#catalogueRows tr').count(),firstPage.length);await badMetadata.close();receipt.checks.push('orphan semantic metadata is rejected without replacing the static catalogue');
+for(const scenario of ['missing-record','same-size-orphan','invalid-type','unsafe-evidence-url']){
+  const badMetadata=await browser.newPage();const unknown=structuredClone(metadata);
+  if(scenario==='missing-record')delete unknown.records.kuiper;
+  else if(scenario==='same-size-orphan'){unknown.records['unknown-entity']=unknown.records.kuiper;delete unknown.records.kuiper;}
+  else if(scenario==='invalid-type')unknown.records.kuiper.type='unrecognized';
+  else unknown.records.kuiper.capability_evidence.url='javascript:alert(1)';
+  await badMetadata.route('**/data/entity-types.json',route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify(unknown)}));
+  await badMetadata.goto(base);await badMetadata.waitForFunction(()=>document.getElementById('searchStatus').textContent.includes('unavailable'));
+  assert.equal(await badMetadata.locator('#searchControls').isVisible(),false,scenario);
+  assert.equal(await badMetadata.locator('#catalogueRows tr').count(),firstPage.length,scenario);
+  assert.equal(await badMetadata.locator('.highlight-card').count(),presentation.highlights.length,scenario);
+  await badMetadata.close();
+}
+receipt.checks.push('missing, orphan, unknown-type and unsafe-evidence metadata preserve the static catalogue');
 assert.deepEqual(errors,[]);receipt.checks.push('no browser runtime errors');receipt.status='pass';
 }catch(error){receipt.status='fail';receipt.error=error.stack;process.exitCode=1;}finally{if(browser)await browser.close();server.close();fs.writeFileSync(path.join(output,'receipt.json'),JSON.stringify(receipt,null,2));console.log(JSON.stringify(receipt,null,2));}})();
