@@ -51,6 +51,20 @@ paginated search. The browser should request a bounded result page rather than
 download the whole estate. Data repositories own their large datasets; this
 homepage owns the routes into them.
 
+The primary interface is the searchable table. Compact highlights and the
+activity ticker assist discovery; expandable section navigation follows the
+table. Keep a stable, explicit ordering and preserve IDs as categories move.
+Do not make animation or a spatial graphic the only route to an item.
+
+For a future equipment catalogue, distinguish a canonical part, its technical
+revision, manufacturer part number, supplier offer and physical asset instance.
+App release IDs are not a substitute for those records. Use typed, unit-aware
+specifications and evidence-backed compatibility relationships; similar names
+or dimensions must not imply interchangeability. Preserve query, filters,
+cursor and selected items when opening a datasheet or returning to results.
+Ordering and supplier inventory are future capabilities, not features of this
+app directory.
+
 The current implementation paginates a small downloaded JSON catalogue. It does
 not implement a million-record backend. A future service should preserve these
 logical keys: app `id`; release `(app_id, release_id)`; category `id`; membership

@@ -39,6 +39,9 @@ assert.deepEqual(await page.locator('.highlight-label').allTextContents(),presen
 for(const item of presentation.highlights){const entity=catalogue.entities.find(e=>e.id===item.entity_id);assert.equal(await page.locator('.highlight-card[data-entity-id='+JSON.stringify(item.entity_id)+']').getAttribute('href'),entity.releases.find(r=>r.id===entity.operative_release_id).url);}
 assert(await page.evaluate(()=>Boolean(document.getElementById('highlights').compareDocumentPosition(document.querySelector('.development-strip'))&Node.DOCUMENT_POSITION_FOLLOWING)));
 receipt.checks.push('four curated app destinations precede the activity ticker');
+assert(await page.evaluate(()=>Boolean(document.getElementById('catalogue').compareDocumentPosition(document.getElementById('nests'))&Node.DOCUMENT_POSITION_FOLLOWING)));
+assert.equal(await page.locator('.highlight-card').first().evaluate(e=>getComputedStyle(e).borderTopWidth),'0px');
+receipt.checks.push('plain text highlights and searchable table precede secondary section browsing');
 assert.equal(await page.locator('#catalogueRows tr').count(),firstPage.length);
 for(const entity of firstPage){const row=page.locator('#catalogueRows tr').filter({has:page.getByRole('link',{name:entity.title,exact:true})});assert.equal(await row.count(),1);assert.equal(await row.getAttribute('data-entity-id'),entity.id);const release=entity.releases.find(r=>r.id===entity.operative_release_id);assert.equal(await row.locator('th a').getAttribute('href'),release.url);assert.equal(await row.locator('.table-versions > summary').innerText(),release.label);}
 await page.locator('#catalogueRows a').first().focus();assert.equal(await page.locator('#catalogueRows a').first().evaluate(e=>e===document.activeElement),true);
