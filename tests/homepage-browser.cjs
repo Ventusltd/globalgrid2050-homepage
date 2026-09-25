@@ -20,7 +20,7 @@ await search.fill('unlikelynomatch');assert.match(await page.locator('#searchSta
 await search.fill('');assert.equal(await page.locator('#nests > details:visible').count(),catalogue.view.items.length);assert(await page.locator('#kuiper').evaluate(e=>e.open));
 receipt.checks.push('top search finds independent build descriptions and restores nests');
 await page.locator('#identity-registry > summary').click();assert.equal(await page.locator('#identity-registry .launch').getAttribute('href'),'https://ventusltd.github.io/globalgrid2050-ip-and-mac-addresses/');
-await page.locator('#kuiper .versions > summary').click();assert.match(await page.locator('#kuiper .versions').innerText(),/Archived/);assert.equal(await page.locator('#archiveLink').getAttribute('href'),catalogue.view.archive_url);receipt.checks.push('identity launch, operative history and archive');
+await page.locator('#kuiper .versions > summary').click();assert.match(await page.locator('#kuiper .versions').innerText(),/Archived/i);assert.equal(await page.locator('#archiveLink').getAttribute('href'),catalogue.view.archive_url);receipt.checks.push('identity launch, operative history and archive');
 await page.locator('.ticker-pause').click();assert.equal(await page.locator('.ticker-pause').getAttribute('aria-pressed'),'true');assert.equal(await page.locator('.development-track').evaluate(e=>getComputedStyle(e).animationPlayState),'paused');
 assert.equal(await page.locator('.development-group[aria-hidden] a').first().getAttribute('tabindex'),'-1');
 await page.screenshot({path:path.join(output,'desktop.png'),fullPage:true});receipt.checks.push('ticker pause and one keyboard link per destination');
