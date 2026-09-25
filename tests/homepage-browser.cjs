@@ -8,7 +8,7 @@ const server=http.createServer((req,res)=>{const pathname=new URL(req.url,'http:
 (async()=>{let browser;const receipt={status:'running',checks:[],source:process.env.GITHUB_SHA||'local'};try{
 await new Promise(r=>server.listen(0,'127.0.0.1',r));const base='http://127.0.0.1:'+server.address().port;
 browser=await chromium.launch({headless:true});const page=await browser.newPage({viewport:{width:1440,height:1000}});const errors=[];page.on('pageerror',e=>errors.push(e.message));
-await page.goto(base);await page.waitForSelector('.build-card');
+await page.goto(base);await page.waitForSelector('.build-card');assert.equal(await page.locator('body').evaluate(e=>getComputedStyle(e).color),'rgb(232, 242, 237)');assert.equal(await page.locator('.brand').evaluate(e=>getComputedStyle(e).color),'rgb(133, 255, 176)');receipt.checks.push('readable retro colours and valid root variables');
 assert.equal(await page.locator('#nests > details').count(),catalogue.view.items.length);
 assert.equal(await page.locator('.build-card').count(),Math.min(3,catalogue.development.length));
 assert.equal(await page.locator('.development-group:not([aria-hidden]) a').count(),catalogue.view.items.length+catalogue.development.length);

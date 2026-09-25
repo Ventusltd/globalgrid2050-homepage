@@ -1,4 +1,4 @@
-﻿(function () {
+(function () {
   'use strict';
   const configUrl = new URL('../data/homepage.json', document.currentScript.src);
   const mount = document.getElementById('nests');
