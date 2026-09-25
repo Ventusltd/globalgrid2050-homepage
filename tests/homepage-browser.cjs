@@ -3,8 +3,10 @@ const fs=require('node:fs'),path=require('node:path'),http=require('node:http'),
 const {chromium}=require(process.env.PLAYWRIGHT_MODULE || 'playwright');
 const root=path.resolve(__dirname,'..');
 const catalogue=JSON.parse(fs.readFileSync(path.join(root,'data/homepage.json'),'utf8'));
+const presentation=JSON.parse(fs.readFileSync(path.join(root,'data/presentation.json'),'utf8'));
+const firstPage=catalogue.entities.slice(0,presentation.page_size);
 const feed=JSON.parse(fs.readFileSync(path.join(root,'data/active-pages.json'),'utf8'));
-const matches=(entity,query)=>[entity.title,entity.subtitle,entity.description,...entity.releases.map(r=>[r.label,r.url,r.status,r.source_ref].join(' '))].join(' ').toLocaleLowerCase().includes(query.toLocaleLowerCase());
+const matches=(entity,query)=>[entity.id,entity.title,entity.subtitle,entity.description,...entity.releases.map(r=>[r.id,r.label,r.url,r.status,r.source_ref].join(' '))].join(' ').toLocaleLowerCase().includes(query.toLocaleLowerCase());
 const output=path.join(root,'browser-evidence');fs.mkdirSync(output,{recursive:true});
 const isApp=url=>{const h=new URL(url).hostname;return !/(^|\.)github\.com$/i.test(h)&&!/(^|\.)githubusercontent\.com$/i.test(h);};
 const server=http.createServer((req,res)=>{const pathname=new URL(req.url,'http://localhost').pathname;const file=path.resolve(root,'.'+(pathname==='/'?'/index.html':pathname));if(!file.startsWith(root+path.sep)||!fs.existsSync(file)||!fs.statSync(file).isFile()){res.writeHead(404).end();return;}res.setHeader('Content-Type',({'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css','.json':'application/json'})[path.extname(file)]||'application/octet-stream');fs.createReadStream(file).pipe(res);});
@@ -32,22 +34,31 @@ assert.deepEqual(await page.locator('.development-group:not([aria-hidden]) a').a
 for(const href of await page.locator('a[href]').evaluateAll(items=>items.map(a=>a.href)))assert(isApp(href),'Only app links: '+href);
 assert.equal(await page.locator('.release-url,.build-evidence').count(),0);
 receipt.checks.push('closed Kuiper, no In build or pause controls, label-only live app ticker');
-assert.equal(await page.locator('#catalogueRows tr').count(),catalogue.entities.length);
-for(const entity of catalogue.entities){const row=page.locator('#catalogueRows tr').filter({has:page.getByRole('link',{name:entity.title,exact:true})});assert.equal(await row.count(),1);assert.equal(await row.getAttribute('data-entity-id'),entity.id);const release=entity.releases.find(r=>r.id===entity.operative_release_id);assert.equal(await row.locator('a').getAttribute('href'),release.url);assert.equal(await row.locator('td').last().innerText(),release.label);}
+assert.deepEqual(await page.locator('.highlight-card').evaluateAll(cards=>cards.map(card=>card.dataset.entityId)),presentation.highlights.map(item=>item.entity_id));
+assert.deepEqual(await page.locator('.highlight-label').allTextContents(),presentation.highlights.map(item=>item.label));
+for(const item of presentation.highlights){const entity=catalogue.entities.find(e=>e.id===item.entity_id);assert.equal(await page.locator('.highlight-card[data-entity-id='+JSON.stringify(item.entity_id)+']').getAttribute('href'),entity.releases.find(r=>r.id===entity.operative_release_id).url);}
+assert(await page.evaluate(()=>Boolean(document.getElementById('highlights').compareDocumentPosition(document.querySelector('.development-strip'))&Node.DOCUMENT_POSITION_FOLLOWING)));
+receipt.checks.push('four curated app destinations precede the activity ticker');
+assert.equal(await page.locator('#catalogueRows tr').count(),firstPage.length);
+for(const entity of firstPage){const row=page.locator('#catalogueRows tr').filter({has:page.getByRole('link',{name:entity.title,exact:true})});assert.equal(await row.count(),1);assert.equal(await row.getAttribute('data-entity-id'),entity.id);const release=entity.releases.find(r=>r.id===entity.operative_release_id);assert.equal(await row.locator('th a').getAttribute('href'),release.url);assert.equal(await row.locator('.table-versions > summary').innerText(),release.label);}
 await page.locator('#catalogueRows a').first().focus();assert.equal(await page.locator('#catalogueRows a').first().evaluate(e=>e===document.activeElement),true);
 receipt.checks.push('all catalogue entities share current release links, persistent IDs and keyboard access');
+await page.locator('#catalogueRows .table-versions > summary').first().click();
+assert.match(await page.locator('#catalogueRows tr').first().innerText(),new RegExp(catalogue.entities[0].operative_release_id));
+assert.equal(await page.locator('#catalogueRows .entity-key').first().innerText(),catalogue.entities[0].id);
+await page.locator('#catalogueRows .table-versions > summary').first().click();
 const search=page.locator('#homepageSearch');assert((await search.boundingBox()).y<(await page.locator('#nests').boundingBox()).y);
 await search.fill('GridAtlas');assert.equal(await page.locator('#catalogueRows tr:visible').count(),catalogue.entities.filter(e=>matches(e,'GridAtlas')).length);assert.equal(await page.locator('#gridatlas').isVisible(),true);
 await search.fill('unlikelynomatch');assert.match(await page.locator('#searchStatus').innerText(),/No matching/);
 assert.equal(await page.locator('#catalogueRows tr:visible').count(),0);assert.equal(await page.locator('#catalogueEmpty').isVisible(),true);
 await search.fill('');assert.equal(await page.locator('#nests > details:visible').count(),catalogue.view.items.length);assert.equal(await page.locator('#kuiper').evaluate(e=>e.open),false);
-assert.equal(await page.locator('#catalogueRows tr:visible').count(),catalogue.entities.length);assert.equal(await page.locator('#catalogueEmpty').isVisible(),false);
+assert.equal(await page.locator('#catalogueRows tr:visible').count(),firstPage.length);assert.equal(await page.locator('#catalogueEmpty').isVisible(),false);
 receipt.checks.push('top search filters nests and table, shows empty state and restores closed nests');
 for(const child of catalogue.entities.filter(entity=>{if(!entity.parent_id)return false;let ancestor=entity;while(ancestor.parent_id)ancestor=catalogue.entities.find(item=>item.id===ancestor.parent_id);return catalogue.view.items.some(item=>item.entity_id===ancestor.id);})){
   await search.fill(child.title);
-  assert.equal(await page.locator('#'+child.id).isVisible(),true);
+  assert.equal(await page.locator('[id='+JSON.stringify(child.id)+']').isVisible(),true);
   let parentId=child.parent_id;
-  while(parentId){assert.equal(await page.locator('#'+parentId).evaluate(e=>e.open),true);parentId=catalogue.entities.find(entity=>entity.id===parentId).parent_id;}
+  while(parentId){assert.equal(await page.locator('[id='+JSON.stringify(parentId)+']').evaluate(e=>e.open),true);parentId=catalogue.entities.find(entity=>entity.id===parentId).parent_id;}
   assert.deepEqual(await page.locator('#catalogueRows tr:visible').evaluateAll(rows=>rows.map(row=>row.dataset.entityId)),catalogue.entities.filter(entity=>matches(entity,child.title)).map(entity=>entity.id));
 }
 await search.fill('');
@@ -71,6 +82,21 @@ await page.locator('.development-track').evaluate(e=>{e.style.animation='none';e
 await page.locator('.development-group[aria-hidden] a').first().click();assert.equal(page.url(),destination);receipt.checks.push('visible repeated ticker link really navigates');
 await page.route('**/data/active-pages.json',route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({items:[{label:'Repository',url:'https://github.com/Ventusltd/example'}]})}));
 await page.goto(base);await page.waitForSelector('#searchControls:not([hidden])');await page.waitForLoadState('networkidle');assert.equal(await page.locator('.development-strip').count(),0);assert.equal(await page.locator('#nests > details').count(),catalogue.view.items.length);receipt.checks.push('invalid optional app feed leaves searchable nests available');
-const fallback=await browser.newPage({javaScriptEnabled:false,viewport:{width:390,height:844}});await fallback.goto(base);assert.equal(await fallback.locator('#catalogueRows tr').count(),catalogue.entities.length);assert.equal(await fallback.locator('#catalogue').isVisible(),true);for(const entity of catalogue.entities){const release=entity.releases.find(r=>r.id===entity.operative_release_id);assert.equal(await fallback.locator('#catalogueRows').getByRole('link',{name:entity.title,exact:true}).getAttribute('href'),release.url);}assert.equal(await fallback.locator('#nests > details').count(),catalogue.view.items.length);assert.equal(await fallback.locator('#kuiper').evaluate(e=>e.open),false);assert.equal(await fallback.locator('#identity-registry .launch').getAttribute('href'),'https://ventusltd.github.io/globalgrid2050-ip-and-mac-addresses/');assert.equal(await fallback.locator('#archiveLink').getAttribute('href'),catalogue.view.archive_url);await fallback.close();receipt.checks.push('static closed nests and archive survive disabled JavaScript');
+const fallback=await browser.newPage({javaScriptEnabled:false,viewport:{width:390,height:844}});await fallback.goto(base);assert.equal(await fallback.locator('#catalogueRows tr').count(),firstPage.length);assert.equal(await fallback.locator('#catalogue').isVisible(),true);for(const entity of firstPage){const release=entity.releases.find(r=>r.id===entity.operative_release_id);assert.equal(await fallback.locator('#catalogueRows').getByRole('link',{name:entity.title,exact:true}).getAttribute('href'),release.url);}assert.equal(await fallback.locator('#nests > details').count(),catalogue.view.items.length);assert.equal(await fallback.locator('#kuiper').evaluate(e=>e.open),false);assert.equal(await fallback.locator('#identity-registry .launch').getAttribute('href'),'https://ventusltd.github.io/globalgrid2050-ip-and-mac-addresses/');assert.equal(await fallback.locator('#archiveLink').getAttribute('href'),catalogue.view.archive_url);await fallback.close();receipt.checks.push('static closed nests and archive survive disabled JavaScript');
+const paged=await browser.newPage();
+const large=structuredClone(catalogue);
+for(let i=0;i<presentation.page_size+6;i++){const entity=structuredClone(catalogue.entities[0]);entity.id='pagination-probe-'+i;entity.title='Pagination probe '+i;delete entity.parent_id;large.entities.push(entity);}
+await paged.route('**/data/homepage.json',route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify(large)}));
+await paged.goto(base);await paged.waitForSelector('#searchControls:not([hidden])');
+assert.equal(await paged.locator('#catalogueRows tr').count(),presentation.page_size);
+assert.equal(await paged.locator('#cataloguePrevious').isDisabled(),true);
+assert.equal(await paged.locator('#catalogueNext').isDisabled(),false);
+const ids=()=>paged.locator('#catalogueRows tr').evaluateAll(rows=>rows.map(row=>row.dataset.entityId));
+await paged.locator('#catalogueNext').click();assert.deepEqual(await ids(),large.entities.slice(presentation.page_size,2*presentation.page_size).map(e=>e.id));
+await paged.locator('#cataloguePrevious').click();assert.deepEqual(await ids(),large.entities.slice(0,presentation.page_size).map(e=>e.id));
+await paged.locator('#homepageSearch').fill(large.entities.at(-1).id);assert.deepEqual(await ids(),[large.entities.at(-1).id]);assert.equal(await paged.locator('#catalogueNext').isDisabled(),true);
+await paged.locator('#homepageSearch').fill('');assert.deepEqual(await ids(),large.entities.slice(0,presentation.page_size).map(e=>e.id));
+while(!await paged.locator('#catalogueNext').isDisabled())await paged.locator('#catalogueNext').click();assert(await paged.locator('#catalogueRows tr').count()<=presentation.page_size);assert((await ids()).includes(large.entities.at(-1).id));
+await paged.close();receipt.checks.push('synthetic multi-page catalogue bounds DOM rows, paginates in both directions and searches off-page permanent keys');
 assert.deepEqual(errors,[]);receipt.checks.push('no browser runtime errors');receipt.status='pass';
 }catch(error){receipt.status='fail';receipt.error=error.stack;process.exitCode=1;}finally{if(browser)await browser.close();server.close();fs.writeFileSync(path.join(output,'receipt.json'),JSON.stringify(receipt,null,2));console.log(JSON.stringify(receipt,null,2));}})();

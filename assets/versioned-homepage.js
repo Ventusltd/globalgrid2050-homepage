@@ -2,12 +2,13 @@
   'use strict';
   const configUrl = new URL('../data/homepage.json', document.currentScript.src);
   const activityUrl = new URL('../data/active-pages.json', document.currentScript.src);
+  const presentationUrl = new URL('../data/presentation.json', document.currentScript.src);
   const mount = document.getElementById('nests');
   const search = document.getElementById('homepageSearch');
   const status = document.getElementById('searchStatus');
   const catalogueBody = document.getElementById('catalogueRows');
   function matchesQuery(entity, query) {
-    return [entity.title, entity.subtitle, entity.description, ...entity.releases.map(release => [release.label, release.url, release.status, release.source_ref].join(' '))].join(' ').toLocaleLowerCase().includes(query);
+    return [entity.id, entity.title, entity.subtitle, entity.description, ...entity.releases.map(release => [release.id, release.label, release.url, release.status, release.source_ref].join(' '))].join(' ').toLocaleLowerCase().includes(query);
   }
   const node = (tag, text, className) => {
     const element = document.createElement(tag);
@@ -80,6 +81,14 @@
     row.append(link(release.label, target, 'release-link'));
     return row;
   }
+  function validatePresentation(config, byId) {
+    if (!config || config.schema_version !== 1 || !Number.isInteger(config.page_size) || config.page_size < 1 || config.page_size > 100 || !Array.isArray(config.highlights) || config.highlights.length > 4) throw new Error('Invalid presentation settings');
+    const seen = new Set();
+    for (const item of config.highlights) {
+      if (!byId.has(item.entity_id) || seen.has(item.entity_id) || typeof item.label !== 'string' || !item.label.trim() || item.label.length > 40) throw new Error('Invalid highlight');
+      seen.add(item.entity_id);
+    }
+  }
   function developmentStrip(items) {
     if (!items.length) return;
     const strip = node('section', undefined, 'development-strip');
@@ -98,10 +107,23 @@
     track.append(clone);
     viewport.append(track);
     strip.append(label, viewport);
-    document.querySelector('header').after(strip);
+    document.getElementById('highlights').after(strip);
   }
-  function render(data) {
+  function render(data, presentation) {
     const byId = validate(data);
+    validatePresentation(presentation, byId);
+    const highlights = document.getElementById('highlightCards');
+    highlights.replaceChildren();
+    for (const item of presentation.highlights) {
+      const entity = byId.get(item.entity_id);
+      const release = entity.releases.find(release => release.id === entity.operative_release_id);
+      const card = link('', release.url, 'highlight-card');
+      card.dataset.entityId = entity.id;
+      card.append(node('span', item.label, 'highlight-label'), node('strong', entity.title));
+      if (entity.subtitle) card.append(node('span', entity.subtitle, 'highlight-description'));
+      highlights.append(card);
+    }
+    document.getElementById('highlights').hidden = presentation.highlights.length === 0;
     const records = [];
     function entityNode(entity, position, open) {
       const details = node('details', undefined, 'entity');
@@ -135,18 +157,40 @@
     const fragment = document.createDocumentFragment();
     data.view.items.forEach((item, index) => fragment.append(entityNode(byId.get(item.entity_id), String(index + 1).padStart(2, '0'), item.open)));
     mount.replaceChildren(fragment);
-    catalogueBody.replaceChildren();
-    const catalogueRows = data.entities.map(entity => {
+    let page = 0;
+    let filtered = data.entities;
+    function renderTable() {
+      catalogueBody.replaceChildren();
+      for (const entity of filtered.slice(page * presentation.page_size, (page + 1) * presentation.page_size)) {
       const operative = entity.releases.find(release => release.id === entity.operative_release_id);
       const row = node('tr');
       row.dataset.entityId = entity.id;
       const name = node('th');
       name.scope = 'row';
       name.append(link(entity.title, operative.url));
-      row.append(name, node('td', entity.subtitle || byId.get(entity.parent_id)?.title || '\u2014'), node('td', operative.label));
+      name.append(node('small', entity.id, 'entity-key'));
+      const versions = node('details', undefined, 'table-versions');
+      versions.append(node('summary', operative.label));
+      for (const release of entity.releases) {
+        const version = releaseRow(release, release.id === operative.id);
+        version.append(node('small', release.id, 'entity-key'));
+        versions.append(version);
+      }
+      const versionCell = node('td');
+      versionCell.append(versions);
+      row.append(name, node('td', entity.subtitle || byId.get(entity.parent_id)?.title || '\u2014'), versionCell);
       catalogueBody.append(row);
-      return { entity, row };
-    });
+      }
+      const count = filtered.length;
+      document.getElementById('catalogueEmpty').hidden = count > 0;
+      document.getElementById('cataloguePage').textContent = count ? (page * presentation.page_size + 1) + '\u2013' + Math.min((page + 1) * presentation.page_size, count) + ' of ' + count + ' apps' : '0 apps';
+      document.getElementById('cataloguePrevious').disabled = page === 0;
+      document.getElementById('catalogueNext').disabled = (page + 1) * presentation.page_size >= count;
+    }
+    document.getElementById('cataloguePagination').hidden = false;
+    document.getElementById('cataloguePrevious').addEventListener('click', () => { if (page > 0) { page--; renderTable(); } });
+    document.getElementById('catalogueNext').addEventListener('click', () => { if ((page + 1) * presentation.page_size < filtered.length) { page++; renderTable(); } });
+    renderTable();
     document.getElementById('catalogue').hidden = false;
     document.getElementById('archiveLink').href = appUrl(data.view.archive_url);
     document.getElementById('searchControls').hidden = false;
@@ -169,20 +213,18 @@
         saved.forEach((open, detail) => { detail.open = open; });
         saved = null;
       }
-      let count = 0;
-      for (const record of catalogueRows) {
-        record.row.hidden = !matchesQuery(record.entity, query);
-        if (!record.row.hidden) count++;
-      }
-      document.getElementById('catalogueEmpty').hidden = count > 0;
+      filtered = data.entities.filter(entity => matchesQuery(entity, query));
+      page = 0;
+      renderTable();
+      const count = filtered.length;
       status.textContent = query ? count ? count + ' matching apps and versions.' : 'No matching tools or versions.' : '';
     });
   }
-  fetch(configUrl).then(response => {
+  Promise.all([configUrl, presentationUrl].map(url => fetch(url).then(response => {
     if (!response.ok) throw new Error('Catalogue unavailable');
     return response.json();
-  }).then(data => {
-    render(data);
+  }))).then(([data, presentation]) => {
+    render(data, presentation);
     // Activity is optional: a missing feed must never hide the main collection.
     fetch(activityUrl).then(response => {
       if (!response.ok) throw new Error('Apps unavailable');

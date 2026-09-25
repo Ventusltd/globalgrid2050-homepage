@@ -53,7 +53,7 @@ jobs:
           mkdir -p _site/assets _site/data
           cp index.html .nojekyll _site/
           cp assets/versioned-homepage.js assets/versioned-homepage.css _site/assets/
-          cp data/homepage.json data/active-pages.json _site/data/
+          cp data/homepage.json data/active-pages.json data/presentation.json _site/data/
           python3 -c "from pathlib import Path; n=sum(p.stat().st_size for p in Path('_site').rglob('*') if p.is_file()); print('Homepage bytes:', n); assert n < 1000000, 'Homepage bundle exceeds 1 MB budget'"
       - name: Configure Pages
         uses: actions/configure-pages@v5
