@@ -3,13 +3,15 @@
   const configUrl = new URL('../data/homepage.json', document.currentScript.src);
   const activityUrl = new URL('../data/active-pages.json', document.currentScript.src);
   const presentationUrl = new URL('../data/presentation.json', document.currentScript.src);
+  const typesUrl = new URL('../data/entity-types.json', document.currentScript.src);
+  let entityTypes = {};
   const mount = document.getElementById('nests');
   const search = document.getElementById('homepageSearch');
   const status = document.getElementById('searchStatus');
   const catalogueBody = document.getElementById('catalogueRows');
   const searchText = new WeakMap();
   function matchesQuery(entity, query) {
-    if (!searchText.has(entity)) searchText.set(entity, [entity.id, entity.title, entity.subtitle, entity.description, ...entity.releases.map(release => [release.id, release.label, release.url, release.status, release.source_ref].join(' '))].join(' ').toLocaleLowerCase());
+    if (!searchText.has(entity)) { const meta = entityTypes[entity.id]; searchText.set(entity, [entity.id, entity.title, entity.subtitle, entity.description, meta.type, meta.purpose, ...meta.audience, ...meta.roles, ...entity.releases.map(release => [release.id, release.label, release.url, release.status, release.source_ref].join(' '))].join(' ').toLocaleLowerCase()); }
     return searchText.get(entity).includes(query);
   }
   async function fetchJson(url) {
@@ -131,9 +133,24 @@
     strip.append(label, viewport);
     document.getElementById('highlights').after(strip);
   }
-  function render(data, presentation) {
+  function validateTypes(metadata, byId) {
+    const types = new Set(['engine', 'application', 'dataset', 'equipment', 'project', 'reference', 'drawing', 'catalogue']);
+    if (!metadata || metadata.schema_version !== 1 || !metadata.records || typeof metadata.records !== 'object' || Array.isArray(metadata.records) || Object.keys(metadata.records).length !== byId.size) throw new Error('Invalid entity metadata');
+    const bounded = (value, limit) => typeof value === 'string' && value.trim().length > 0 && value.length <= limit;
+    for (const [id, meta] of Object.entries(metadata.records)) {
+      if (!byId.has(id) || !meta || !types.has(meta.type) || !bounded(meta.purpose, 1000) || !Array.isArray(meta.audience) || !meta.audience.length || meta.audience.length > 10 || !meta.audience.every(value => bounded(value, 100))) throw new Error('Invalid entity metadata record');
+      if (!Array.isArray(meta.roles) || meta.roles.length > 10 || !meta.roles.every(value => bounded(value, 100)) || new Set(meta.roles).size !== meta.roles.length) throw new Error('Invalid entity roles');
+      if (meta.capability_evidence !== undefined) {
+        if (!meta.capability_evidence || !bounded(meta.capability_evidence.summary, 1000)) throw new Error('Invalid capability evidence');
+        appUrl(meta.capability_evidence.url);
+      }
+    }
+    return metadata.records;
+  }
+  function render(data, presentation, metadata) {
     const byId = validate(data);
     validatePresentation(presentation, byId);
+    entityTypes = validateTypes(metadata, byId);
     const highlights = document.getElementById('highlightCards');
     highlights.replaceChildren();
     for (const item of presentation.highlights) {
@@ -207,7 +224,17 @@
       } });
       const versionCell = node('td');
       versionCell.append(versions);
-      row.append(name, node('td', entity.subtitle || byId.get(entity.parent_id)?.title || '\u2014'), versionCell);
+      const meta = entityTypes[entity.id];
+      const typeCell = node('td');
+      const semantic = node('details', undefined, 'entity-type');
+      semantic.append(node('summary', meta.type));
+      onDemand(semantic, () => {
+        semantic.append(node('p', 'Intended purpose: ' + meta.purpose), node('p', 'For: ' + meta.audience.join(', ')));
+        if (meta.roles.length) semantic.append(node('p', 'Intended roles: ' + meta.roles.join(', ')));
+        if (meta.capability_evidence) { semantic.append(node('p', 'Recorded evidence: ' + meta.capability_evidence.summary), link('View evidence', meta.capability_evidence.url)); }
+      });
+      typeCell.append(semantic);
+      row.append(name, typeCell, node('td', entity.subtitle || byId.get(entity.parent_id)?.title || '\u2014'), versionCell);
       catalogueBody.append(row);
       }
       const count = filtered.length;
@@ -250,8 +277,8 @@
       status.textContent = query ? count ? count + ' matching apps and versions.' : 'No matching tools or versions.' : '';
     });
   }
-  Promise.all([configUrl, presentationUrl].map(fetchJson)).then(([data, presentation]) => {
-    render(data, presentation);
+  Promise.all([configUrl, presentationUrl, typesUrl].map(fetchJson)).then(([data, presentation, metadata]) => {
+    render(data, presentation, metadata);
     // Activity is optional: a missing feed must never hide the main collection.
     fetchJson(activityUrl).then(feed => {
       if (!Array.isArray(feed.items)) throw new Error('Invalid app list');

@@ -12,7 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 def app_url(value):
     parsed = urlparse(value)
     hostname = parsed.hostname or ''
-    if parsed.scheme != 'https' or parsed.username or parsed.password or any(hostname == h or hostname.endswith('.' + h) for h in ['github.com', 'githubusercontent.com']):
+    if parsed.scheme != 'https' or not hostname or parsed.username or parsed.password or any(hostname == h or hostname.endswith('.' + h) for h in ['github.com', 'githubusercontent.com']):
         raise ValueError('Expected an HTTPS app URL')
     return escape(value, quote=True)
 
@@ -21,6 +21,22 @@ def build(root=ROOT):
     root = Path(root)
     data = load(root / 'data/homepage.json')
     by_id = {entity['id']: entity for entity in data['entities']}
+    metadata = json.loads((root / 'data/entity-types.json').read_text(encoding='utf-8'))
+    types = {'engine', 'application', 'dataset', 'equipment', 'project', 'reference', 'drawing', 'catalogue'}
+    if metadata.get('schema_version') != 1 or not isinstance(metadata.get('records'), dict) or set(metadata['records']) != set(by_id):
+        raise ValueError('Invalid entity metadata keys')
+    def bounded(value, limit):
+        return isinstance(value, str) and bool(value.strip()) and len(value) <= limit
+    for meta in metadata['records'].values():
+        if not isinstance(meta, dict) or meta.get('type') not in types or not bounded(meta.get('purpose'), 1000) or not isinstance(meta.get('audience'), list) or not 1 <= len(meta['audience']) <= 10 or not all(bounded(value, 100) for value in meta['audience']):
+            raise ValueError('Invalid entity metadata record')
+        if not isinstance(meta.get('roles'), list) or len(meta['roles']) > 10 or not all(bounded(value, 100) for value in meta['roles']) or len(set(meta['roles'])) != len(meta['roles']):
+            raise ValueError('Invalid entity roles')
+        if 'capability_evidence' in meta:
+            evidence = meta['capability_evidence']
+            if not isinstance(evidence, dict) or not bounded(evidence.get('summary'), 1000):
+                raise ValueError('Invalid capability evidence')
+            app_url(evidence.get('url', ''))
     presentation = json.loads((root / 'data/presentation.json').read_text(encoding='utf-8'))
     if presentation.get('schema_version') != 1 or type(presentation.get('page_size')) is not int or not 1 <= presentation['page_size'] <= 100 or not isinstance(presentation.get('highlights'), list) or len(presentation['highlights']) > 4:
         raise ValueError('Invalid presentation settings')
@@ -49,7 +65,15 @@ def build(root=ROOT):
         versions = []
         for version in entity['releases']:
             versions.append(f'<div class="release"><span class="release-state">{"Operative" if version["id"] == release["id"] else "Candidate" if version["status"] == "candidate" else "Archived"}</span><a href="{app_url(version["url"])}">{escape(version["label"])}</a><small class="entity-key">{escape(version["id"])}</small></div>')
-        rows.append(f'<tr data-entity-id="{escape(entity["id"], quote=True)}"><th scope="row"><a href="{app_url(release["url"])}">{escape(entity["title"])}</a><small class="entity-key">{escape(entity["id"])}</small></th><td>{escape(area)}</td><td><details class="table-versions"><summary>{escape(release["label"])}</summary>{"".join(versions)}</details></td></tr>')
+        meta = metadata['records'][entity['id']]
+        semantics = f'<details class="entity-type"><summary>{escape(meta["type"])}</summary><p>Intended purpose: {escape(meta["purpose"])}</p><p>For: {escape(", ".join(meta["audience"]))}</p>'
+        if meta['roles']:
+            semantics += f'<p>Intended roles: {escape(", ".join(meta["roles"]))}</p>'
+        if meta.get('capability_evidence'):
+            evidence = meta['capability_evidence']
+            semantics += f'<p>Recorded evidence: {escape(evidence["summary"])}</p><a href="{app_url(evidence["url"])}">View evidence</a>'
+        semantics += '</details>'
+        rows.append(f'<tr data-entity-id="{escape(entity["id"], quote=True)}"><th scope="row"><a href="{app_url(release["url"])}">{escape(entity["title"])}</a><small class="entity-key">{escape(entity["id"])}</small></th><td>{semantics}</td><td>{escape(area)}</td><td><details class="table-versions"><summary>{escape(release["label"])}</summary>{"".join(versions)}</details></td></tr>')
     cards = []
     for item in presentation['highlights']:
         entity = by_id[item['entity_id']]

@@ -3,10 +3,11 @@ const fs=require('node:fs'),path=require('node:path'),http=require('node:http'),
 const {chromium}=require(process.env.PLAYWRIGHT_MODULE || 'playwright');
 const root=path.resolve(__dirname,'..');
 const catalogue=JSON.parse(fs.readFileSync(path.join(root,'data/homepage.json'),'utf8'));
+const metadata=JSON.parse(fs.readFileSync(path.join(root,'data/entity-types.json'),'utf8'));
 const presentation=JSON.parse(fs.readFileSync(path.join(root,'data/presentation.json'),'utf8'));
 const firstPage=catalogue.entities.slice(0,presentation.page_size);
 const feed=JSON.parse(fs.readFileSync(path.join(root,'data/active-pages.json'),'utf8'));
-const matches=(entity,query)=>[entity.id,entity.title,entity.subtitle,entity.description,...entity.releases.map(r=>[r.id,r.label,r.url,r.status,r.source_ref].join(' '))].join(' ').toLocaleLowerCase().includes(query.toLocaleLowerCase());
+const matches=(entity,query)=>[entity.id,entity.title,entity.subtitle,entity.description,metadata.records[entity.id].type,metadata.records[entity.id].purpose,...metadata.records[entity.id].audience,...metadata.records[entity.id].roles,...entity.releases.map(r=>[r.id,r.label,r.url,r.status,r.source_ref].join(' '))].join(' ').toLocaleLowerCase().includes(query.toLocaleLowerCase());
 const output=path.join(root,'browser-evidence');fs.mkdirSync(output,{recursive:true});
 const isApp=url=>{const h=new URL(url).hostname;return !/(^|\.)github\.com$/i.test(h)&&!/(^|\.)githubusercontent\.com$/i.test(h);};
 const server=http.createServer((req,res)=>{const pathname=new URL(req.url,'http://localhost').pathname;const file=path.resolve(root,'.'+(pathname==='/'?'/index.html':pathname));if(!file.startsWith(root+path.sep)||!fs.existsSync(file)||!fs.statSync(file).isFile()){res.writeHead(404).end();return;}res.setHeader('Content-Type',({'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css','.json':'application/json'})[path.extname(file)]||'application/octet-stream');fs.createReadStream(file).pipe(res);});
@@ -63,6 +64,12 @@ assert.equal(await page.locator('#catalogueRows tr:visible').count(),0);assert.e
 await search.fill('');assert.equal(await page.locator('#nests > details:visible').count(),catalogue.view.items.length);assert.equal(await page.locator('#kuiper').evaluate(e=>e.open),false);
 assert.equal(await page.locator('#catalogueRows tr:visible').count(),firstPage.length);assert.equal(await page.locator('#catalogueEmpty').isVisible(),false);
 receipt.checks.push('top search filters nests and table, shows empty state and restores closed nests');
+assert.deepEqual(Object.keys(metadata.records).sort(),catalogue.entities.map(e=>e.id).sort());
+for(const meta of Object.values(metadata.records))assert(['engine','application','dataset','equipment','project','reference','drawing','catalogue'].includes(meta.type));
+await search.fill('engine');assert.deepEqual(await page.locator('#catalogueRows tr').evaluateAll(rows=>rows.map(row=>row.dataset.entityId)),catalogue.entities.filter(entity=>matches(entity,'engine')).slice(0,presentation.page_size).map(entity=>entity.id));
+await search.fill('proposal-authoring');assert.deepEqual(await page.locator('#catalogueRows tr').evaluateAll(rows=>rows.map(row=>row.dataset.entityId)),['kuiper']);
+await page.locator('#catalogueRows .entity-type > summary').click();assert.match(await page.locator('#catalogueRows .entity-type').innerText(),/Intended purpose:/);assert.match(await page.locator('#catalogueRows .entity-type').innerText(),/Recorded evidence:/);assert.match(await page.locator('#catalogueRows .entity-type').innerText(),/LLM-assisted/);
+await search.fill('');receipt.checks.push('typed catalogue searches purpose, audience and intended roles separately from recorded evidence');
 for(const child of catalogue.entities.filter(entity=>{if(!entity.parent_id)return false;let ancestor=entity;while(ancestor.parent_id)ancestor=catalogue.entities.find(item=>item.id===ancestor.parent_id);return catalogue.view.items.some(item=>item.entity_id===ancestor.id);})){
   await search.fill(child.title);
   assert.equal(await page.locator('[id='+JSON.stringify(child.id)+']').isVisible(),true);
@@ -93,9 +100,10 @@ await page.route('**/data/active-pages.json',route=>route.fulfill({status:200,co
 await page.goto(base);await page.waitForSelector('#searchControls:not([hidden])');await page.waitForLoadState('networkidle');assert.equal(await page.locator('.development-strip').count(),0);assert.equal(await page.locator('#nests > details').count(),catalogue.view.items.length);receipt.checks.push('invalid optional app feed leaves searchable nests available');
 const fallback=await browser.newPage({javaScriptEnabled:false,viewport:{width:390,height:844}});await fallback.goto(base);assert.equal(await fallback.locator('#catalogueRows tr').count(),firstPage.length);assert.equal(await fallback.locator('#catalogue').isVisible(),true);for(const entity of firstPage){const release=entity.releases.find(r=>r.id===entity.operative_release_id);assert.equal(await fallback.locator('#catalogueRows').getByRole('link',{name:entity.title,exact:true}).getAttribute('href'),release.url);}assert.equal(await fallback.locator('#nests > details').count(),catalogue.view.items.length);assert.equal(await fallback.locator('#kuiper').evaluate(e=>e.open),false);assert.equal(await fallback.locator('#identity-registry .launch').getAttribute('href'),'https://ventusltd.github.io/globalgrid2050-ip-and-mac-addresses/');assert.equal(await fallback.locator('#archiveLink').getAttribute('href'),catalogue.view.archive_url);await fallback.close();receipt.checks.push('static closed nests and archive survive disabled JavaScript');
 const paged=await browser.newPage();
-const large=structuredClone(catalogue);
-for(let i=0;i<presentation.page_size+6;i++){const entity=structuredClone(catalogue.entities[0]);entity.id='pagination-probe-'+i;entity.title='Pagination probe '+i;delete entity.parent_id;large.entities.push(entity);}
+const large=structuredClone(catalogue);const largeMetadata=structuredClone(metadata);
+for(let i=0;i<presentation.page_size+6;i++){const entity=structuredClone(catalogue.entities[0]);entity.id='pagination-probe-'+i;entity.title='Pagination probe '+i;delete entity.parent_id;large.entities.push(entity);largeMetadata.records[entity.id]=structuredClone(metadata.records[catalogue.entities[0].id]);}
 await paged.route('**/data/homepage.json',route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify(large)}));
+await paged.route('**/data/entity-types.json',route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify(largeMetadata)}));
 await paged.goto(base);await paged.waitForSelector('#searchControls:not([hidden])');
 assert.equal(await paged.locator('#catalogueRows tr').count(),presentation.page_size);
 assert.equal(await paged.locator('#cataloguePrevious').isDisabled(),true);
@@ -120,5 +128,8 @@ await unavailable.goto(base);await unavailable.waitForFunction(()=>document.getE
 assert.equal(await unavailable.locator('.highlight-card').count(),presentation.highlights.length);
 assert.equal(await unavailable.locator('#nests > details').count(),catalogue.view.items.length);
 await unavailable.close();receipt.checks.push('unavailable catalogue preserves static highlights and app links');
+const badMetadata=await browser.newPage();const unknown=structuredClone(metadata);unknown.records['unknown-entity']=structuredClone(metadata.records.kuiper);
+await badMetadata.route('**/data/entity-types.json',route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify(unknown)}));
+await badMetadata.goto(base);await badMetadata.waitForFunction(()=>document.getElementById('searchStatus').textContent.includes('unavailable'));assert.equal(await badMetadata.locator('#searchControls').isVisible(),false);assert.equal(await badMetadata.locator('#catalogueRows tr').count(),firstPage.length);await badMetadata.close();receipt.checks.push('orphan semantic metadata is rejected without replacing the static catalogue');
 assert.deepEqual(errors,[]);receipt.checks.push('no browser runtime errors');receipt.status='pass';
 }catch(error){receipt.status='fail';receipt.error=error.stack;process.exitCode=1;}finally{if(browser)await browser.close();server.close();fs.writeFileSync(path.join(output,'receipt.json'),JSON.stringify(receipt,null,2));console.log(JSON.stringify(receipt,null,2));}})();
