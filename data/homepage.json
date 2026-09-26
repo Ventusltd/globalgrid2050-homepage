@@ -185,7 +185,7 @@
       "subtitle": "Solar Design Studio drawing prototype",
       "description": "Explore an illustrative electrical scene in 3D, inspect array geometry and follow modelled cable routes. Prototype, not a surveyed site or approved engineering design.",
       "launch_label": "Open drawing prototype",
-      "operative_release_id": "prototype-20260925",
+      "operative_release_id": "world-202609262041",
       "releases": [
         {
           "id": "prototype-20260925",
@@ -202,6 +202,14 @@
           "published_at": "2026-09-26",
           "status": "candidate",
           "source_ref": "https://github.com/Ventusltd/globalgrid2050/tree/3f7361205e9c3e14b7aed2cb27cf778ee7865355/solar-design-studio/202609262200-site-world"
+        },
+        {
+          "id": "world-202609262041",
+          "label": "Site world on real terrain - 26 September 2026",
+          "url": "https://globalgrid2050.com/solar-design-studio/202609262041-site-world/",
+          "published_at": "2026-09-26",
+          "status": "available",
+          "source_ref": "https://github.com/Ventusltd/globalgrid2050/tree/main/solar-design-studio/202609262041-site-world"
         }
       ],
       "parent_id": "solar-design-studio"
@@ -471,5 +479,13 @@
       "evidence_summary": "Identity registry available. Kuiper inspection readers are the next step."
     }
   ],
-  "promotions": []
+  "promotions": [
+    {
+      "entity_id": "electrical-scene-explorer",
+      "from_release_id": "prototype-20260925",
+      "to_release_id": "world-202609262041",
+      "reason": "Site world on real EA LiDAR terrain; 32 browser checks passed on the release folder",
+      "promoted_at": "2026-09-26T20:42:27Z"
+    }
+  ]
 }
