@@ -194,6 +194,14 @@
           "published_at": "2026-09-25",
           "status": "available",
           "source_ref": "https://github.com/Ventusltd/graphics-engines-open-source"
+        },
+        {
+          "id": "world-202609262200",
+          "label": "Site world - 26 September 2026",
+          "url": "https://globalgrid2050.com/solar-design-studio/202609262200-site-world/",
+          "published_at": "2026-09-26",
+          "status": "candidate",
+          "source_ref": "https://github.com/Ventusltd/globalgrid2050/tree/3f7361205e9c3e14b7aed2cb27cf778ee7865355/solar-design-studio/202609262200-site-world"
         }
       ],
       "parent_id": "solar-design-studio"
