@@ -40,9 +40,14 @@ assert.deepEqual(await page.locator('.highlight-label').allTextContents(),presen
 for(const item of presentation.highlights){const entity=catalogue.entities.find(e=>e.id===item.entity_id);assert.equal(await page.locator('.highlight-card[data-entity-id='+JSON.stringify(item.entity_id)+']').getAttribute('href'),entity.releases.find(r=>r.id===entity.operative_release_id).url);}
 assert(await page.evaluate(()=>Boolean(document.getElementById('highlights').compareDocumentPosition(document.querySelector('.development-strip'))&Node.DOCUMENT_POSITION_FOLLOWING)));
 receipt.checks.push('four curated app destinations precede the activity ticker');
-assert(await page.evaluate(()=>Boolean(document.getElementById('catalogue').compareDocumentPosition(document.getElementById('nests'))&Node.DOCUMENT_POSITION_FOLLOWING)));
+assert(await page.evaluate(()=>Boolean(document.getElementById('nests').compareDocumentPosition(document.getElementById('catalogueArchive'))&Node.DOCUMENT_POSITION_FOLLOWING)));
+assert.equal(await page.locator('header p').first().innerText(),"An open grid development, engineering, procurement, construction and operations platform dedicated to documenting, analysing and improving the world's electrical energy systems as they undergo rapid electrification.");
+assert.equal(await page.locator('footer p').first().innerText(),'Disclaimer: Content provided for general technical documentation and research purposes only.');
+assert.equal(await page.locator('#catalogueArchive').evaluate(e=>e.open),false);
+receipt.checks.push('mission leads the header, disclaimer leads the footer, the nests precede the archived catalogue');
+await page.locator('#catalogueArchive > summary').click();
 assert.equal(await page.locator('.highlight-card').first().evaluate(e=>getComputedStyle(e).borderTopWidth),'0px');
-receipt.checks.push('plain text highlights and searchable table precede secondary section browsing');
+receipt.checks.push('plain text highlights and the sections precede the archived searchable table');
 assert.equal(await page.locator('#catalogueRows tr').count(),firstPage.length);
 for(const entity of firstPage){const row=page.locator('#catalogueRows tr').filter({has:page.getByRole('link',{name:entity.title,exact:true})});assert.equal(await row.count(),1);assert.equal(await row.getAttribute('data-entity-id'),entity.id);const release=entity.releases.find(r=>r.id===entity.operative_release_id);assert.equal(await row.locator('th a').getAttribute('href'),release.url);assert.equal(await row.locator('.table-versions > summary').innerText(),release.label);}
 await page.locator('#catalogueRows a').first().focus();assert.equal(await page.locator('#catalogueRows a').first().evaluate(e=>e===document.activeElement),true);
@@ -57,7 +62,7 @@ await page.locator('#catalogueRows .table-versions > summary').first().click();
 assert.equal(await page.locator('#catalogueRows tr').first().locator('.table-versions .release').count(),catalogue.entities[0].releases.length);
 await page.locator('#catalogueRows .table-versions > summary').first().click();
 receipt.checks.push('release detail DOM is created on demand and reused without duplicates');
-const search=page.locator('#homepageSearch');assert((await search.boundingBox()).y<(await page.locator('#nests').boundingBox()).y);
+const search=page.locator('#homepageSearch');assert((await search.boundingBox()).y>(await page.locator('#nests').boundingBox()).y);
 await search.fill('GridAtlas');assert.equal(await page.locator('#catalogueRows tr:visible').count(),catalogue.entities.filter(e=>matches(e,'GridAtlas')).length);assert.equal(await page.locator('#gridatlas').isVisible(),true);
 await search.fill('unlikelynomatch');assert.match(await page.locator('#searchStatus').innerText(),/No matching/);
 assert.equal(await page.locator('#catalogueRows tr:visible').count(),0);assert.equal(await page.locator('#catalogueEmpty').isVisible(),true);
@@ -97,14 +102,14 @@ await page.route(destination,route=>route.fulfill({status:200,contentType:'text/
 await page.locator('.development-track').evaluate(e=>{e.style.animation='none';e.style.transform='translateX(-50%)';});
 await page.locator('.development-group[aria-hidden] a').first().click();assert.equal(page.url(),destination);receipt.checks.push('visible repeated ticker link really navigates');
 await page.route('**/data/active-pages.json',route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({items:[{label:'Repository',url:'https://github.com/Ventusltd/example'}]})}));
-await page.goto(base);await page.waitForSelector('#searchControls:not([hidden])');await page.waitForLoadState('networkidle');assert.equal(await page.locator('.development-strip').count(),0);assert.equal(await page.locator('#nests > details').count(),catalogue.view.items.length);receipt.checks.push('invalid optional app feed leaves searchable nests available');
-const fallback=await browser.newPage({javaScriptEnabled:false,viewport:{width:390,height:844}});await fallback.goto(base);assert.equal(await fallback.locator('#catalogueRows tr').count(),firstPage.length);assert.equal(await fallback.locator('#catalogue').isVisible(),true);for(const entity of firstPage){const release=entity.releases.find(r=>r.id===entity.operative_release_id);assert.equal(await fallback.locator('#catalogueRows').getByRole('link',{name:entity.title,exact:true}).getAttribute('href'),release.url);}assert.equal(await fallback.locator('#nests > details').count(),catalogue.view.items.length);assert.equal(await fallback.locator('#kuiper').evaluate(e=>e.open),false);assert.equal(await fallback.locator('#identity-registry .launch').getAttribute('href'),'https://ventusltd.github.io/globalgrid2050-ip-and-mac-addresses/');assert.equal(await fallback.locator('#archiveLink').getAttribute('href'),catalogue.view.archive_url);await fallback.close();receipt.checks.push('static closed nests and archive survive disabled JavaScript');
+await page.goto(base);await page.waitForSelector('#searchControls:not([hidden])',{state:'attached'});await page.locator('#catalogueArchive').evaluate(e=>{e.open=true;});await page.waitForLoadState('networkidle');assert.equal(await page.locator('.development-strip').count(),0);assert.equal(await page.locator('#nests > details').count(),catalogue.view.items.length);receipt.checks.push('invalid optional app feed leaves searchable nests available');
+const fallback=await browser.newPage({javaScriptEnabled:false,viewport:{width:390,height:844}});await fallback.goto(base);assert.equal(await fallback.locator('#catalogueRows tr').count(),firstPage.length);assert.equal(await fallback.locator('#catalogueArchive #catalogue').count(),1);await fallback.locator('#catalogueArchive').evaluate(e=>{e.open=true;});for(const entity of firstPage){const release=entity.releases.find(r=>r.id===entity.operative_release_id);assert.equal(await fallback.locator('#catalogueRows').getByRole('link',{name:entity.title,exact:true}).getAttribute('href'),release.url);}assert.equal(await fallback.locator('#nests > details').count(),catalogue.view.items.length);assert.equal(await fallback.locator('#kuiper').evaluate(e=>e.open),false);assert.equal(await fallback.locator('#identity-registry .launch').getAttribute('href'),'https://ventusltd.github.io/globalgrid2050-ip-and-mac-addresses/');assert.equal(await fallback.locator('#archiveLink').getAttribute('href'),catalogue.view.archive_url);await fallback.close();receipt.checks.push('static closed nests and archive survive disabled JavaScript');
 const paged=await browser.newPage();
 const large=structuredClone(catalogue);const largeMetadata=structuredClone(metadata);
 for(let i=0;i<presentation.page_size+6;i++){const entity=structuredClone(catalogue.entities[0]);entity.id='pagination-probe-'+i;entity.title='Pagination probe '+i;delete entity.parent_id;large.entities.push(entity);largeMetadata.records[entity.id]=structuredClone(metadata.records[catalogue.entities[0].id]);}
 await paged.route('**/data/homepage.json',route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify(large)}));
 await paged.route('**/data/entity-types.json',route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify(largeMetadata)}));
-await paged.goto(base);await paged.waitForSelector('#searchControls:not([hidden])');
+await paged.goto(base);await paged.waitForSelector('#searchControls:not([hidden])',{state:'attached'});await paged.locator('#catalogueArchive').evaluate(e=>{e.open=true;});
 assert.equal(await paged.locator('#catalogueRows tr').count(),presentation.page_size);
 assert.equal(await paged.locator('#cataloguePrevious').isDisabled(),true);
 assert.equal(await paged.locator('#catalogueNext').isDisabled(),false);
