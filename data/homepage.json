@@ -49,6 +49,25 @@
       ]
     },
     {
+      "id": "learn-the-kuiper",
+      "parent_id": "kuiper",
+      "title": "Learn the Kuiper",
+      "subtitle": "Play with how Kuiper places every particle",
+      "description": "One full-screen sheet: start with one particle, then watch real lines of Kuiper's own code placed by the live law, grow the circle to quadrillions, and change every number. Initial version: some inputs do not yet respond.",
+      "launch_label": "Open Learn the Kuiper",
+      "operative_release_id": "20261004-initial",
+      "releases": [
+        {
+          "id": "20261004-initial",
+          "label": "4 October 2026 (initial)",
+          "url": "https://ventusltd.github.io/kuiper-belt/learn-the-kuiper/202610042225/",
+          "published_at": "2026-10-04T21:25:00Z",
+          "status": "available",
+          "source_ref": "https://github.com/Ventusltd/kuiper-belt/commit/bb55165e384e46414e5ed12ed9b9aa52bcb3e102"
+        }
+      ]
+    },
+    {
       "id": "gridatlas",
       "title": "GridAtlas",
       "subtitle": "Explore the electricity network",

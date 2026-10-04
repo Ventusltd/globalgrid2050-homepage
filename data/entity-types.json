@@ -224,6 +224,16 @@
         "learners"
       ],
       "roles": []
+    },
+    "learn-the-kuiper": {
+      "type": "application",
+      "purpose": "Show through play how Kuiper's deterministic law places each particle, from one particle to quadrillions, with every number changeable.",
+      "audience": [
+        "learners",
+        "developers",
+        "grid researchers"
+      ],
+      "roles": []
     }
   }
 }
