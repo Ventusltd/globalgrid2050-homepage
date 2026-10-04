@@ -52,11 +52,19 @@
       "id": "learn-the-kuiper",
       "parent_id": "kuiper",
       "title": "Learn the Kuiper",
-      "subtitle": "Play with how Kuiper places every particle",
-      "description": "One full-screen sheet: start with one particle, then watch real lines of Kuiper's own code placed by the live law, grow the circle to quadrillions, and change every number. Initial version: some inputs do not yet respond.",
+      "subtitle": "Play with the stars: zoom, radar, the real wafer, the UK grid",
+      "description": "Every dot has an address. Zoom from the whole Kuiper to one star and the code behind it, play missions on the real wafer, sweep it like a radar, watch the stars draw every UK substation, and grow a solar farm where every part has a key. Runs offline.",
       "launch_label": "Open Learn the Kuiper",
-      "operative_release_id": "20261004-initial",
+      "operative_release_id": "20261005-v3",
       "releases": [
+        {
+          "id": "20261005-v3",
+          "label": "5 October 2026 (version 3)",
+          "url": "https://ventusltd.github.io/kuiper-belt/learn-the-kuiper/202610050010/",
+          "published_at": "2026-10-04T23:10:00Z",
+          "status": "available",
+          "source_ref": "https://github.com/Ventusltd/kuiper-belt/commit/1b54cdc"
+        },
         {
           "id": "20261004-initial",
           "label": "4 October 2026 (initial)",
