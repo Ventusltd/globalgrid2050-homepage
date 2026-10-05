@@ -227,11 +227,31 @@
     },
     "learn-the-kuiper": {
       "type": "application",
-      "purpose": "Show through play how Kuiper's deterministic law places each particle, from one particle to quadrillions, with every number changeable.",
+      "purpose": "Show through play how Kuiper's deterministic law places an item: the square root of a key sets its distance and a multiply with MOD sets its angle, with every number changeable.",
       "audience": [
         "learners",
         "developers",
         "grid researchers"
+      ],
+      "roles": []
+    },
+    "see-through": {
+      "type": "application",
+      "purpose": "Show any UK substation in 3D on real satellite ground, drawn by one rule from open map data with its towers along the real line routes, as a first step toward seeing grid connection options site by site.",
+      "audience": [
+        "grid researchers",
+        "developers",
+        "learners"
+      ],
+      "roles": []
+    },
+    "kuiper-diary": {
+      "type": "reference",
+      "purpose": "Explain in plain words what the Kuiper is, what Learn the Kuiper and See Through do, what they could become, and how they may help with grid connection.",
+      "audience": [
+        "learners",
+        "grid researchers",
+        "developers"
       ],
       "roles": []
     }

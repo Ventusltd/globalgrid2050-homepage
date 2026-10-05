@@ -52,11 +52,19 @@
       "id": "learn-the-kuiper",
       "parent_id": "kuiper",
       "title": "Learn the Kuiper",
-      "subtitle": "Play with the stars: zoom, radar, the real wafer, the UK grid",
-      "description": "Every dot has an address. Zoom from the whole Kuiper to one star and the code behind it, play missions on the real wafer, sweep it like a radar, watch the stars draw every UK substation, and grow a solar farm where every part has a key. Runs offline.",
+      "subtitle": "One circle, one dot, two numbers",
+      "description": "Learn the rule by using it. One number goes through the square root and sets how far out the dot sits; the other goes through MOD and sets where round the circle it sits. Slide or type the numbers to steer the dot onto targets, then link them into one key, as the Kuiper does. Six levels, up to the real numbers. Runs offline.",
       "launch_label": "Open Learn the Kuiper",
-      "operative_release_id": "20261005-v3",
+      "operative_release_id": "20261005-0609",
       "releases": [
+        {
+          "id": "20261005-0609",
+          "label": "5 October 2026 (one dot, two numbers)",
+          "url": "https://ventusltd.github.io/kuiper-belt/learn-the-kuiper/202610050609/",
+          "published_at": "2026-10-05T05:10:00Z",
+          "status": "available",
+          "source_ref": "https://github.com/Ventusltd/kuiper-belt/commit/d303932"
+        },
         {
           "id": "20261005-v3",
           "label": "5 October 2026 (version 3)",
@@ -72,6 +80,44 @@
           "published_at": "2026-10-04T21:25:00Z",
           "status": "available",
           "source_ref": "https://github.com/Ventusltd/kuiper-belt/commit/bb55165e384e46414e5ed12ed9b9aa52bcb3e102"
+        }
+      ]
+    },
+    {
+      "id": "see-through",
+      "parent_id": "kuiper",
+      "title": "See to grid connection probabilities iteratively",
+      "subtitle": "See Through: from the stars to one substation in 3D",
+      "description": "Type the name of a UK substation and press GO. The stars gather into the grid, the real map and satellite view appear inside the circle, and the substation rises in 3D on the real ground with its towers along the real line routes. Drawn by one rule from open map data for about 5,800 substations. A first step toward narrowing down, step by step, where a grid connection is likely. Needs the internet.",
+      "launch_label": "Open See Through",
+      "operative_release_id": "20261005-0609",
+      "releases": [
+        {
+          "id": "20261005-0609",
+          "label": "5 October 2026",
+          "url": "https://ventusltd.github.io/kuiper-belt/see-through/202610050609/",
+          "published_at": "2026-10-05T05:10:00Z",
+          "status": "available",
+          "source_ref": "https://github.com/Ventusltd/kuiper-belt/commit/d303932"
+        }
+      ]
+    },
+    {
+      "id": "kuiper-diary",
+      "parent_id": "kuiper",
+      "title": "Kuiper diary",
+      "subtitle": "What it is, what it could become, and why it matters now",
+      "description": "A short note for anyone meeting the Kuiper for the first time: the two rules behind it, the two things you can open today, where it could go, and how it may help with grid connection in the UK.",
+      "launch_label": "Read the diary",
+      "operative_release_id": "20261005-diary",
+      "releases": [
+        {
+          "id": "20261005-diary",
+          "label": "5 October 2026",
+          "url": "https://ventusltd.github.io/kuiper-belt/diary/20261005.html",
+          "published_at": "2026-10-05T08:33:00Z",
+          "status": "available",
+          "source_ref": "https://github.com/Ventusltd/kuiper-belt/commit/11a53a903bc2fd45bea816ea144d2d1122659157"
         }
       ]
     },
