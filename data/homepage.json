@@ -53,7 +53,7 @@
       "parent_id": "kuiper",
       "title": "Learn the Kuiper",
       "subtitle": "One circle, one dot, two numbers",
-      "description": "Learn the rule by using it. One number goes through the square root and sets how far out the dot sits; the other goes through MOD and sets where round the circle it sits. Slide or type the numbers to steer the dot onto targets, then link them into one key, as the Kuiper does. Six levels, up to the real numbers. Runs offline.",
+      "description": "Move one dot by changing two numbers: one sets the distance through a square root, the other sets the angle through MOD. Slide or type the numbers to steer the dot onto targets, then link them into one key. Six circle sizes, ending with the Kuiper's own constants. The main screen runs offline.",
       "launch_label": "Open Learn the Kuiper",
       "operative_release_id": "20261005-0609",
       "releases": [
@@ -63,7 +63,7 @@
           "url": "https://ventusltd.github.io/kuiper-belt/learn-the-kuiper/202610050609/",
           "published_at": "2026-10-05T05:10:00Z",
           "status": "available",
-          "source_ref": "https://github.com/Ventusltd/kuiper-belt/commit/d303932"
+          "source_ref": "https://github.com/Ventusltd/kuiper-belt/commit/613b10f4746ae2603fd0268ef0a890fbfa85281a"
         },
         {
           "id": "20261005-v3",
@@ -88,7 +88,7 @@
       "parent_id": "kuiper",
       "title": "See to grid connection probabilities iteratively",
       "subtitle": "See Through: from the stars to one substation in 3D",
-      "description": "Type the name of a UK substation and press GO. The stars gather into the grid, the real map and satellite view appear inside the circle, and the substation rises in 3D on the real ground with its towers along the real line routes. Drawn by one rule from open map data for about 5,800 substations. A first step toward narrowing down, step by step, where a grid connection is likely. Needs the internet.",
+      "description": "Type the name of a UK substation and press GO. The stars gather into the grid, the real map and satellite view appear inside the circle, and an illustrative 3D model of the substation rises on the real ground, combining mapped features with estimates. About 5,800 mapped substations. An early step toward comparing connection options site by site; no connection probability is calculated today. Needs the internet.",
       "launch_label": "Open See Through",
       "operative_release_id": "20261005-0609",
       "releases": [
@@ -98,7 +98,7 @@
           "url": "https://ventusltd.github.io/kuiper-belt/see-through/202610050609/",
           "published_at": "2026-10-05T05:10:00Z",
           "status": "available",
-          "source_ref": "https://github.com/Ventusltd/kuiper-belt/commit/d303932"
+          "source_ref": "https://github.com/Ventusltd/kuiper-belt/commit/613b10f4746ae2603fd0268ef0a890fbfa85281a"
         }
       ]
     },
@@ -117,7 +117,7 @@
           "url": "https://ventusltd.github.io/kuiper-belt/diary/20261005.html",
           "published_at": "2026-10-05T08:33:00Z",
           "status": "available",
-          "source_ref": "https://github.com/Ventusltd/kuiper-belt/commit/11a53a903bc2fd45bea816ea144d2d1122659157"
+          "source_ref": "https://github.com/Ventusltd/kuiper-belt/commit/613b10f4746ae2603fd0268ef0a890fbfa85281a"
         }
       ]
     },

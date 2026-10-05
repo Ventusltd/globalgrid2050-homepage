@@ -227,7 +227,7 @@
     },
     "learn-the-kuiper": {
       "type": "application",
-      "purpose": "Show through play how Kuiper's deterministic law places an item: the square root of a key sets its distance and a multiply with MOD sets its angle, with every number changeable.",
+      "purpose": "Explore square roots and MOD through two linked numbers and a moving dot, and compare the square-root-of-key exercise with the live Kuiper rule, whose radius is the square root of key plus a half.",
       "audience": [
         "learners",
         "developers",
@@ -237,7 +237,7 @@
     },
     "see-through": {
       "type": "application",
-      "purpose": "Show any UK substation in 3D on real satellite ground, drawn by one rule from open map data with its towers along the real line routes, as a first step toward seeing grid connection options site by site.",
+      "purpose": "Explore mapped substation records through illustrative 3D models that distinguish mapped features from estimated equipment, supporting questions about connection options without calculating their probability or feasibility.",
       "audience": [
         "grid researchers",
         "developers",
