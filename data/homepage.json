@@ -125,9 +125,9 @@
       "id": "gridatlas",
       "title": "GridAtlas",
       "subtitle": "Explore the electricity network",
-      "description": "Find sites, explore network layers and inspect the connections around them.",
+      "description": "Find sites, explore network layers and inspect the connections around them. Now with an optional UK lightning overlay (observed optical flashes, 12-month history) linked to nearest substations.",
       "launch_label": "Open GridAtlas",
-      "operative_release_id": "202609241334",
+      "operative_release_id": "202610281340",
       "releases": [
         {
           "id": "202609241334",
@@ -138,6 +138,16 @@
           "source_ref": "https://github.com/Ventusltd/gridatlas",
           "archive_url": "https://ventusltd.github.io/gridatlas/atlas/manifests/202609241334-composition.json",
           "archive_kind": "manifest"
+        },
+        {
+          "id": "202610281340",
+          "label": "V9.172 - 28 October 2026",
+          "url": "https://ventusltd.github.io/gridatlas/atlas/",
+          "published_at": "2026-10-28T18:53:00Z",
+          "status": "available",
+          "source_ref": "https://github.com/Ventusltd/gridatlas/commit/08b5caeac1b0128311d7a5e985f1fbe1c18414ae",
+          "archive_url": "https://ventusltd.github.io/gridatlas/atlas/v/202610281340/",
+          "archive_kind": "app"
         }
       ]
     },
@@ -792,6 +802,13 @@
       "to_release_id": "ets-202609282123",
       "reason": "Owner: switch off scanner rows (drew one farm's rows from any location). 202609282123 (main a6b5ae6) checked live: smoke 14/14, 0 page errors",
       "promoted_at": "2026-09-28T20:29:49Z"
+    },
+    {
+      "entity_id": "gridatlas",
+      "from_release_id": "202609241334",
+      "to_release_id": "202610281340",
+      "reason": "GridAtlas v9.172 (generation 202610281340) is live on the canonical route and accepted by the owner",
+      "promoted_at": "2026-10-29T00:45:36Z"
     }
   ]
 }

@@ -1,5 +1,13 @@
 # Changes
 
+## 29 October 2026 - GridAtlas v9.172 and one-command GridAtlas releases
+
+- GridAtlas operative release is now V9.172 - 28 October 2026 (generation 202610281340); V9.156 is retained as an archived release with its composition manifest.
+- GridAtlas description mentions the optional UK lightning overlay (observed optical flashes, 12-month history) linked to nearest substations.
+- Add scripts/release_gridatlas.py and docs/GRIDATLAS-RELEASE.md so the next GridAtlas release is one command plus the domain pin.
+- Run the publication checks on pull requests (pr-checks.yml); nothing deploys from it.
+- Make the active-pages network-failure test independent of today's date.
+
 ## 25 September 2026 - build highlights and connected identities
 
 - Preserve the top search, retro palette, existing nests, explicit versions and archive.
