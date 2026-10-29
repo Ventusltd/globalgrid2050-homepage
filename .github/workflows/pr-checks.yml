@@ -1,0 +1,41 @@
+name: Homepage PR checks
+
+# Same validation and browser checks as pages.yml, run on pull requests so a
+# change is proven before it reaches main. Nothing is deployed from here.
+on:
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate version catalogue
+        run: |
+          python3 scripts/releases.py validate
+          python3 scripts/build_homepage_fallback.py
+          git diff --exit-code -- index.html
+          python3 -m unittest discover -s tests
+          node --check assets/versioned-homepage.js
+          python3 scripts/fetch_active_pages.py --check
+      - name: Check desktop and mobile browser behaviour
+        timeout-minutes: 5
+        run: |
+          npm install --prefix "$RUNNER_TEMP/homepage-browser" --no-save --ignore-scripts playwright@1.62.1
+          "$RUNNER_TEMP/homepage-browser/node_modules/.bin/playwright" install --with-deps chromium
+          PLAYWRIGHT_MODULE="$RUNNER_TEMP/homepage-browser/node_modules/playwright" node tests/homepage-browser.cjs
+      - name: Preserve browser evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: homepage-browser-evidence
+          path: browser-evidence
+          if-no-files-found: warn

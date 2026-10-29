@@ -53,8 +53,16 @@ class ActivePageTests(unittest.TestCase):
             path.write_bytes(previous)
             def fail(url, limit):
                 raise OSError("network failure")
+            class RecentAPI(FakeAPI):
+                # Keep the fixture commit inside the rolling activity window so the
+                # probe (and its network failure) is reached whatever today's date is.
+                def get(self, path, missing_ok=False):
+                    result = super().get(path, missing_ok)
+                    if isinstance(result, list) and result and "commit" in result[0]:
+                        result[0]["commit"]["committer"]["date"] = module.stamp(datetime.now(timezone.utc))
+                    return result
             with self.assertRaises(OSError):
-                module.refresh(self.config(), path, FakeAPI(), fail)
+                module.refresh(self.config(), path, RecentAPI(), fail)
             self.assertEqual(path.read_bytes(), previous)
 
     def test_private_repository_cannot_enter_public_feed(self):
