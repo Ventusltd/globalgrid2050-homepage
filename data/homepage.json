@@ -125,9 +125,9 @@
       "id": "gridatlas",
       "title": "GridAtlas",
       "subtitle": "Explore the electricity network",
-      "description": "Find sites, explore network layers and inspect the connections around them. Now with an optional UK lightning overlay (observed optical flashes, 12-month history) linked to nearest substations.",
+      "description": "Optional UK lightning overlay (observed optical flashes, 12-month history) with the nearest substations and REPD projects, plus a Potential offtakers layer (industry, power stations, data centres) linked to the 15 nearest REPD projects.",
       "launch_label": "Open GridAtlas",
-      "operative_release_id": "202610281340",
+      "operative_release_id": "202610291044",
       "releases": [
         {
           "id": "202609241334",
@@ -147,6 +147,16 @@
           "status": "available",
           "source_ref": "https://github.com/Ventusltd/gridatlas/commit/08b5caeac1b0128311d7a5e985f1fbe1c18414ae",
           "archive_url": "https://ventusltd.github.io/gridatlas/atlas/v/202610281340/",
+          "archive_kind": "app"
+        },
+        {
+          "id": "202610291044",
+          "label": "V9.186 - 29 October 2026",
+          "url": "https://ventusltd.github.io/gridatlas/atlas/",
+          "published_at": "2026-10-29T11:25:00Z",
+          "status": "available",
+          "source_ref": "https://github.com/Ventusltd/gridatlas/pull/72",
+          "archive_url": "https://ventusltd.github.io/gridatlas/atlas/v/202610291044/",
           "archive_kind": "app"
         }
       ]
@@ -809,6 +819,13 @@
       "to_release_id": "202610281340",
       "reason": "GridAtlas v9.172 (generation 202610281340) is live on the canonical route and accepted by the owner",
       "promoted_at": "2026-10-29T00:45:36Z"
+    },
+    {
+      "entity_id": "gridatlas",
+      "from_release_id": "202610281340",
+      "to_release_id": "202610291044",
+      "reason": "GridAtlas v9.186 (generation 202610291044) is live on the canonical route and accepted by the owner",
+      "promoted_at": "2026-10-29T11:26:19Z"
     }
   ]
 }
