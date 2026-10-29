@@ -1,5 +1,11 @@
 # Changes
 
+## 29 October 2026 - privacy notice
+
+- Add a collapsed "Privacy" notice to the homepage footer, below the disclaimer. It is one plain-English statement covering the homepage, GridAtlas, Pipeline News and the Energy Transition Simulator. It says there are no analytics, no cookies of our own and no accounts; that GitHub Pages logs visitor IP addresses for security; which other services each app contacts and when; what is stored on the device and how to clear it; and what the statement does not cover.
+- The text is the same as Ventusltd/gridatlas docs/PRIVACY.md. URLs are shown as text, not links, because the homepage links only to apps.
+- It lives in index.html and versioned-homepage.css, so the seven-file bundle and its importer are unchanged. The domain shows it only after the owner accepts this commit and globalgrid2050's catalogue/homepage-owner.json pin moves to it (docs/GRIDATLAS-RELEASE.md step 2).
+
 ## 29 October 2026 - GridAtlas v9.172 and one-command GridAtlas releases
 
 - GridAtlas operative release is now V9.172 - 28 October 2026 (generation 202610281340); V9.156 is retained as an archived release with its composition manifest.
