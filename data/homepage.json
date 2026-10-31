@@ -127,7 +127,7 @@
       "subtitle": "Explore the electricity network",
       "description": "Optional UK lightning overlay (observed optical flashes, 12-month history) with the nearest substations and REPD projects, plus a Potential offtakers layer (industry, power stations, data centres) linked to the 15 nearest REPD projects.",
       "launch_label": "Open GridAtlas",
-      "operative_release_id": "202610291044",
+      "operative_release_id": "202610312138",
       "releases": [
         {
           "id": "202609241334",
@@ -157,6 +157,16 @@
           "status": "available",
           "source_ref": "https://github.com/Ventusltd/gridatlas/pull/72",
           "archive_url": "https://ventusltd.github.io/gridatlas/atlas/v/202610291044/",
+          "archive_kind": "app"
+        },
+        {
+          "id": "202610312138",
+          "label": "V9.188 - 31 October 2026",
+          "url": "https://ventusltd.github.io/gridatlas/atlas/",
+          "published_at": "2026-10-31T22:53:00Z",
+          "status": "available",
+          "source_ref": "https://github.com/Ventusltd/gridatlas/commit/41729af0b49dcfbe8f2a3ebc485eff217a61b84d",
+          "archive_url": "https://ventusltd.github.io/gridatlas/atlas/v/202610312138/",
           "archive_kind": "app"
         }
       ]
@@ -826,6 +836,13 @@
       "to_release_id": "202610291044",
       "reason": "GridAtlas v9.186 (generation 202610291044) is live on the canonical route and accepted by the owner",
       "promoted_at": "2026-10-29T11:26:19Z"
+    },
+    {
+      "entity_id": "gridatlas",
+      "from_release_id": "202610291044",
+      "to_release_id": "202610312138",
+      "reason": "GridAtlas v9.188 (generation 202610312138) is live on the canonical route and accepted by the owner",
+      "promoted_at": "2026-10-31T22:56:23Z"
     }
   ]
 }
