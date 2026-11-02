@@ -133,9 +133,9 @@
       "parent_id": "kuiper",
       "title": "See to grid connection probabilities iteratively",
       "subtitle": "See Through: from the stars to one substation in 3D",
-      "description": "Type the name of a UK substation and press GO. The stars gather into the grid, the real map and satellite view appear inside the circle, and an illustrative 3D model of the substation rises on the real ground, combining mapped features with estimates. About 5,800 mapped substations. An early step toward comparing connection options site by site; no connection probability is calculated today. Needs the internet.",
+      "description": "Type the name of a UK substation and press GO. The stars gather into the grid, the real map and satellite view appear inside the circle, and an illustrative 3D model of the substation rises on the real ground, combining mapped features with estimates. About 5,800 mapped substations. An early step toward comparing connection options site by site; no connection probability is calculated today. It now also opens from a Kuiper card's link, straight to the right star. Needs the internet.",
       "launch_label": "Open See Through",
-      "operative_release_id": "20261005-0609",
+      "operative_release_id": "202611020012",
       "releases": [
         {
           "id": "20261005-0609",
@@ -144,6 +144,16 @@
           "published_at": "2026-10-05T05:10:00Z",
           "status": "available",
           "source_ref": "https://github.com/Ventusltd/kuiper-belt/commit/613b10f4746ae2603fd0268ef0a890fbfa85281a"
+        },
+        {
+          "id": "202611020012",
+          "label": "2 November 2026",
+          "url": "https://ventusltd.github.io/kuiper-belt/see-through/",
+          "published_at": "2026-11-02T02:14:48Z",
+          "status": "available",
+          "source_ref": "https://github.com/Ventusltd/kuiper-belt/commit/7110022668eb4f8bd8d4dcfce87fd3c2fb315bfd",
+          "archive_url": "https://ventusltd.github.io/kuiper-belt/see-through/202611020012/",
+          "archive_kind": "app"
         }
       ]
     },
@@ -888,6 +898,13 @@
       "to_release_id": "202610312138",
       "reason": "GridAtlas v9.188 (generation 202610312138) is live on the canonical route and accepted by the owner",
       "promoted_at": "2026-10-31T22:56:23Z"
+    },
+    {
+      "entity_id": "see-through",
+      "from_release_id": "20261005-0609",
+      "to_release_id": "202611020012",
+      "reason": "See Through 202611020012 published (kuiper-belt 7110022): reads the Kuiper's deep links, so a Kuiper card's link opens it at the right star; launch uses the stable see-through/ pointer, 20261005-0609 stays as an earlier release",
+      "promoted_at": "2026-11-02T02:19:08Z"
     }
   ]
 }
