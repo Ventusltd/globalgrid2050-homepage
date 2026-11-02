@@ -254,6 +254,16 @@
         "developers"
       ],
       "roles": []
+    },
+    "kuiper-editions": {
+      "type": "application",
+      "purpose": "Find the estate's verified lines of code on the Kuiper wafer, each placed at its own key and linked to its repository, commit, file and line, with every dated edition kept unchanged as history.",
+      "audience": [
+        "developers",
+        "grid researchers",
+        "learners"
+      ],
+      "roles": []
     }
   }
 }

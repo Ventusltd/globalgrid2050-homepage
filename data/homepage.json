@@ -30,6 +30,51 @@
       ]
     },
     {
+      "id": "kuiper-editions",
+      "parent_id": "kuiper",
+      "title": "Kuiper editions",
+      "subtitle": "The estate's verified lines of code, lit on the Kuiper wafer",
+      "description": "Every line of every commit of the estate drawn on one wafer, with the verified lines lit as green sparks at their own keys. Tap a spark, or pick one from LINES, to read its line and open it on GitHub at its repository, commit, file and line. Each change is a new dated edition and earlier editions stay as they were. Works on a phone. See Through, the substation app from the same family, opens from its own entry in this section and from ventusltd.github.io/kuiper-belt/see-through/.",
+      "launch_label": "Open the Kuiper editions",
+      "operative_release_id": "202611012027",
+      "releases": [
+        {
+          "id": "202610311905",
+          "label": "Edition 1 - 31 October 2026",
+          "url": "https://ventusltd.github.io/kuiper-belt/editions/202610311905/belt/",
+          "published_at": "2026-10-31T19:46:58Z",
+          "status": "available",
+          "source_ref": "https://github.com/Ventusltd/kuiper-belt/commit/5bf5202ff51a37e2f243eebcd0b9734c1d6fdbb1"
+        },
+        {
+          "id": "202611010114",
+          "label": "Edition 2 - 1 November 2026",
+          "url": "https://ventusltd.github.io/kuiper-belt/editions/202611010114/",
+          "published_at": "2026-11-01T01:16:34Z",
+          "status": "available",
+          "source_ref": "https://github.com/Ventusltd/kuiper-belt/commit/638cc3ffe737575c69b59f00a15e9993a286e25c"
+        },
+        {
+          "id": "202611012022",
+          "label": "Edition 3 - 1 November 2026",
+          "url": "https://ventusltd.github.io/kuiper-belt/editions/202611012022/",
+          "published_at": "2026-11-01T20:25:49Z",
+          "status": "available",
+          "source_ref": "https://github.com/Ventusltd/kuiper-belt/commit/a168c66e53754f3d72f8e1d3555b2f31dd572abe"
+        },
+        {
+          "id": "202611012027",
+          "label": "Edition 4 - 1 November 2026",
+          "url": "https://globalgrid2050.com/kuiper-editions/",
+          "published_at": "2026-11-01T20:32:13Z",
+          "status": "available",
+          "source_ref": "https://github.com/Ventusltd/kuiper-belt/commit/689d8100bf3891f423b2d5e9597669d4b8ee8bb4",
+          "archive_url": "https://ventusltd.github.io/kuiper-belt/editions/202611012027/",
+          "archive_kind": "app"
+        }
+      ]
+    },
+    {
       "id": "what-is-kuiper",
       "parent_id": "kuiper",
       "title": "What is the Kuiper?",
