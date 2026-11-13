@@ -1,5 +1,11 @@
 # Changes
 
+## 13 November 2026 — Cyber Resilience Log
+
+- Add a tenth homepage section, **Cyber Resilience Log**, linked to the independent static Pages site in `Ventusltd/cyber-resilience`.
+- Extend only the append-only entity catalogue, corresponding metadata and no-JavaScript navigation fallback; preserve all 27 existing entities, nine original sections, existing releases, promotions, CSS, JavaScript and privacy notice.
+- The new destination records dated research into cloud outages, cyber incidents, supplier concentration and independent recovery. GitHub Pages for the destination must be enabled separately; the domain publisher is not repointed until acceptance and verification.
+
 ## 29 October 2026 - privacy notice
 
 - Add a collapsed "Privacy" notice to the homepage footer, below the disclaimer. It is one plain-English statement covering the homepage, GridAtlas, Pipeline News and the Energy Transition Simulator. It says there are no analytics, no cookies of our own and no accounts; that GitHub Pages logs visitor IP addresses for security; which other services each app contacts and when; what is stored on the device and how to clear it; and what the statement does not cover.

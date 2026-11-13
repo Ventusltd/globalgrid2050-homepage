@@ -264,6 +264,17 @@
         "learners"
       ],
       "roles": []
+    },
+    "cyber-resilience-log": {
+      "type": "reference",
+      "purpose": "Document verified cloud-service outages, cybercrime incidents, supplier concentration risks and practical independent-recovery measures.",
+      "audience": [
+        "critical infrastructure operators",
+        "developers",
+        "risk and procurement teams",
+        "learners"
+      ],
+      "roles": []
     }
   }
 }
