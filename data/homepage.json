@@ -718,6 +718,24 @@
         }
       ],
       "parent_id": "cable-engineering"
+    },
+    {
+      "id": "cyber-resilience-log",
+      "title": "Cyber Resilience Log",
+      "subtitle": "Cloud outages, supply-chain risk and independent recovery",
+      "description": "A dated research log on operational failures, security incidents and the risks of relying on too few providers for critical systems.",
+      "launch_label": "Open Cyber Resilience Log",
+      "operative_release_id": "20261113",
+      "releases": [
+        {
+          "id": "20261113",
+          "label": "13 November 2026",
+          "url": "https://ventusltd.github.io/cyber-resilience/",
+          "published_at": "2026-11-13",
+          "status": "available",
+          "source_ref": "https://github.com/Ventusltd/cyber-resilience/commit/51e10d52be3916b50801cdd2510ea32c4ce4a490"
+        }
+      ]
     }
   ],
   "view": {
@@ -756,6 +774,10 @@
       },
       {
         "entity_id": "cable-engineering",
+        "open": false
+      },
+      {
+        "entity_id": "cyber-resilience-log",
         "open": false
       }
     ],
