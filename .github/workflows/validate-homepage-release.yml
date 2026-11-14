@@ -1,0 +1,48 @@
+name: Homepage release catalogue validation
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - data/homepage.json
+      - scripts/releases.py
+      - .github/workflows/validate-homepage-release.yml
+  push:
+    branches: [main]
+    paths:
+      - data/homepage.json
+      - scripts/releases.py
+      - .github/workflows/validate-homepage-release.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Validate complete catalogue and promotion history
+        run: python3 scripts/releases.py validate
+      - name: Check Q3 operative pointer and retained September rollback
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          p=json.loads(Path("data/homepage.json").read_text())
+          e=next(e for e in p["entities"] if e["id"]=="pipeline-news")
+          assert e["operative_release_id"]=="202611132345"
+          releases={r["id"]:r for r in e["releases"]}
+          assert set(("202609082224","202611132345")) <= releases.keys()
+          assert releases["202611132345"]["url"]=="https://globalgrid2050.com/uk_renewables_pipeline/202611132345/"
+          assert releases["202609082224"]["url"]=="https://globalgrid2050.com/uk_renewables_pipeline/202609082224/"
+          assert p["promotions"][-1]["entity_id"]=="pipeline-news"
+          assert p["promotions"][-1]["from_release_id"]=="202609082224"
+          assert p["promotions"][-1]["to_release_id"]=="202611132345"
+          print("PASS: Q3 promotion history, Q2 rollback link and source URL")
+          PY
