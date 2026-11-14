@@ -957,7 +957,7 @@
       "entity_id": "gridatlas",
       "from_release_id": "202610312138",
       "to_release_id": "202611132345",
-      "reason": "GridAtlas v9.189 (generation 202611132345) is live on the canonical route and accepted by the owner",
+      "reason": "GridAtlas v9.189 (generation 202611132345) is live on the canonical route (live-bytes and twin reproduction runs passed); published on the owner's instruction of 14 November 2026 to release without the acceptance step; no owner acceptance is recorded; 202610312138 retained as an earlier release",
       "promoted_at": "2026-11-14T02:24:06Z"
     }
   ]
