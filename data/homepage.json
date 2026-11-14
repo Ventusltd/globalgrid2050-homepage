@@ -335,6 +335,14 @@
           "published_at": "2026-09-08T22:24:00Z",
           "status": "available",
           "source_ref": "https://github.com/Ventusltd/globalgrid2050/tree/7c64560d282f3412a3dfd79939e236a37ee5e8da"
+        },
+        {
+          "id": "202611132345",
+          "label": "October 2026 REPD (14 November 2026)",
+          "url": "https://globalgrid2050.com/uk_renewables_pipeline/202611132345/",
+          "published_at": "2026-11-14T00:39:07Z",
+          "status": "available",
+          "source_ref": "https://github.com/Ventusltd/globalgrid2050/tree/07b6d51702a12aa3d69833d91e43f84d8901ba78/uk_renewables_pipeline/202611132345"
         }
       ]
     },
