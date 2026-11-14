@@ -935,8 +935,7 @@
       "to_release_id": "202611020012",
       "reason": "See Through 202611020012 published (kuiper-belt 7110022): reads the Kuiper's deep links, so a Kuiper card's link opens it at the right star; launch uses the stable see-through/ pointer, 20261005-0609 stays as an earlier release",
       "promoted_at": "2026-11-02T02:19:08Z"
-    }
-  ,
+    },
     {
       "entity_id": "pipeline-news",
       "from_release_id": "202609082224",
