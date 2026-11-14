@@ -29,23 +29,33 @@ jobs:
           python-version: '3.11'
       - name: Validate complete catalogue and promotion history
         run: python3 scripts/releases.py validate
-      - name: Check Q3 operative pointer and retained September rollback
+      - name: Check immutable Q2/Q3 catalogue, promotion chain and current pointer
         run: |
           python3 - <<'PY'
           import json
           from pathlib import Path
           p=json.loads(Path("data/homepage.json").read_text())
           e=next(e for e in p["entities"] if e["id"]=="pipeline-news")
-          assert e["operative_release_id"]=="202611132345"
           releases={r["id"]:r for r in e["releases"]}
-          assert set(("202609082224","202611132345")) <= releases.keys()
-          assert releases["202611132345"]["url"]=="https://globalgrid2050.com/uk_renewables_pipeline/202611132345/"
-          assert releases["202609082224"]["url"]=="https://globalgrid2050.com/uk_renewables_pipeline/202609082224/"
-          # The Q3 promotion must be present exactly once and be the latest Pipeline News promotion;
-          # promotions of other entities may follow it.
+          q2="202609082224"
+          q3="202611132345"
+          v920="202611140306"
+          assert {q2,q3,v920} <= releases.keys(), "missing retained release"
+          for rid in (q2,q3,v920):
+              assert releases[rid]["url"]==f"https://globalgrid2050.com/uk_renewables_pipeline/{rid}/", f"incorrect URL: {rid}"
+              assert releases[rid]["status"]=="available", f"unavailable release: {rid}"
+          assert releases[v920]["source_ref"]=="https://github.com/Ventusltd/globalgrid2050/tree/a5988652003fb29e054ffa7860d8e53fe6458edc/uk_renewables_pipeline/202611140306", "unverified moving source ref"
           news=[x for x in p["promotions"] if x["entity_id"]=="pipeline-news"]
-          q3=[x for x in news if x["from_release_id"]=="202609082224" and x["to_release_id"]=="202611132345"]
-          assert len(q3)==1
-          assert news[-1] is q3[0]
-          print("PASS: Q3 promotion history, Q2 rollback link and source URL")
+          assert news, "missing Pipeline News history"
+          q3_moves=[x for x in news if x["from_release_id"]==q2 and x["to_release_id"]==q3]
+          assert len(q3_moves)==1, "missing or duplicate original Q3 promotion"
+          assert news.index(q3_moves[0])==0, "original Q3 promotion order changed"
+          assert len(news)>=2, "missing successor promotion"
+          successor=[x for x in news if x["from_release_id"]==q3 and x["to_release_id"]==v920]
+          assert len(successor)==1, "V9.20 must follow Q3 exactly once"
+          assert news.index(successor[0])==1, "successor not directly after Q3"
+          assert news[-1]["to_release_id"]==e["operative_release_id"], "pointer differs from latest audited promotion"
+          assert e["operative_release_id"]==v920, "unexpected operative target"
+          assert len({x["to_release_id"] for x in news})==len(news), "repeated promotion target"
+          print("PASS: original Q2/Q3 entries, immutable source URLs and audited V9.20 successor")
           PY

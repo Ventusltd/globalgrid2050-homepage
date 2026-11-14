@@ -336,7 +336,7 @@
       "subtitle": "Follow renewable energy projects",
       "description": "Explore the project register and follow the renewable energy pipeline.",
       "launch_label": "Open Pipeline News",
-      "operative_release_id": "202611132345",
+      "operative_release_id": "202611140306",
       "releases": [
         {
           "id": "202609082224",
@@ -353,6 +353,14 @@
           "published_at": "2026-11-14T00:39:07Z",
           "status": "available",
           "source_ref": "https://github.com/Ventusltd/globalgrid2050/tree/07b6d51702a12aa3d69833d91e43f84d8901ba78/uk_renewables_pipeline/202611132345"
+        },
+        {
+          "id": "202611140306",
+          "label": "V9.20 · October 2026 REPD (14 November 2026)",
+          "url": "https://globalgrid2050.com/uk_renewables_pipeline/202611140306/",
+          "published_at": "2026-11-14T03:06:00Z",
+          "status": "available",
+          "source_ref": "https://github.com/Ventusltd/globalgrid2050/tree/a5988652003fb29e054ffa7860d8e53fe6458edc/uk_renewables_pipeline/202611140306"
         }
       ]
     },
@@ -959,6 +967,13 @@
       "to_release_id": "202611132345",
       "reason": "GridAtlas v9.189 (generation 202611132345) is live on the canonical route (live-bytes and twin reproduction runs passed); published on the owner's instruction of 14 November 2026 to release without the acceptance step; no owner acceptance is recorded; 202610312138 retained as an earlier release",
       "promoted_at": "2026-11-14T02:24:06Z"
+    },
+    {
+      "entity_id": "pipeline-news",
+      "from_release_id": "202611132345",
+      "to_release_id": "202611140306",
+      "reason": "Owner instruction 14 November 2026; V9.20 excludes unverified data-centre register and Energy24; independent hosted source/browser/CSV/MAP verification run 43577469586; preserve earlier October and September editions; subject to final served-byte and rollback verification",
+      "promoted_at": "2026-11-14T09:33:00Z"
     }
   ]
 }
