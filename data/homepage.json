@@ -182,7 +182,7 @@
       "subtitle": "Explore the electricity network",
       "description": "Optional UK lightning overlay (observed optical flashes, 12-month history) with the nearest substations and REPD projects, plus a Potential offtakers layer (industry, power stations, data centres) linked to the 15 nearest REPD projects.",
       "launch_label": "Open GridAtlas",
-      "operative_release_id": "202610312138",
+      "operative_release_id": "202611132345",
       "releases": [
         {
           "id": "202609241334",
@@ -222,6 +222,16 @@
           "status": "available",
           "source_ref": "https://github.com/Ventusltd/gridatlas/commit/41729af0b49dcfbe8f2a3ebc485eff217a61b84d",
           "archive_url": "https://ventusltd.github.io/gridatlas/atlas/v/202610312138/",
+          "archive_kind": "app"
+        },
+        {
+          "id": "202611132345",
+          "label": "V9.189 - 14 November 2026",
+          "url": "https://ventusltd.github.io/gridatlas/atlas/",
+          "published_at": "2026-11-14T01:56:00Z",
+          "status": "available",
+          "source_ref": "https://github.com/Ventusltd/gridatlas/commit/b0a3a93835739bf9a4987a2f4916938fa37ad124",
+          "archive_url": "https://ventusltd.github.io/gridatlas/atlas/v/202611132345/",
           "archive_kind": "app"
         }
       ]
@@ -942,6 +952,13 @@
       "to_release_id": "202611132345",
       "reason": "Owner standing authorisation 14 November 2026; October REPD official source 43/43 independently accepted (run 43535583260), Q3 public SHA256/legacy byte parity and desktop/mobile CSV/MAP live checks passed (run 43535706937); previous September edition retained as rollback",
       "promoted_at": "2026-11-14T00:41:59Z"
+    },
+    {
+      "entity_id": "gridatlas",
+      "from_release_id": "202610312138",
+      "to_release_id": "202611132345",
+      "reason": "GridAtlas v9.189 (generation 202611132345) is live on the canonical route and accepted by the owner",
+      "promoted_at": "2026-11-14T02:24:06Z"
     }
   ]
 }
