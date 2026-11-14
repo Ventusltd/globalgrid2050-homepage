@@ -1,0 +1,52 @@
+name: Build and commit homepage fallback on isolated Q3 release branch
+
+on:
+  push:
+    branches:
+      - release/pipeline-news-202611132345-20261114
+    paths:
+      - data/homepage.json
+      - .github/workflows/build-homepage-release-candidate.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: homepage-q3-fallback-build
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: release/pipeline-news-202611132345-20261114
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Validate and regenerate fallback from the pinned owner catalogue
+        run: |
+          set -euo pipefail
+          python3 scripts/releases.py validate
+          python3 scripts/build_homepage_fallback.py
+          python3 -m unittest discover -s tests
+          node --check assets/versioned-homepage.js
+          python3 scripts/fetch_active_pages.py --check
+      - name: Commit only generated fallback HTML to release branch
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- index.html
+          if git diff --cached --quiet; then
+            echo 'Fallback already matches the catalogue'
+            exit 0
+          fi
+          git diff --cached --name-only | grep -Fx index.html
+          git commit -m 'build(homepage): regenerate Q3 operative Pipeline News fallback'
+          git push origin HEAD:release/pipeline-news-202611132345-20261114
+          echo 'Generated fallback committed to isolated release branch'

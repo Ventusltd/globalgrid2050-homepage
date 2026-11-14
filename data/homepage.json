@@ -326,7 +326,7 @@
       "subtitle": "Follow renewable energy projects",
       "description": "Explore the project register and follow the renewable energy pipeline.",
       "launch_label": "Open Pipeline News",
-      "operative_release_id": "202609082224",
+      "operative_release_id": "202611132345",
       "releases": [
         {
           "id": "202609082224",
@@ -335,6 +335,14 @@
           "published_at": "2026-09-08T22:24:00Z",
           "status": "available",
           "source_ref": "https://github.com/Ventusltd/globalgrid2050/tree/7c64560d282f3412a3dfd79939e236a37ee5e8da"
+        },
+        {
+          "id": "202611132345",
+          "label": "October 2026 REPD (14 November 2026)",
+          "url": "https://globalgrid2050.com/uk_renewables_pipeline/202611132345/",
+          "published_at": "2026-11-14T00:39:07Z",
+          "status": "available",
+          "source_ref": "https://github.com/Ventusltd/globalgrid2050/tree/07b6d51702a12aa3d69833d91e43f84d8901ba78/uk_renewables_pipeline/202611132345"
         }
       ]
     },
@@ -927,6 +935,13 @@
       "to_release_id": "202611020012",
       "reason": "See Through 202611020012 published (kuiper-belt 7110022): reads the Kuiper's deep links, so a Kuiper card's link opens it at the right star; launch uses the stable see-through/ pointer, 20261005-0609 stays as an earlier release",
       "promoted_at": "2026-11-02T02:19:08Z"
+    },
+    {
+      "entity_id": "pipeline-news",
+      "from_release_id": "202609082224",
+      "to_release_id": "202611132345",
+      "reason": "Owner standing authorisation 14 November 2026; October REPD official source 43/43 independently accepted (run 43535583260), Q3 public SHA256/legacy byte parity and desktop/mobile CSV/MAP live checks passed (run 43535706937); previous September edition retained as rollback",
+      "promoted_at": "2026-11-14T00:41:59Z"
     }
   ]
 }
