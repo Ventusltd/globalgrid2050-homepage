@@ -41,8 +41,11 @@ jobs:
           assert set(("202609082224","202611132345")) <= releases.keys()
           assert releases["202611132345"]["url"]=="https://globalgrid2050.com/uk_renewables_pipeline/202611132345/"
           assert releases["202609082224"]["url"]=="https://globalgrid2050.com/uk_renewables_pipeline/202609082224/"
-          assert p["promotions"][-1]["entity_id"]=="pipeline-news"
-          assert p["promotions"][-1]["from_release_id"]=="202609082224"
-          assert p["promotions"][-1]["to_release_id"]=="202611132345"
+          # The Q3 promotion must be present exactly once and be the latest Pipeline News promotion;
+          # promotions of other entities may follow it.
+          news=[x for x in p["promotions"] if x["entity_id"]=="pipeline-news"]
+          q3=[x for x in news if x["from_release_id"]=="202609082224" and x["to_release_id"]=="202611132345"]
+          assert len(q3)==1
+          assert news[-1] is q3[0]
           print("PASS: Q3 promotion history, Q2 rollback link and source URL")
           PY
