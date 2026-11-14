@@ -940,7 +940,7 @@
       "entity_id": "pipeline-news",
       "from_release_id": "202609082224",
       "to_release_id": "202611132345",
-      "reason": "Owner standing authorisation 14 November 2026; October REPD official source 43/43 independently accepted (run 43535583260), Q3 public SHA256/legacy byte parity and desktop/mobile CSV/MAP live checks passed (run 43535706937); previous September edition retained",
+      "reason": "Owner standing authorisation 14 November 2026; October REPD official source 43/43 independently accepted (run 43535583260), Q3 public SHA256/legacy byte parity and desktop/mobile CSV/MAP live checks passed (run 43535706937); previous September edition retained as rollback",
       "promoted_at": "2026-11-14T00:41:59Z"
     }
   ]
