@@ -1,0 +1,53 @@
+name: Agent 8 V9.22 homepage fallback build (temporary isolated branch)
+
+# Only used to regenerate the owner-authored no-JavaScript fallback for the
+# unique Agent8 release branch. This workflow is removed before merging.
+on:
+  push:
+    branches:
+      - release/agent8-v922-homepage-20261115
+    paths:
+      - data/homepage.json
+      - .github/workflows/agent8-v922-homepage-fallback.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: agent8-v922-homepage-fallback
+  cancel-in-progress: false
+
+jobs:
+  regenerate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: release/agent8-v922-homepage-20261115
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Validate source and regenerate the exact fallback
+        run: |
+          set -euo pipefail
+          python3 scripts/releases.py validate
+          python3 scripts/build_homepage_fallback.py
+          python3 -m unittest discover -s tests
+          node --check assets/versioned-homepage.js
+          python3 scripts/fetch_active_pages.py --check
+      - name: Commit generated fallback only within Agent8 release branch
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- index.html
+          if git diff --cached --quiet; then
+            echo "Owner fallback already matches catalogue"
+            exit 0
+          fi
+          git diff --cached --name-only | grep -Fx index.html
+          git commit -m "build(agent8): regenerate V9.22 owner fallback from validated catalogue"
+          git push origin HEAD:release/agent8-v922-homepage-20261115
+          echo "Source and generated fallback are committed together on Agent8 branch"
