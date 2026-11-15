@@ -336,7 +336,7 @@
       "subtitle": "Follow renewable energy projects",
       "description": "Explore the project register and follow the renewable energy pipeline.",
       "launch_label": "Open Pipeline News",
-      "operative_release_id": "202611140306",
+      "operative_release_id": "202611141017",
       "releases": [
         {
           "id": "202609082224",
@@ -361,6 +361,14 @@
           "published_at": "2026-11-14T03:06:00Z",
           "status": "available",
           "source_ref": "https://github.com/Ventusltd/globalgrid2050/tree/a5988652003fb29e054ffa7860d8e53fe6458edc/uk_renewables_pipeline/202611140306"
+        },
+        {
+          "id": "202611141017",
+          "label": "V9.21 · October 2026 REPD · live headlines",
+          "url": "https://globalgrid2050.com/uk_renewables_pipeline/202611141017/",
+          "published_at": "2026-11-15T10:09:07Z",
+          "status": "available",
+          "source_ref": "https://github.com/Ventusltd/globalgrid2050/tree/9092ff8a8fcd4c83191d00bc928377412ad05f42/uk_renewables_pipeline/202611141017"
         }
       ]
     },
@@ -974,6 +982,13 @@
       "to_release_id": "202611140306",
       "reason": "Owner instruction 14 November 2026; V9.20 excludes unverified data-centre register and Energy24; independent hosted source/browser/CSV/MAP verification run 43577469586; preserve earlier October and September editions; subject to final served-byte and rollback verification",
       "promoted_at": "2026-11-14T09:33:00Z"
+    },
+    {
+      "entity_id": "pipeline-news",
+      "from_release_id": "202611140306",
+      "to_release_id": "202611141017",
+      "reason": "Owner direct 15 Nov 2026 order to publish now without further internal reviews. Promote existing V9.21 versioned news-block candidate, preserve V9.20 rollback and 7,775 REPD records; possible matches remain unverified and no claim of producer PR112 deployment.",
+      "promoted_at": "2026-11-15T10:09:07Z"
     }
   ]
 }
