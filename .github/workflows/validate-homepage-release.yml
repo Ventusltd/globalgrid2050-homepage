@@ -55,7 +55,14 @@ jobs:
           assert len(successor)==1, "V9.20 must follow Q3 exactly once"
           assert news.index(successor[0])==1, "successor not directly after Q3"
           assert news[-1]["to_release_id"]==e["operative_release_id"], "pointer differs from latest audited promotion"
-          assert e["operative_release_id"]==v920, "unexpected operative target"
+          v921="202611141017"
+          v922="202611151300"
+          assert {v921,v922} <= releases.keys(), "missing V9.21/V9.22 versions"
+          assert releases[v921]["status"]=="available" and releases[v922]["status"]=="available", "release archive unavailable"
+          assert releases[v922]["url"]==f"https://globalgrid2050.com/uk_renewables_pipeline/{v922}/", "incorrect V9.22 URL"
+          assert releases[v922]["source_ref"]=="https://github.com/Ventusltd/globalgrid2050/tree/0719ddc28f2a418281594549d4667c9916ff6b20/uk_renewables_pipeline/202611151300", "wrong immutable release source SHA"
+          assert any(x["from_release_id"]==v921 and x["to_release_id"]==v922 for x in news), "V9.22 promotion audit missing"
+          assert e["operative_release_id"]==v922, "unexpected operative target"
           assert len({x["to_release_id"] for x in news})==len(news), "repeated promotion target"
-          print("PASS: original Q2/Q3 entries, immutable source URLs and audited V9.20 successor")
+          print("PASS: Q2/Q3/V9.20/V9.21 preserved and owner-authorised V9.22 operative")
           PY
