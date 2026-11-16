@@ -400,7 +400,7 @@
           "url": "https://globalgrid2050.com/uk_renewables_pipeline/202611161757/",
           "published_at": null,
           "status": "available",
-          "source_ref": "https://github.com/Ventusltd/globalgrid2050/tree/0c8ee525544a08001439c8c20abc26d6e3407b30/uk_renewables_pipeline/202611161757"
+          "source_ref": "https://github.com/Ventusltd/globalgrid2050/tree/84c739ad711b3ce8476acdfab219c8f8b67f102d/uk_renewables_pipeline/202611161757"
         }
       ]
     },
@@ -1047,7 +1047,7 @@
       "entity_id": "pipeline-news",
       "from_release_id": "202611161244",
       "to_release_id": "202611161757",
-      "reason": "Owner explicitly instructed publication of corrected V9.28 on 16 November 2026. Pin exact product source 0c8ee525544a08001439c8c20abc26d6e3407b30; retain all 7,775 REPD rows and immutable Solar-1000, provisional-only context and unassessed source rights. V9.24 remains available for rollback. Prepared for merge only after exact-source CI and product served-byte checks; no independent project evidence or rights approval is inferred.",
+      "reason": "Owner explicitly instructed publication of corrected V9.28 on 16 November 2026. Pin exact product source 84c739ad711b3ce8476acdfab219c8f8b67f102d; retain all 7,775 REPD rows and immutable Solar-1000, provisional-only context and unassessed source rights. V9.24 remains available for rollback. Prepared for merge only after exact-source CI and product served-byte checks; no independent project evidence or rights approval is inferred.",
       "promoted_at": "2026-11-16T23:09:31Z"
     }
   ]
