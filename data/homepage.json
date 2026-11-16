@@ -346,7 +346,7 @@
       "subtitle": "Follow renewable energy projects",
       "description": "Explore the project register and follow the renewable energy pipeline.",
       "launch_label": "Open Pipeline News",
-      "operative_release_id": "202611161630",
+      "operative_release_id": "202611161747",
       "releases": [
         {
           "id": "202609082224",
@@ -416,16 +416,16 @@
           "id": "202611161734",
           "label": "V9.26 - source-aware news ordering",
           "url": "https://globalgrid2050.com/uk_renewables_pipeline/202611161734/",
-          "published_at": null,
-          "status": "candidate",
+          "published_at": "2026-11-16T18:16:45Z",
+          "status": "available",
           "source_ref": "https://github.com/Ventusltd/globalgrid2050/tree/53c437fa23debe16036b87ba3d59cfaca3900105/uk_renewables_pipeline/202611161734"
         },
         {
           "id": "202611161747",
           "label": "V9.27 - source-bound project research priority",
           "url": "https://globalgrid2050.com/uk_renewables_pipeline/202611161747/",
-          "published_at": null,
-          "status": "candidate",
+          "published_at": "2026-11-16T18:16:45Z",
+          "status": "available",
           "source_ref": "https://github.com/Ventusltd/globalgrid2050/tree/fb4bd1baaa50c5102a791cf88b9ef23f3fc89a67/uk_renewables_pipeline/202611161747"
         }
       ]
@@ -1082,6 +1082,20 @@
       "to_release_id": "202611161630",
       "reason": "Merged PR125 at 60c778d9789b88ce6a803ac84bff9099e423eec2; Pages deployment completed 2026-11-16T18:08:41Z and public V9.25 HTML matched SHA256 d762ab6f7d5cff70f0b7427b1d524e3fefb5e0ba95e5f08bd95377d46b443a1a at 18:08:59Z. Append this dated software edition under standing incremental-release instructions; preserve V9.24 rollback. Evidence collection remains disabled, zero independent verification and partial global data-centre coverage. No human acceptance is inferred.",
       "promoted_at": "2026-11-16T18:09:12Z"
+    },
+    {
+      "entity_id": "pipeline-news",
+      "from_release_id": "202611161630",
+      "to_release_id": "202611161734",
+      "reason": "Merged dated software edition 202611161734; deployment 43925444775 completed 2026-11-16T18:16:45Z. Public HTML read back at 2026-11-16T18:16:58Z matched SHA256 4b275043bea6bf30e5573ddb2db5a70f84fd434b20f7806049dac7028d300564. Preserve the preceding edition and its immutable source. This is research software, not independently verified project evidence or a live trend assertion. No human acceptance is inferred.",
+      "promoted_at": "2026-11-16T18:17:00Z"
+    },
+    {
+      "entity_id": "pipeline-news",
+      "from_release_id": "202611161734",
+      "to_release_id": "202611161747",
+      "reason": "Merged dated software edition 202611161747; deployment 43925444775 completed 2026-11-16T18:16:45Z. Public HTML read back at 2026-11-16T18:16:58Z matched SHA256 ef77a1017c4bd54657f5b2061367aaba3d85170996d642916a49418ac888b419. Preserve the preceding edition and its immutable source. This is research software, not independently verified project evidence or a live trend assertion. No human acceptance is inferred.",
+      "promoted_at": "2026-11-16T18:17:00Z"
     }
   ]
 }

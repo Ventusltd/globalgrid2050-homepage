@@ -11,9 +11,9 @@ readback are outside this PR. No human acceptance is inferred.
 | V9.26 / 202611161734 | `53c437fa23debe16036b87ba3d59cfaca3900105` | `4b275043bea6bf30e5573ddb2db5a70f84fd434b20f7806049dac7028d300564` |
 | V9.27 / 202611161747 | `fb4bd1baaa50c5102a791cf88b9ef23f3fc89a67` | `ef77a1017c4bd54657f5b2061367aaba3d85170996d642916a49418ac888b419` |
 
-The hashes above identify the merged source files; public readback results are
-recorded separately in the PR. A pending edition remains a candidate until its
-public bytes match. V9.25 was observed HTTP 200 at 18:08:59 UTC, matching its
+All three public Pipeline indexes matched these merged-source hashes before
+promotion. The complete receipt, including deployment completion and readback
+timestamps, is in `receipts/20261116-owner-v927-public-readback.json`. V9.25 was observed HTTP 200 at 18:08:59 UTC, matching its
 17,225-byte source index. Its deploy job completed at 18:08:41 UTC in
 [run 43924628537](https://github.com/Ventusltd/globalgrid2050/actions/runs/43924628537).
 

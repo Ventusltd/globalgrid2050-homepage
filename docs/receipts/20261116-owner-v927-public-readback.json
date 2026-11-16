@@ -1,0 +1,43 @@
+{
+  "deployment_run": 43925444775,
+  "deployment_head": "fb4bd1baaa50c5102a791cf88b9ef23f3fc89a67",
+  "deployment_completed_at": "2026-11-16T18:16:45Z",
+  "readbacks": [
+    {
+      "id": "202611161630",
+      "url": "https://globalgrid2050.com/uk_renewables_pipeline/202611161630/index.html",
+      "readback_url": "https://globalgrid2050.com/uk_renewables_pipeline/202611161630/index.html?owner_readback=2026-11-16T181658Z",
+      "observed_at": "2026-11-16T18:16:58Z",
+      "status": 200,
+      "bytes": 17225,
+      "sha256": "d762ab6f7d5cff70f0b7427b1d524e3fefb5e0ba95e5f08bd95377d46b443a1a"
+    },
+    {
+      "id": "202611161734",
+      "url": "https://globalgrid2050.com/uk_renewables_pipeline/202611161734/index.html",
+      "readback_url": "https://globalgrid2050.com/uk_renewables_pipeline/202611161734/index.html?owner_readback=2026-11-16T181658Z",
+      "observed_at": "2026-11-16T18:16:58Z",
+      "status": 200,
+      "bytes": 17285,
+      "sha256": "4b275043bea6bf30e5573ddb2db5a70f84fd434b20f7806049dac7028d300564"
+    },
+    {
+      "id": "202611161747",
+      "url": "https://globalgrid2050.com/uk_renewables_pipeline/202611161747/index.html",
+      "readback_url": "https://globalgrid2050.com/uk_renewables_pipeline/202611161747/index.html?owner_readback=2026-11-16T181658Z",
+      "observed_at": "2026-11-16T18:16:58Z",
+      "status": 200,
+      "bytes": 17839,
+      "sha256": "ef77a1017c4bd54657f5b2061367aaba3d85170996d642916a49418ac888b419"
+    },
+    {
+      "url": "https://ventusltd.github.io/gridatlas/atlas/current.json",
+      "observed_at": "2026-11-16T18:16:58Z",
+      "status": 200,
+      "bytes": 69086,
+      "sha256": "5f7c3fafc789f2b779a9bc7352d8619e7cb9f9ca06724287614dfc73113b27e8",
+      "generation": "202611161720",
+      "composition_version": "v9.191"
+    }
+  ]
+}
