@@ -336,7 +336,7 @@
       "subtitle": "Follow renewable energy projects",
       "description": "Explore the project register and follow the renewable energy pipeline.",
       "launch_label": "Open Pipeline News",
-      "operative_release_id": "202611160020",
+      "operative_release_id": "202611161244",
       "releases": [
         {
           "id": "202609082224",
@@ -385,6 +385,14 @@
           "published_at": "2026-11-16T08:02:54Z",
           "status": "available",
           "source_ref": "https://github.com/Ventusltd/globalgrid2050/tree/1559f40e73a4e454c39b23d5172cf4c5e96ef3ea/uk_renewables_pipeline/202611160020"
+        },
+        {
+          "id": "202611161244",
+          "label": "V9.24 · October 2026 REPD · 1,000 solar project research pilot (0 verified)",
+          "url": "https://globalgrid2050.com/uk_renewables_pipeline/202611161244/",
+          "published_at": "2026-11-16T12:48:38Z",
+          "status": "available",
+          "source_ref": "https://github.com/Ventusltd/globalgrid2050/tree/6d019006d2d091e45f7b30eeafd756126230e9d7/uk_renewables_pipeline/202611161244"
         }
       ]
     },
@@ -1019,6 +1027,13 @@
       "to_release_id": "202611160020",
       "reason": "Owner direct 16 Nov 2026 publish V9.23 now as iterative release; preserve immutable V9.22 and predecessors, show short unverified candidate project news notes, simplify feed. External GridAtlas 390px visible MAP still failed 2/3 in real three-project sample; does not claim fix. 7,775 official REPD records and publisher source rights subject to independent verification.",
       "promoted_at": "2026-11-16T08:02:54Z"
+    },
+    {
+      "entity_id": "pipeline-news",
+      "from_release_id": "202611160020",
+      "to_release_id": "202611161244",
+      "reason": "Owner explicitly directed 16 November 2026 to publish V9.24 as-is, without waiting for unrelated research. Separate version adds deterministic numeric REPD Solar-1000 pilot with 2 source candidates, 998 unresearched and 0 independently verified. Official 7,775 REPD records, original MAP links and CSV unchanged; inherited external GridAtlas mobile first-restore issue documented. V9.23 and prior immutable releases retained for rollback.",
+      "promoted_at": "2026-11-16T12:48:38Z"
     }
   ]
 }
