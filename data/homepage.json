@@ -346,7 +346,7 @@
       "subtitle": "Follow renewable energy projects",
       "description": "Explore the project register and follow the renewable energy pipeline.",
       "launch_label": "Open Pipeline News",
-      "operative_release_id": "202611161244",
+      "operative_release_id": "202611161630",
       "releases": [
         {
           "id": "202609082224",
@@ -408,8 +408,8 @@
           "id": "202611161630",
           "label": "V9.25 - October 2026 REPD - consolidated project workspace and global data centres",
           "url": "https://globalgrid2050.com/uk_renewables_pipeline/202611161630/",
-          "published_at": null,
-          "status": "candidate",
+          "published_at": "2026-11-16T18:08:41Z",
+          "status": "available",
           "source_ref": "https://github.com/Ventusltd/globalgrid2050/tree/60c778d9789b88ce6a803ac84bff9099e423eec2/uk_renewables_pipeline/202611161630"
         },
         {
@@ -1075,6 +1075,13 @@
       "to_release_id": "202611161720",
       "reason": "Draft prepared under the owner standing instruction for tested incremental releases. Public generation 202611161720 and v9.191 were read back; deployment 43922521166 and live-byte workflow 43922522238 passed. No human acceptance is inferred. Earlier releases remain available for rollback; COMMAND alone may merge this promotion.",
       "promoted_at": "2026-11-16T18:03:50Z"
+    },
+    {
+      "entity_id": "pipeline-news",
+      "from_release_id": "202611161244",
+      "to_release_id": "202611161630",
+      "reason": "Merged PR125 at 60c778d9789b88ce6a803ac84bff9099e423eec2; Pages deployment completed 2026-11-16T18:08:41Z and public V9.25 HTML matched SHA256 d762ab6f7d5cff70f0b7427b1d524e3fefb5e0ba95e5f08bd95377d46b443a1a at 18:08:59Z. Append this dated software edition under standing incremental-release instructions; preserve V9.24 rollback. Evidence collection remains disabled, zero independent verification and partial global data-centre coverage. No human acceptance is inferred.",
+      "promoted_at": "2026-11-16T18:09:12Z"
     }
   ]
 }
