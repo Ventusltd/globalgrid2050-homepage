@@ -62,7 +62,12 @@ jobs:
           assert releases[v922]["url"]==f"https://globalgrid2050.com/uk_renewables_pipeline/{v922}/", "incorrect V9.22 URL"
           assert releases[v922]["source_ref"]=="https://github.com/Ventusltd/globalgrid2050/tree/0719ddc28f2a418281594549d4667c9916ff6b20/uk_renewables_pipeline/202611151300", "wrong immutable release source SHA"
           assert any(x["from_release_id"]==v921 and x["to_release_id"]==v922 for x in news), "V9.22 promotion audit missing"
-          assert e["operative_release_id"]==v922, "unexpected operative target"
+          v923="202611160020"
+          assert v923 in releases and releases[v923]["status"]=="available", "V9.23 release missing"
+          assert releases[v923]["url"]==f"https://globalgrid2050.com/uk_renewables_pipeline/{v923}/", "incorrect V9.23 URL"
+          assert releases[v923]["source_ref"]=="https://github.com/Ventusltd/globalgrid2050/tree/1559f40e73a4e454c39b23d5172cf4c5e96ef3ea/uk_renewables_pipeline/202611160020", "incorrect immutable V9.23 source"
+          assert any(x["from_release_id"]==v922 and x["to_release_id"]==v923 for x in news), "V9.23 promotion audit missing"
+          assert e["operative_release_id"]==v923, "unexpected operative target"
           assert len({x["to_release_id"] for x in news})==len(news), "repeated promotion target"
-          print("PASS: Q2/Q3/V9.20/V9.21 preserved and owner-authorised V9.22 operative")
+          print("PASS: historical Q2/Q3/V9.20/V9.21/V9.22 intact and owner-authorised V9.23 operative")
           PY
