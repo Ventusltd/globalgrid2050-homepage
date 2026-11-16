@@ -336,7 +336,7 @@
       "subtitle": "Follow renewable energy projects",
       "description": "Explore the project register and follow the renewable energy pipeline.",
       "launch_label": "Open Pipeline News",
-      "operative_release_id": "202611161244",
+      "operative_release_id": "202611161757",
       "releases": [
         {
           "id": "202609082224",
@@ -393,6 +393,14 @@
           "published_at": "2026-11-16T12:48:38Z",
           "status": "available",
           "source_ref": "https://github.com/Ventusltd/globalgrid2050/tree/6d019006d2d091e45f7b30eeafd756126230e9d7/uk_renewables_pipeline/202611161244"
+        },
+        {
+          "id": "202611161757",
+          "label": "V9.28 ? October 2026 REPD ? Headlines and Pipeline",
+          "url": "https://globalgrid2050.com/uk_renewables_pipeline/202611161757/",
+          "published_at": null,
+          "status": "available",
+          "source_ref": "https://github.com/Ventusltd/globalgrid2050/tree/0c8ee525544a08001439c8c20abc26d6e3407b30/uk_renewables_pipeline/202611161757"
         }
       ]
     },
@@ -1034,6 +1042,13 @@
       "to_release_id": "202611161244",
       "reason": "Owner explicitly directed 16 November 2026 to publish V9.24 as-is, without waiting for unrelated research. Separate version adds deterministic numeric REPD Solar-1000 pilot with 2 source candidates, 998 unresearched and 0 independently verified. Official 7,775 REPD records, original MAP links and CSV unchanged; inherited external GridAtlas mobile first-restore issue documented. V9.23 and prior immutable releases retained for rollback.",
       "promoted_at": "2026-11-16T12:48:38Z"
+    },
+    {
+      "entity_id": "pipeline-news",
+      "from_release_id": "202611161244",
+      "to_release_id": "202611161757",
+      "reason": "Owner explicitly instructed publication of corrected V9.28 on 16 November 2026. Pin exact product source 0c8ee525544a08001439c8c20abc26d6e3407b30; retain all 7,775 REPD rows and immutable Solar-1000, provisional-only context and unassessed source rights. V9.24 remains available for rollback. Prepared for merge only after exact-source CI and product served-byte checks; no independent project evidence or rights approval is inferred.",
+      "promoted_at": "2026-11-16T23:09:31Z"
     }
   ]
 }
