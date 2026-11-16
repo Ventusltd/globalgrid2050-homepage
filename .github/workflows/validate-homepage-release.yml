@@ -72,7 +72,24 @@ jobs:
           assert releases[v924]["url"]==f"https://globalgrid2050.com/uk_renewables_pipeline/{v924}/", "V9.24 URL"
           assert releases[v924]["source_ref"]=="https://github.com/Ventusltd/globalgrid2050/tree/6d019006d2d091e45f7b30eeafd756126230e9d7/uk_renewables_pipeline/202611161244", "V9.24 must pin immutable source commit"
           assert any(x["from_release_id"]==v923 and x["to_release_id"]==v924 for x in news), "V9.24 promotion history missing"
-          assert e["operative_release_id"]==v924, "unexpected operative target"
+          v925="202611161630"
+          assert v925 in releases and releases[v925]["status"]=="available", "V9.25 missing"
+          assert releases[v925]["url"]==f"https://globalgrid2050.com/uk_renewables_pipeline/{v925}/", "V9.25 URL"
+          assert releases[v925]["source_ref"]=="https://github.com/Ventusltd/globalgrid2050/tree/60c778d9789b88ce6a803ac84bff9099e423eec2/uk_renewables_pipeline/202611161630", "V9.25 must pin merged immutable source"
+          assert any(x["from_release_id"]==v924 and x["to_release_id"]==v925 for x in news), "V9.25 promotion history missing"
+          previous=v925
+          for rid,sha in (("202611161734","53c437fa23debe16036b87ba3d59cfaca3900105"),("202611161747","fb4bd1baaa50c5102a791cf88b9ef23f3fc89a67")):
+              assert rid in releases and releases[rid]["status"]=="available", f"missing successor {rid}"
+              assert releases[rid]["url"]==f"https://globalgrid2050.com/uk_renewables_pipeline/{rid}/", f"incorrect successor URL {rid}"
+              assert releases[rid]["source_ref"]==f"https://github.com/Ventusltd/globalgrid2050/tree/{sha}/uk_renewables_pipeline/{rid}", f"incorrect immutable successor source {rid}"
+              assert any(x["from_release_id"]==previous and x["to_release_id"]==rid for x in news), f"missing successor history {rid}"
+              previous=rid
+          assert e["operative_release_id"]==previous, "unexpected operative target"
           assert len({x["to_release_id"] for x in news})==len(news), "repeated promotion target"
-          print("PASS: historical Q2/Q3/V9.20/V9.21/V9.22/V9.23 retained and owner-authorised V9.24 operative")
+          atlas=next(e for e in p["entities"] if e["id"]=="gridatlas")
+          assert atlas["operative_release_id"]=="202611161720", "GridAtlas V9.191 target"
+          atlas_release=next(r for r in atlas["releases"] if r["id"]==atlas["operative_release_id"])
+          assert atlas_release["source_ref"]=="https://github.com/Ventusltd/gridatlas/commit/1de35f9eca360a5d80d81542230fef546917f5c5", "GridAtlas immutable source"
+          assert any(x["entity_id"]=="gridatlas" and x["from_release_id"]=="202611132345" and x["to_release_id"]=="202611161720" for x in p["promotions"]), "GridAtlas promotion history missing"
+          print("PASS: historical Q2/Q3/V9.20-V9.26 retained; V9.27 and GridAtlas V9.191 operative")
           PY
