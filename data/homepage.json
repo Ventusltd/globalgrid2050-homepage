@@ -549,7 +549,7 @@
       "id": "energy-transition-simulator",
       "title": "Energy Transition Simulator",
       "subtitle": "Solar farming with power grids, on real UK ground (preview)",
-      "description": "Walk and fly anywhere in the UK over measured Environment Agency LiDAR, streamed where you arrive. Tables, trenches, lines and stations are modelled on the satellite and labelled as measured, documented or estimated. A preview, not a surveyed site or an approved engineering design.",
+      "description": "Walk and fly anywhere in the UK over Environment Agency LiDAR, streamed where you arrive. Tables, trenches, lines and stations are modelled on the satellite, with source data, documentation and estimates distinguished. A preview, not a surveyed site or an approved engineering design.",
       "launch_label": "Open the simulator preview",
       "operative_release_id": "ets-202609282123",
       "parent_id": "solar-design-studio",
@@ -780,7 +780,7 @@
     {
       "id": "cyber-resilience-log",
       "title": "Cyber Resilience Log",
-      "subtitle": "Cloud outages, supply-chain risk and independent recovery",
+      "subtitle": "Cloud outages, supplier dependencies and independent recovery",
       "description": "A dated research log on operational failures, security incidents and the risks of relying on too few providers for critical systems.",
       "launch_label": "Open Cyber Resilience Log",
       "operative_release_id": "20261113",
