@@ -180,9 +180,9 @@
       "id": "gridatlas",
       "title": "GridAtlas",
       "subtitle": "Explore the electricity network",
-      "description": "Optional UK lightning overlay (observed optical flashes, 12-month history) with the nearest substations and REPD projects, plus a Potential offtakers layer (industry, power stations, data centres) linked to the 15 nearest REPD projects.",
+      "description": "Explore the electricity network with the VENTUS Grid Engine. Project deep links retain exact REPD identity and show measured nearby substations; distance does not establish grid capacity or a connection offer. Existing network, lightning and potential-offtaker layers remain available.",
       "launch_label": "Open GridAtlas",
-      "operative_release_id": "202611132345",
+      "operative_release_id": "202611161720",
       "releases": [
         {
           "id": "202609241334",
@@ -232,6 +232,16 @@
           "status": "available",
           "source_ref": "https://github.com/Ventusltd/gridatlas/commit/b0a3a93835739bf9a4987a2f4916938fa37ad124",
           "archive_url": "https://ventusltd.github.io/gridatlas/atlas/v/202611132345/",
+          "archive_kind": "app"
+        },
+        {
+          "id": "202611161720",
+          "label": "V9.191 - 16 November 2026",
+          "url": "https://ventusltd.github.io/gridatlas/atlas/",
+          "published_at": "2026-11-16T17:50:55Z",
+          "status": "available",
+          "source_ref": "https://github.com/Ventusltd/gridatlas/commit/1de35f9eca360a5d80d81542230fef546917f5c5",
+          "archive_url": "https://ventusltd.github.io/gridatlas/atlas/v/202611161720/",
           "archive_kind": "app"
         }
       ]
@@ -393,6 +403,30 @@
           "published_at": "2026-11-16T12:48:38Z",
           "status": "available",
           "source_ref": "https://github.com/Ventusltd/globalgrid2050/tree/6d019006d2d091e45f7b30eeafd756126230e9d7/uk_renewables_pipeline/202611161244"
+        },
+        {
+          "id": "202611161630",
+          "label": "V9.25 - October 2026 REPD - consolidated project workspace and global data centres",
+          "url": "https://globalgrid2050.com/uk_renewables_pipeline/202611161630/",
+          "published_at": null,
+          "status": "candidate",
+          "source_ref": "https://github.com/Ventusltd/globalgrid2050/tree/60c778d9789b88ce6a803ac84bff9099e423eec2/uk_renewables_pipeline/202611161630"
+        },
+        {
+          "id": "202611161734",
+          "label": "V9.26 - source-aware news ordering",
+          "url": "https://globalgrid2050.com/uk_renewables_pipeline/202611161734/",
+          "published_at": null,
+          "status": "candidate",
+          "source_ref": "https://github.com/Ventusltd/globalgrid2050/tree/53c437fa23debe16036b87ba3d59cfaca3900105/uk_renewables_pipeline/202611161734"
+        },
+        {
+          "id": "202611161747",
+          "label": "V9.27 - source-bound project research priority",
+          "url": "https://globalgrid2050.com/uk_renewables_pipeline/202611161747/",
+          "published_at": null,
+          "status": "candidate",
+          "source_ref": "https://github.com/Ventusltd/globalgrid2050/tree/fb4bd1baaa50c5102a791cf88b9ef23f3fc89a67/uk_renewables_pipeline/202611161747"
         }
       ]
     },
@@ -1034,6 +1068,13 @@
       "to_release_id": "202611161244",
       "reason": "Owner explicitly directed 16 November 2026 to publish V9.24 as-is, without waiting for unrelated research. Separate version adds deterministic numeric REPD Solar-1000 pilot with 2 source candidates, 998 unresearched and 0 independently verified. Official 7,775 REPD records, original MAP links and CSV unchanged; inherited external GridAtlas mobile first-restore issue documented. V9.23 and prior immutable releases retained for rollback.",
       "promoted_at": "2026-11-16T12:48:38Z"
+    },
+    {
+      "entity_id": "gridatlas",
+      "from_release_id": "202611132345",
+      "to_release_id": "202611161720",
+      "reason": "Draft prepared under the owner standing instruction for tested incremental releases. Public generation 202611161720 and v9.191 were read back; deployment 43922521166 and live-byte workflow 43922522238 passed. No human acceptance is inferred. Earlier releases remain available for rollback; COMMAND alone may merge this promotion.",
+      "promoted_at": "2026-11-16T18:03:50Z"
     }
   ]
 }
