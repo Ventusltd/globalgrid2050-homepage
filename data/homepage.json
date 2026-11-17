@@ -336,7 +336,7 @@
       "subtitle": "Follow renewable energy projects",
       "description": "Explore the project register and follow the renewable energy pipeline.",
       "launch_label": "Open Pipeline News",
-      "operative_release_id": "202611171507",
+      "operative_release_id": "202611171526",
       "releases": [
         {
           "id": "202609082224",
@@ -465,6 +465,14 @@
           "published_at": null,
           "status": "available",
           "source_ref": "https://github.com/Ventusltd/globalgrid2050/tree/de175b28076ca3115ecb026174b7dc6bb1fd9e8c/uk_renewables_pipeline/202611171507"
+        },
+        {
+          "id": "202611171526",
+          "label": "V9.37 - news filters and source provenance",
+          "url": "https://globalgrid2050.com/uk_renewables_pipeline/202611171526/",
+          "published_at": null,
+          "status": "available",
+          "source_ref": "https://github.com/Ventusltd/globalgrid2050/tree/aca34ce9ff2e76e56f4c1a6c564870a35b8815dd/uk_renewables_pipeline/202611171526"
         }
       ]
     },
@@ -1169,6 +1177,13 @@
       "to_release_id": "202611171507",
       "reason": "Owner-directed three-hour implementation/publication window 17 November 2026. PN-TICKER exact source de175b28076ca3115ecb026174b7dc6bb1fd9e8c adds bounded20-item static browsing/search across up to100 actual source headlines with original attribution/clocks, no Pause/motion and unchanged collector/main12-item list. Independent Agent B review passed. Merge only after all exact-source gates and dated public acceptance; retain V9.35 and all older releases.",
       "promoted_at": "2026-11-17T15:32:24Z"
+    },
+    {
+      "entity_id": "pipeline-news",
+      "from_release_id": "202611171507",
+      "to_release_id": "202611171526",
+      "reason": "Owner-directed three-hour implementation/publication scope17November2026. PN-NEWS exactsourceaca34ce9ff2e76e56f4c1a6c564870a35b8815dd adds stable title/publisher/topic/category/current-exact-ranking-source-type filters and honest lazy collection/source provenance, preserving full original document, V936 ticker and main12 batches. Merge only after all exact-source gates, independent review and dated public acceptance. Retain V936 and all prior immutable releases.",
+      "promoted_at": "2026-11-17T16:11:32Z"
     }
   ]
 }
