@@ -336,7 +336,7 @@
       "subtitle": "Follow renewable energy projects",
       "description": "Explore the project register and follow the renewable energy pipeline.",
       "launch_label": "Open Pipeline News",
-      "operative_release_id": "202611170243",
+      "operative_release_id": "202611170324",
       "releases": [
         {
           "id": "202609082224",
@@ -425,6 +425,14 @@
           "published_at": null,
           "status": "available",
           "source_ref": "https://github.com/Ventusltd/globalgrid2050/tree/a7641774faf9bde8862a5dc8c59f3b83805f4c96/uk_renewables_pipeline/202611170243"
+        },
+        {
+          "id": "202611170324",
+          "label": "V9.32 - primary planning decision note",
+          "url": "https://globalgrid2050.com/uk_renewables_pipeline/202611170324/",
+          "published_at": null,
+          "status": "available",
+          "source_ref": "https://github.com/Ventusltd/globalgrid2050/tree/ba57b59447c4c7619262d440f6d4cac449dac8a2/uk_renewables_pipeline/202611170324"
         }
       ]
     },
@@ -1094,6 +1102,13 @@
       "to_release_id": "202611170243",
       "reason": "Prepare daily historical system-sell Prices at product source a7641774faf9bde8862a5dc8c59f3b83805f4c96. Retain source-declared day groups and coverage, negative prices, gaps, partial markers and legacy UTC disagreements through 31 October 2026; no live quote, forecast or intraday certification. ROOT must verify exact-source CI and actual dated-release source, graph and public-flow acceptance before merge; V9.30 and every older release remain available for rollback.",
       "promoted_at": "2026-11-17T03:13:50Z"
+    },
+    {
+      "entity_id": "pipeline-news",
+      "from_release_id": "202611170243",
+      "to_release_id": "202611170324",
+      "reason": "Prepare one narrowly reviewed government decision note in existing Machine Read Notes at product source ba57b59447c4c7619262d440f6d4cac449dac8a2. EN010147 to REPD12588 remains a PROVISIONAL association with zero VERIFIED claims and zero Solar-1000 verified delta. Frozen REPD status, original application capacity and distinct source dates remain unchanged. ROOT must verify all exact-source CI and actual dated-release note, source and browser acceptance before merge; V9.31 and every older release remain available for rollback.",
+      "promoted_at": "2026-11-17T04:11:16Z"
     }
   ]
 }
