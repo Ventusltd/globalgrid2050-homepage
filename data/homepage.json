@@ -336,7 +336,7 @@
       "subtitle": "Follow renewable energy projects",
       "description": "Explore the project register and follow the renewable energy pipeline.",
       "launch_label": "Open Pipeline News",
-      "operative_release_id": "202611171710",
+      "operative_release_id": "202611171940",
       "releases": [
         {
           "id": "202609082224",
@@ -481,6 +481,14 @@
           "published_at": null,
           "status": "available",
           "source_ref": "https://github.com/Ventusltd/globalgrid2050/tree/5e17571d634bd4f298ff4c73a1f84beaa1a09e37/uk_renewables_pipeline/202611171710"
+        },
+        {
+          "id": "202611171940",
+          "label": "V9.41 - crisp red ticker",
+          "url": "https://globalgrid2050.com/uk_renewables_pipeline/202611171940/",
+          "published_at": null,
+          "status": "available",
+          "source_ref": "https://github.com/Ventusltd/globalgrid2050/tree/f975a982619d55f28d9091e11d73279fe826ae1f/uk_renewables_pipeline/202611171940"
         }
       ]
     },
@@ -1199,6 +1207,13 @@
       "to_release_id": "202611171710",
       "reason": "Root-accepted exact source combines continuously flowing restrained red-neon headlines and compact main news search with inherited source-qualified government grid notices and six precisely located HTML document facts. Canonical data and original source clocks remain unchanged. CI and named Pixel 7/Galaxy S9+ Chromium emulation support acceptance; physical handset and assistive-technology acceptance remain unknown. Promotion from the accepted V9.37 operative remains gated on root validation of actual public bytes and controls.",
       "promoted_at": "2026-11-17T17:52:56Z"
+    },
+    {
+      "entity_id": "pipeline-news",
+      "from_release_id": "202611171710",
+      "to_release_id": "202611171940",
+      "reason": "Owner-requested crisp red headlines on solid black, with glow and glass removed and slightly faster continuous motion; existing controls, original links, source policy and data retained.",
+      "promoted_at": "2026-11-17T19:58:55Z"
     }
   ]
 }
