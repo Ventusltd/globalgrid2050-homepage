@@ -440,7 +440,7 @@
           "url": "https://globalgrid2050.com/uk_renewables_pipeline/202611170512/",
           "published_at": null,
           "status": "available",
-          "source_ref": "https://github.com/Ventusltd/globalgrid2050/tree/c688b800c4afa2a3eb9baf4dbe89b3b675f88efe/uk_renewables_pipeline/202611170512"
+          "source_ref": "https://github.com/Ventusltd/globalgrid2050/tree/e68a760bf41e98167cf5f3e86de474ed9e7bcfda/uk_renewables_pipeline/202611170512"
         }
       ]
     },
@@ -1122,7 +1122,7 @@
       "entity_id": "pipeline-news",
       "from_release_id": "202611170324",
       "to_release_id": "202611170512",
-      "reason": "Prepare four narrowly scoped primary-source notes at product source c688b800c4afa2a3eb9baf4dbe89b3b675f88efe: the unchanged Botley government decision and three government grant records. All project associations remain PROVISIONAL, with zero VERIFIED claims and zero Solar-1000 verified delta. Preserve distinct source clocks and document types, frozen REPD data, and unknown whole-development and BESS claims. ROOT must verify all exact-source CI and actual dated-release four-note, source and browser acceptance before merge; V9.32 and every older release remain available for rollback.",
+      "reason": "Prepare four narrowly scoped primary-source notes at product source e68a760bf41e98167cf5f3e86de474ed9e7bcfda: the unchanged Botley government decision and three government grant records. All project associations remain PROVISIONAL, with zero VERIFIED claims and zero Solar-1000 verified delta. Preserve distinct source clocks and document types, frozen REPD data, and unknown whole-development and BESS claims. ROOT must verify all exact-source CI and actual dated-release four-note, source and browser acceptance before merge; V9.32 and every older release remain available for rollback.",
       "promoted_at": "2026-11-17T05:54:37Z"
     }
   ]
