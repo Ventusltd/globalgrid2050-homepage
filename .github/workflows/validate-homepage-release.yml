@@ -130,7 +130,7 @@ jobs:
           v940="202611171710"
           assert v940 in releases and releases[v940]["status"]=="available", "V9.40 missing"
           assert releases[v940]["url"]==f"https://globalgrid2050.com/uk_renewables_pipeline/{v940}/", "V9.40 URL"
-          assert releases[v940]["source_ref"]=="https://github.com/Ventusltd/globalgrid2050/tree/5db6c6dfbc441f5be030b0bd23c9425fef6be7df/uk_renewables_pipeline/202611171710", "V9.40 must pin exact accepted product source"
+          assert releases[v940]["source_ref"]=="https://github.com/Ventusltd/globalgrid2050/tree/5e17571d634bd4f298ff4c73a1f84beaa1a09e37/uk_renewables_pipeline/202611171710", "V9.40 must pin exact accepted product source"
           assert releases[v940]["published_at"] is None, "Publication clock remains unasserted"
           assert any(x["from_release_id"]==v937 and x["to_release_id"]==v940 for x in news), "Immediate predecessor promotion history missing"
           assert e["operative_release_id"]==v940, "unexpected operative target"
