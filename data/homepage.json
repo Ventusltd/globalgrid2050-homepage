@@ -416,7 +416,7 @@
           "url": "https://globalgrid2050.com/uk_renewables_pipeline/202611170147/",
           "published_at": null,
           "status": "available",
-          "source_ref": "https://github.com/Ventusltd/globalgrid2050/tree/ef10d3c1b4911d0d91184b44d9f2566a7b6d0ec0/uk_renewables_pipeline/202611170147"
+          "source_ref": "https://github.com/Ventusltd/globalgrid2050/tree/ed7b972435dc11c2aa99c69226719c31d822ed21/uk_renewables_pipeline/202611170147"
         }
       ]
     },
@@ -1077,7 +1077,7 @@
       "entity_id": "pipeline-news",
       "from_release_id": "202611162354",
       "to_release_id": "202611170147",
-      "reason": "Prepare source-pinned V9.30 data-centre address screening at product source ef10d3c1b4911d0d91184b44d9f2566a7b6d0ec0. Preserve unknown capacity, unverified operating status and entity identity, possibly stale original Prices and zero independently verified Solar-1000 evidence. ROOT must verify exact-source CI and actual dated-release browser and receiver acceptance before merge; V9.29 and every older release remain available for rollback.",
+      "reason": "Prepare source-pinned V9.30 data-centre address screening at product source ed7b972435dc11c2aa99c69226719c31d822ed21. Preserve unknown capacity, unverified operating status and entity identity, possibly stale original Prices and zero independently verified Solar-1000 evidence. ROOT must verify exact-source CI and actual dated-release browser and receiver acceptance before merge; V9.29 and every older release remain available for rollback.",
       "promoted_at": "2026-11-17T02:19:45Z"
     }
   ]

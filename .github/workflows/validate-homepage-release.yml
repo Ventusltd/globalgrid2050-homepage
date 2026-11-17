@@ -85,7 +85,7 @@ jobs:
           v930="202611170147"
           assert v930 in releases and releases[v930]["status"]=="available", "V9.30 missing"
           assert releases[v930]["url"]==f"https://globalgrid2050.com/uk_renewables_pipeline/{v930}/", "V9.30 URL"
-          assert releases[v930]["source_ref"]=="https://github.com/Ventusltd/globalgrid2050/tree/ef10d3c1b4911d0d91184b44d9f2566a7b6d0ec0/uk_renewables_pipeline/202611170147", "V9.30 must pin exact accepted product source"
+          assert releases[v930]["source_ref"]=="https://github.com/Ventusltd/globalgrid2050/tree/ed7b972435dc11c2aa99c69226719c31d822ed21/uk_renewables_pipeline/202611170147", "V9.30 must pin exact accepted product source"
           assert any(x["from_release_id"]==v929 and x["to_release_id"]==v930 for x in news), "V9.29 to V9.30 promotion history missing"
           assert e["operative_release_id"]==v930, "unexpected operative target"
           assert len({x["to_release_id"] for x in news})==len(news), "repeated promotion target"
