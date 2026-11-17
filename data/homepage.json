@@ -336,7 +336,7 @@
       "subtitle": "Follow renewable energy projects",
       "description": "Explore the project register and follow the renewable energy pipeline.",
       "launch_label": "Open Pipeline News",
-      "operative_release_id": "202611171217",
+      "operative_release_id": "202611171507",
       "releases": [
         {
           "id": "202609082224",
@@ -457,6 +457,14 @@
           "published_at": null,
           "status": "available",
           "source_ref": "https://github.com/Ventusltd/globalgrid2050/tree/2499e91704a24f1586ba4bf1b85a3f5beca5cb6a/uk_renewables_pipeline/202611171217"
+        },
+        {
+          "id": "202611171507",
+          "label": "V9.36 - searchable static headlines, up to 100 available",
+          "url": "https://globalgrid2050.com/uk_renewables_pipeline/202611171507/",
+          "published_at": null,
+          "status": "available",
+          "source_ref": "https://github.com/Ventusltd/globalgrid2050/tree/de175b28076ca3115ecb026174b7dc6bb1fd9e8c/uk_renewables_pipeline/202611171507"
         }
       ]
     },
@@ -1154,6 +1162,13 @@
       "to_release_id": "202611171217",
       "reason": "Owner explicitly instructed publish V9.35 on 17 November 2026 after all five source workflows and independent Agent B review passed. Exact source 2499e91704a24f1586ba4bf1b85a3f5beca5cb6a adds official Operational dates with sorting/year selection, preserving all 7775 canonical rows, null dates, source statuses and original CSV. Merge only after actual dated public acceptance and homepage checks. Preserve V9.34 and all prior rollback releases.",
       "promoted_at": "2026-11-17T12:40:11Z"
+    },
+    {
+      "entity_id": "pipeline-news",
+      "from_release_id": "202611171217",
+      "to_release_id": "202611171507",
+      "reason": "Owner-directed three-hour implementation/publication window 17 November 2026. PN-TICKER exact source de175b28076ca3115ecb026174b7dc6bb1fd9e8c adds bounded20-item static browsing/search across up to100 actual source headlines with original attribution/clocks, no Pause/motion and unchanged collector/main12-item list. Independent Agent B review passed. Merge only after all exact-source gates and dated public acceptance; retain V9.35 and all older releases.",
+      "promoted_at": "2026-11-17T15:32:24Z"
     }
   ]
 }
