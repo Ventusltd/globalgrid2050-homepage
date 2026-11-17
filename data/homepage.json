@@ -336,7 +336,7 @@
       "subtitle": "Follow renewable energy projects",
       "description": "Explore the project register and follow the renewable energy pipeline.",
       "launch_label": "Open Pipeline News",
-      "operative_release_id": "202611161757",
+      "operative_release_id": "202611162354",
       "releases": [
         {
           "id": "202609082224",
@@ -401,6 +401,14 @@
           "published_at": null,
           "status": "available",
           "source_ref": "https://github.com/Ventusltd/globalgrid2050/tree/84c739ad711b3ce8476acdfab219c8f8b67f102d/uk_renewables_pipeline/202611161757"
+        },
+        {
+          "id": "202611162354",
+          "label": "V9.29 - full-width pipeline and Android rotation",
+          "url": "https://globalgrid2050.com/uk_renewables_pipeline/202611162354/",
+          "published_at": null,
+          "status": "available",
+          "source_ref": "https://github.com/Ventusltd/globalgrid2050/tree/7f0d26f4343d5d223781a7231e7655e5df1f5ff2/uk_renewables_pipeline/202611162354"
         }
       ]
     },
@@ -1049,6 +1057,13 @@
       "to_release_id": "202611161757",
       "reason": "Owner explicitly instructed publication of corrected V9.28 on 16 November 2026. Pin exact product source 84c739ad711b3ce8476acdfab219c8f8b67f102d; retain all 7,775 REPD rows and immutable Solar-1000, provisional-only context and unassessed source rights. V9.24 remains available for rollback. Prepared for merge only after exact-source CI and product served-byte checks; no independent project evidence or rights approval is inferred.",
       "promoted_at": "2026-11-16T23:09:31Z"
+    },
+    {
+      "entity_id": "pipeline-news",
+      "from_release_id": "202611161757",
+      "to_release_id": "202611162354",
+      "reason": "Owner-requested sidebar removal and Android rotation fixes, pinned to product source 7f0d26f4343d5d223781a7231e7655e5df1f5ff2. Prepare the compact full-width V9.29 with two blocks and six tabs while preserving source snapshots, unknown capacity, possibly stale original Prices, zero new VERIFIED claims and all prior releases. ROOT must verify exact-source CI and the public dated release before merge; V9.28 remains available for rollback.",
+      "promoted_at": "2026-11-17T00:41:47Z"
     }
   ]
 }
