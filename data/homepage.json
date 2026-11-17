@@ -336,7 +336,7 @@
       "subtitle": "Follow renewable energy projects",
       "description": "Explore the project register and follow the renewable energy pipeline.",
       "launch_label": "Open Pipeline News",
-      "operative_release_id": "202611170147",
+      "operative_release_id": "202611170243",
       "releases": [
         {
           "id": "202609082224",
@@ -417,6 +417,14 @@
           "published_at": null,
           "status": "available",
           "source_ref": "https://github.com/Ventusltd/globalgrid2050/tree/ed7b972435dc11c2aa99c69226719c31d822ed21/uk_renewables_pipeline/202611170147"
+        },
+        {
+          "id": "202611170243",
+          "label": "V9.31 - daily historical system-sell prices",
+          "url": "https://globalgrid2050.com/uk_renewables_pipeline/202611170243/",
+          "published_at": null,
+          "status": "available",
+          "source_ref": "https://github.com/Ventusltd/globalgrid2050/tree/a7641774faf9bde8862a5dc8c59f3b83805f4c96/uk_renewables_pipeline/202611170243"
         }
       ]
     },
@@ -1079,6 +1087,13 @@
       "to_release_id": "202611170147",
       "reason": "Prepare source-pinned V9.30 data-centre address screening at product source ed7b972435dc11c2aa99c69226719c31d822ed21. Preserve unknown capacity, unverified operating status and entity identity, possibly stale original Prices and zero independently verified Solar-1000 evidence. ROOT must verify exact-source CI and actual dated-release browser and receiver acceptance before merge; V9.29 and every older release remain available for rollback.",
       "promoted_at": "2026-11-17T02:19:45Z"
+    },
+    {
+      "entity_id": "pipeline-news",
+      "from_release_id": "202611170147",
+      "to_release_id": "202611170243",
+      "reason": "Prepare daily historical system-sell Prices at product source a7641774faf9bde8862a5dc8c59f3b83805f4c96. Retain source-declared day groups and coverage, negative prices, gaps, partial markers and legacy UTC disagreements through 31 October 2026; no live quote, forecast or intraday certification. ROOT must verify exact-source CI and actual dated-release source, graph and public-flow acceptance before merge; V9.30 and every older release remain available for rollback.",
+      "promoted_at": "2026-11-17T03:13:50Z"
     }
   ]
 }
