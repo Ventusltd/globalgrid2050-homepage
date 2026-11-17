@@ -336,7 +336,7 @@
       "subtitle": "Follow renewable energy projects",
       "description": "Explore the project register and follow the renewable energy pipeline.",
       "launch_label": "Open Pipeline News",
-      "operative_release_id": "202611162354",
+      "operative_release_id": "202611170147",
       "releases": [
         {
           "id": "202609082224",
@@ -409,6 +409,14 @@
           "published_at": null,
           "status": "available",
           "source_ref": "https://github.com/Ventusltd/globalgrid2050/tree/bc8ba03b74dc88cd1fa9d181eb40eb45045b1291/uk_renewables_pipeline/202611162354"
+        },
+        {
+          "id": "202611170147",
+          "label": "V9.30 - data-centre address screening",
+          "url": "https://globalgrid2050.com/uk_renewables_pipeline/202611170147/",
+          "published_at": null,
+          "status": "available",
+          "source_ref": "https://github.com/Ventusltd/globalgrid2050/tree/ef10d3c1b4911d0d91184b44d9f2566a7b6d0ec0/uk_renewables_pipeline/202611170147"
         }
       ]
     },
@@ -1064,6 +1072,13 @@
       "to_release_id": "202611162354",
       "reason": "Owner-requested sidebar removal and Android rotation fixes, pinned to product source 7f0d26f4343d5d223781a7231e7655e5df1f5ff2. Prepare the compact full-width V9.29 with two blocks and six tabs while preserving source snapshots, unknown capacity, possibly stale original Prices, zero new VERIFIED claims and all prior releases. ROOT must verify exact-source CI and the public dated release before merge; V9.28 remains available for rollback.",
       "promoted_at": "2026-11-17T00:41:47Z"
+    },
+    {
+      "entity_id": "pipeline-news",
+      "from_release_id": "202611162354",
+      "to_release_id": "202611170147",
+      "reason": "Prepare source-pinned V9.30 data-centre address screening at product source ef10d3c1b4911d0d91184b44d9f2566a7b6d0ec0. Preserve unknown capacity, unverified operating status and entity identity, possibly stale original Prices and zero independently verified Solar-1000 evidence. ROOT must verify exact-source CI and actual dated-release browser and receiver acceptance before merge; V9.29 and every older release remain available for rollback.",
+      "promoted_at": "2026-11-17T02:19:45Z"
     }
   ]
 }
