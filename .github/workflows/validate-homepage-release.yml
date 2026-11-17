@@ -87,7 +87,12 @@ jobs:
           assert releases[v930]["url"]==f"https://globalgrid2050.com/uk_renewables_pipeline/{v930}/", "V9.30 URL"
           assert releases[v930]["source_ref"]=="https://github.com/Ventusltd/globalgrid2050/tree/ed7b972435dc11c2aa99c69226719c31d822ed21/uk_renewables_pipeline/202611170147", "V9.30 must pin exact accepted product source"
           assert any(x["from_release_id"]==v929 and x["to_release_id"]==v930 for x in news), "V9.29 to V9.30 promotion history missing"
-          assert e["operative_release_id"]==v930, "unexpected operative target"
+          v931="202611170243"
+          assert v931 in releases and releases[v931]["status"]=="available", "V9.31 missing"
+          assert releases[v931]["url"]==f"https://globalgrid2050.com/uk_renewables_pipeline/{v931}/", "V9.31 URL"
+          assert releases[v931]["source_ref"]=="https://github.com/Ventusltd/globalgrid2050/tree/a7641774faf9bde8862a5dc8c59f3b83805f4c96/uk_renewables_pipeline/202611170243", "V9.31 must pin exact accepted product source"
+          assert any(x["from_release_id"]==v930 and x["to_release_id"]==v931 for x in news), "V9.30 to V9.31 promotion history missing"
+          assert e["operative_release_id"]==v931, "unexpected operative target"
           assert len({x["to_release_id"] for x in news})==len(news), "repeated promotion target"
-          print("PASS: historical Q2/Q3/V9.20/V9.21/V9.22/V9.23/V9.24/V9.28/V9.29 retained and exact-source V9.30 operative")
+          print("PASS: historical Q2/Q3/V9.20/V9.21/V9.22/V9.23/V9.24/V9.28/V9.29/V9.30 retained and exact-source V9.31 operative")
           PY
