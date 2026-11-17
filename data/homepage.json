@@ -336,7 +336,7 @@
       "subtitle": "Follow renewable energy projects",
       "description": "Explore the project register and follow the renewable energy pipeline.",
       "launch_label": "Open Pipeline News",
-      "operative_release_id": "202611170512",
+      "operative_release_id": "202611171141",
       "releases": [
         {
           "id": "202609082224",
@@ -441,6 +441,14 @@
           "published_at": null,
           "status": "available",
           "source_ref": "https://github.com/Ventusltd/globalgrid2050/tree/e68a760bf41e98167cf5f3e86de474ed9e7bcfda/uk_renewables_pipeline/202611170512"
+        },
+        {
+          "id": "202611171141",
+          "label": "V9.34 - planning dates, year filters and expanded analytics",
+          "url": "https://globalgrid2050.com/uk_renewables_pipeline/202611171141/",
+          "published_at": null,
+          "status": "available",
+          "source_ref": "https://github.com/Ventusltd/globalgrid2050/tree/56af4746ffc8781621b03dfedbf5ca1685a245ae/uk_renewables_pipeline/202611171141"
         }
       ]
     },
@@ -1124,6 +1132,13 @@
       "to_release_id": "202611170512",
       "reason": "Prepare four narrowly scoped primary-source notes at product source e68a760bf41e98167cf5f3e86de474ed9e7bcfda: the unchanged Botley government decision and three government development-consent records. All project associations remain PROVISIONAL, with zero VERIFIED claims and zero Solar-1000 verified delta. Preserve distinct source clocks and document types, frozen REPD data, whole-development scope, separate Battery identities and unknown current capacities and operating status. ROOT must verify all exact-source CI and actual dated-release four-note, source and browser acceptance before merge; V9.32 and every older release remain available for rollback.",
       "promoted_at": "2026-11-17T05:54:37Z"
+    },
+    {
+      "entity_id": "pipeline-news",
+      "from_release_id": "202611170512",
+      "to_release_id": "202611171141",
+      "reason": "Owner explicitly approved publication after all checks pass on 17 November 2026. V9.34 source 56af4746ffc8781621b03dfedbf5ca1685a245ae adds existing official planning submission dates, independent date/year controls and reviewed mobile expansion. All 7775 canonical rows and original source data remain unchanged. Independent Agent B reviews passed; merge only after final exact-source CI and dated public source acceptance. Preserve V9.33 and every earlier rollback.",
+      "promoted_at": "2026-11-17T12:10:12Z"
     }
   ]
 }
