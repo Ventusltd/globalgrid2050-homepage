@@ -17,6 +17,17 @@ def app_url(value):
     return escape(value, quote=True)
 
 
+
+def release_app_url(release, operative=False):
+    """Match the JavaScript release row: archived app route, never a manifest."""
+    if not operative and release.get('archive_url') and release.get('archive_kind') != 'manifest':
+        try:
+            return app_url(release['archive_url'])
+        except ValueError:
+            pass  # The JavaScript renderer also retains the app link.
+    return app_url(release['url'])
+
+
 def build(root=ROOT):
     root = Path(root)
     data = load(root / 'data/homepage.json')
@@ -64,7 +75,7 @@ def build(root=ROOT):
         area = entity.get('subtitle') or by_id.get(entity.get('parent_id'), {}).get('title', '\u2014')
         versions = []
         for version in entity['releases']:
-            versions.append(f'<div class="release"><span class="release-state">{"Operative" if version["id"] == release["id"] else "Candidate" if version["status"] == "candidate" else "Archived"}</span><a href="{app_url(version["url"])}">{escape(version["label"])}</a><small class="entity-key">{escape(version["id"])}</small></div>')
+            versions.append(f'<div class="release"><span class="release-state">{"Operative" if version["id"] == release["id"] else "Candidate" if version["status"] == "candidate" else "Archived"}</span><a href="{release_app_url(version, version["id"] == release["id"])}">{escape(version["label"])}</a><small class="entity-key">{escape(version["id"])}</small></div>')
         meta = metadata['records'][entity['id']]
         semantics = f'<details class="entity-type"><summary>{escape(meta["type"])}</summary><p>Intended purpose: {escape(meta["purpose"])}</p><p>For: {escape(", ".join(meta["audience"]))}</p>'
         if meta['roles']:
