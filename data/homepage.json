@@ -180,9 +180,9 @@
       "id": "gridatlas",
       "title": "GridAtlas",
       "subtitle": "Explore the electricity network",
-      "description": "Explore mapped grid assets, project screening and native Grid Journeys, with visible mobile arrival results and clearly labelled learning demonstrations.",
+      "description": "Explore nearby grid and energy assets, search 5,800 mapped substations, and draw clearly labelled learning journeys with session-only proposed connection concepts.",
       "launch_label": "Open GridAtlas",
-      "operative_release_id": "202611172355",
+      "operative_release_id": "202611180026",
       "releases": [
         {
           "id": "202609241334",
@@ -252,6 +252,16 @@
           "status": "available",
           "source_ref": "https://github.com/Ventusltd/gridatlas/commit/b52693aaf513e63240acd8ab99a698df5b738cc6",
           "archive_url": "https://ventusltd.github.io/gridatlas/atlas/v/202611172355/",
+          "archive_kind": "app"
+        },
+        {
+          "id": "202611180026",
+          "label": "V9.193 - 18 November 2026",
+          "url": "https://ventusltd.github.io/gridatlas/atlas/",
+          "published_at": "2026-11-18T03:57:37Z",
+          "status": "available",
+          "source_ref": "https://github.com/Ventusltd/gridatlas/commit/9db8a027a6d15256d4be501707c36d1934c6e2ef",
+          "archive_url": "https://ventusltd.github.io/gridatlas/atlas/v/202611180026/",
           "archive_kind": "app"
         }
       ]
@@ -1256,6 +1266,13 @@
       "to_release_id": "202611172355",
       "reason": "Owner-authorized overnight Atlas1; independent Android/mobile reviews and all applicable CI passed; canonical live pointer and 129 served paths verified 18 November 2026 00:23 UTC. Historical editions retained.",
       "promoted_at": "2026-11-18T00:31:01Z"
+    },
+    {
+      "entity_id": "gridatlas",
+      "from_release_id": "202611172355",
+      "to_release_id": "202611180026",
+      "reason": "Reviewed G193 source promoted under the existing session-owner authorization; public Chromium and WebKit checks and exact live artifact readback passed. Catalog history retained.",
+      "promoted_at": "2026-11-18T03:59:06Z"
     }
   ]
 }
