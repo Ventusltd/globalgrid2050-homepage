@@ -336,7 +336,7 @@
       "subtitle": "Follow renewable energy projects",
       "description": "Explore the project register and follow the renewable energy pipeline.",
       "launch_label": "Open Pipeline News",
-      "operative_release_id": "202611171940",
+      "operative_release_id": "202611172355",
       "releases": [
         {
           "id": "202609082224",
@@ -489,6 +489,14 @@
           "published_at": null,
           "status": "available",
           "source_ref": "https://github.com/Ventusltd/globalgrid2050/tree/f975a982619d55f28d9091e11d73279fe826ae1f/uk_renewables_pipeline/202611171940"
+        },
+        {
+          "id": "202611172355",
+          "label": "V9.42 - mobile MAP handoff",
+          "url": "https://globalgrid2050.com/uk_renewables_pipeline/202611172355/",
+          "published_at": null,
+          "status": "available",
+          "source_ref": "https://github.com/Ventusltd/globalgrid2050/tree/33da7796caf6d9db6eacb1893d52ef8c89666ad8/uk_renewables_pipeline/202611172355"
         }
       ]
     },
@@ -1214,6 +1222,13 @@
       "to_release_id": "202611171940",
       "reason": "Owner-requested crisp red headlines on solid black, with glow and glass removed and slightly faster continuous motion; existing controls, original links, source policy and data retained.",
       "promoted_at": "2026-11-17T19:58:55Z"
+    },
+    {
+      "entity_id": "pipeline-news",
+      "from_release_id": "202611171940",
+      "to_release_id": "202611172355",
+      "reason": "Owner-authorized overnight mobile MAP reliability improvement. Exact source33da7796caf6d9db6eacb1893d52ef8c89666ad8 preserves all REPD data and links, retains desktop behaviour and uses native visible touch navigation with Back filter recovery. Merge only after exact source CI, independent review, actual dated source acceptance and separately served Atlas receiver repair. Preserve V9.41 and all older versions; physical handset acceptance remains unproved.",
+      "promoted_at": "2026-11-18T00:04:45Z"
     }
   ]
 }
