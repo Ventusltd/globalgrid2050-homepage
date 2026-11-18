@@ -180,9 +180,9 @@
       "id": "gridatlas",
       "title": "GridAtlas",
       "subtitle": "Explore the electricity network",
-      "description": "Optional UK lightning overlay (observed optical flashes, 12-month history) with the nearest substations and REPD projects, plus a Potential offtakers layer (industry, power stations, data centres) linked to the 15 nearest REPD projects.",
+      "description": "Explore mapped grid assets, project screening and native Grid Journeys, with visible mobile arrival results and clearly labelled learning demonstrations.",
       "launch_label": "Open GridAtlas",
-      "operative_release_id": "202611132345",
+      "operative_release_id": "202611172355",
       "releases": [
         {
           "id": "202609241334",
@@ -232,6 +232,26 @@
           "status": "available",
           "source_ref": "https://github.com/Ventusltd/gridatlas/commit/b0a3a93835739bf9a4987a2f4916938fa37ad124",
           "archive_url": "https://ventusltd.github.io/gridatlas/atlas/v/202611132345/",
+          "archive_kind": "app"
+        },
+        {
+          "id": "202611161720",
+          "label": "V9.191 - 16 November 2026 generation",
+          "url": "https://ventusltd.github.io/gridatlas/atlas/",
+          "published_at": null,
+          "status": "available",
+          "source_ref": "https://github.com/Ventusltd/gridatlas/commit/1de35f9eca360a5d80d81542230fef546917f5c5",
+          "archive_url": "https://ventusltd.github.io/gridatlas/atlas/v/202611161720/",
+          "archive_kind": "app"
+        },
+        {
+          "id": "202611172355",
+          "label": "V9.192 - 18 November 2026",
+          "url": "https://ventusltd.github.io/gridatlas/atlas/",
+          "published_at": "2026-11-18T00:23:06Z",
+          "status": "available",
+          "source_ref": "https://github.com/Ventusltd/gridatlas/commit/b52693aaf513e63240acd8ab99a698df5b738cc6",
+          "archive_url": "https://ventusltd.github.io/gridatlas/atlas/v/202611172355/",
           "archive_kind": "app"
         }
       ]
@@ -1229,6 +1249,13 @@
       "to_release_id": "202611172355",
       "reason": "Owner-authorized overnight mobile MAP reliability improvement. Exact source33da7796caf6d9db6eacb1893d52ef8c89666ad8 preserves all REPD data and links, retains desktop behaviour and uses native visible touch navigation with Back filter recovery. Merge only after exact source CI, independent review, actual dated source acceptance and separately served Atlas receiver repair. Preserve V9.41 and all older versions; physical handset acceptance remains unproved.",
       "promoted_at": "2026-11-18T00:04:45Z"
+    },
+    {
+      "entity_id": "gridatlas",
+      "from_release_id": "202611132345",
+      "to_release_id": "202611172355",
+      "reason": "Owner-authorized overnight Atlas1; independent Android/mobile reviews and all applicable CI passed; canonical live pointer and 129 served paths verified 18 November 2026 00:23 UTC. Historical editions retained.",
+      "promoted_at": "2026-11-18T00:31:01Z"
     }
   ]
 }
