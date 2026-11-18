@@ -1301,7 +1301,7 @@
       "entity_id": "pipeline-news",
       "from_release_id": "202611180451",
       "to_release_id": "202611180633",
-      "reason": "Draft staged under owner-authorized overnight scope. Exact V9.46 source169fe4e196741971c3cb380ddb49344977026b82 passed all five source workflows and independent review; 39 actual HTTPS file pins passed. Adds source-qualified energy-transition, AI-demand and grid-upgrade news context with retained Journey origin/filter state. Public browser and final publication acceptance are pending; do not merge this draft until those gates pass. Preserve all21 older Pipeline records and every Atlas record; no physical handset claim.",
+      "reason": "Owner-authorized overnight V9.46 energy-transition, AI-demand and grid-upgrade news context with retained Journey origin and filters across cold returns. Exact source169fe4e196741971c3cb380ddb49344977026b82 passed all five source workflows and independent review;39 actual HTTPS source files matched their pins. Preserve all21 older Pipeline records and every Atlas record; no physical handset claim.",
       "promoted_at": "2026-11-18T07:04:15Z"
     }
   ]
