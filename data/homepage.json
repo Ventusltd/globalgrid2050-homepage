@@ -366,7 +366,7 @@
       "subtitle": "Follow renewable energy projects",
       "description": "Explore the project register and follow the renewable energy pipeline.",
       "launch_label": "Open Pipeline News",
-      "operative_release_id": "202611180633",
+      "operative_release_id": "202611191418",
       "releases": [
         {
           "id": "202609082224",
@@ -543,6 +543,14 @@
           "published_at": null,
           "status": "available",
           "source_ref": "https://github.com/Ventusltd/globalgrid2050/tree/169fe4e196741971c3cb380ddb49344977026b82/uk_renewables_pipeline/202611180633"
+        },
+        {
+          "id": "202611191418",
+          "label": "V9.56 - Compact register and responsive gauges",
+          "url": "https://globalgrid2050.com/uk_renewables_pipeline/202611191418/",
+          "published_at": null,
+          "status": "available",
+          "source_ref": "https://github.com/Ventusltd/globalgrid2050/tree/9648b09863e40092ddc653468b573a720b2f1ed9/uk_renewables_pipeline/202611191418"
         }
       ]
     },
@@ -1303,6 +1311,13 @@
       "to_release_id": "202611180633",
       "reason": "Owner-authorized overnight V9.46 energy-transition, AI-demand and grid-upgrade news context with retained Journey origin and filters across cold returns. Exact source169fe4e196741971c3cb380ddb49344977026b82 passed all five source workflows and independent review;39 actual HTTPS source files matched their pins. Preserve all21 older Pipeline records and every Atlas record; no physical handset claim.",
       "promoted_at": "2026-11-18T07:04:15Z"
+    },
+    {
+      "entity_id": "pipeline-news",
+      "from_release_id": "202611180633",
+      "to_release_id": "202611191418",
+      "reason": "Owner approved V9.56 after the dated release passed two public Chromium and WebKit runs and an exact served-byte check.",
+      "promoted_at": "2026-11-19T16:16:20Z"
     }
   ]
 }
