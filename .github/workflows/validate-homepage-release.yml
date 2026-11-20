@@ -162,8 +162,13 @@ jobs:
           assert releases[v956]["url"]==f"https://globalgrid2050.com/uk_renewables_pipeline/{v956}/", "V9.56 URL"
           assert releases[v956]["source_ref"]=="https://github.com/Ventusltd/globalgrid2050/tree/9648b09863e40092ddc653468b573a720b2f1ed9/uk_renewables_pipeline/202611191418", "V9.56 exact source"
           assert releases[v956]["published_at"] is None, "Homepage publication clock remains unasserted"
-          assert news[-1]["from_release_id"]==v946 and news[-1]["to_release_id"]==v956, "V9.46 to V9.56 history missing"
-          assert e["operative_release_id"]==v956, "unexpected operative target"
+          assert any(x["from_release_id"]==v946 and x["to_release_id"]==v956 for x in news), "V9.46 to V9.56 history missing"
+          v957="202611201709"
+          assert releases[v957]["url"]=="https://globalgrid2050.com/uk_renewables_pipeline/202611201709/"
+          assert releases[v957]["source_ref"]=="https://github.com/Ventusltd/globalgrid2050/tree/577233737689e1289c89436d76ae50a272fb3677/uk_renewables_pipeline/202611201709"
+          assert releases[v957]["status"]=="available"
+          assert news[-1]["from_release_id"]==v956 and news[-1]["to_release_id"]==v957
+          assert e["operative_release_id"]==v957, "unexpected operative target"
           assert len({x["to_release_id"] for x in news})==len(news), "repeated promotion target"
-          print("PASS: historical releases retained and exact-source V9.56 operative")
+          print("PASS: historical releases retained and exact-source V9.57 operative")
           PY

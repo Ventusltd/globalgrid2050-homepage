@@ -366,7 +366,7 @@
       "subtitle": "Follow renewable energy projects",
       "description": "Explore the project register and follow the renewable energy pipeline.",
       "launch_label": "Open Pipeline News",
-      "operative_release_id": "202611191418",
+      "operative_release_id": "202611201709",
       "releases": [
         {
           "id": "202609082224",
@@ -551,6 +551,14 @@
           "published_at": null,
           "status": "available",
           "source_ref": "https://github.com/Ventusltd/globalgrid2050/tree/9648b09863e40092ddc653468b573a720b2f1ed9/uk_renewables_pipeline/202611191418"
+        },
+        {
+          "id": "202611201709",
+          "label": "V9.57 - REPD project identity correction",
+          "url": "https://globalgrid2050.com/uk_renewables_pipeline/202611201709/",
+          "published_at": null,
+          "status": "available",
+          "source_ref": "https://github.com/Ventusltd/globalgrid2050/tree/577233737689e1289c89436d76ae50a272fb3677/uk_renewables_pipeline/202611201709"
         }
       ]
     },
@@ -1318,6 +1326,13 @@
       "to_release_id": "202611191418",
       "reason": "Owner approved V9.56 after the dated release passed two public Chromium and WebKit runs and an exact served-byte check.",
       "promoted_at": "2026-11-19T16:16:20Z"
+    },
+    {
+      "entity_id": "pipeline-news",
+      "from_release_id": "202611191418",
+      "to_release_id": "202611201709",
+      "reason": "Owner explicitly approved V9.57 homepage promotion after full Chromium and WebKit regression and public byte verification (run 44780797932).",
+      "promoted_at": "2026-11-20T17:40:22Z"
     }
   ]
 }
