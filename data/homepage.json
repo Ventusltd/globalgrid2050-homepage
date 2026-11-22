@@ -366,7 +366,7 @@
       "subtitle": "Follow renewable energy projects",
       "description": "Explore the project register and follow the renewable energy pipeline.",
       "launch_label": "Open Pipeline News",
-      "operative_release_id": "202611212344",
+      "operative_release_id": "202611220220",
       "releases": [
         {
           "id": "202609082224",
@@ -583,6 +583,30 @@
           "published_at": null,
           "status": "available",
           "source_ref": "https://github.com/Ventusltd/globalgrid2050/tree/3b9716e13c93c5e3ee84038339701279c79a90a5/uk_renewables_pipeline/202611212344"
+        },
+        {
+          "id": "202611220100",
+          "label": "V9.61 - Compact REPD mobile register and landscape density",
+          "url": "https://globalgrid2050.com/uk_renewables_pipeline/202611220100/",
+          "published_at": null,
+          "status": "available",
+          "source_ref": "https://github.com/Ventusltd/globalgrid2050/tree/f01902f5751cb412e950663a1903641fa8ffa456/uk_renewables_pipeline/202611220100"
+        },
+        {
+          "id": "202611220125",
+          "label": "V9.62 - Project, capacity and MAP prospect scan",
+          "url": "https://globalgrid2050.com/uk_renewables_pipeline/202611220125/",
+          "published_at": null,
+          "status": "available",
+          "source_ref": "https://github.com/Ventusltd/globalgrid2050/tree/f01902f5751cb412e950663a1903641fa8ffa456/uk_renewables_pipeline/202611220125"
+        },
+        {
+          "id": "202611220220",
+          "label": "V9.63 - A4 project location report with clickable MAP",
+          "url": "https://globalgrid2050.com/uk_renewables_pipeline/202611220220/",
+          "published_at": null,
+          "status": "available",
+          "source_ref": "https://github.com/Ventusltd/globalgrid2050/tree/f01902f5751cb412e950663a1903641fa8ffa456/uk_renewables_pipeline/202611220220"
         }
       ]
     },
@@ -1364,6 +1388,13 @@
       "to_release_id": "202611212344",
       "reason": "Owner instruction 22 November 2026: serve the newer Pipeline News controls from the homepage. V9.58 news maximise, V9.59 compact button and V9.60 independent landscape-only REPD dashboard passed isolated Chromium/WebKit and inherited release checks. V9.57 retained for rollback; public served-byte check required before deployment.",
       "promoted_at": "2026-11-22T00:12:00Z"
+    },
+    {
+      "entity_id": "pipeline-news",
+      "from_release_id": "202611212344",
+      "to_release_id": "202611220220",
+      "reason": "Owner explicitly instructed publication on 22 November 2026. V9.61 density, V9.62 facts-first prospect scan and V9.63 location-first A4 report all passed dedicated Chromium/WebKit acceptance and full version regression. No land area or automated Signal ranking. Preserve V9.60 for rollback; verify live homepage bytes after deployment.",
+      "promoted_at": "2026-11-22T09:07:50.212Z"
     }
   ]
 }
