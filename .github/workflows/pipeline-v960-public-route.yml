@@ -1,4 +1,4 @@
-name: Verify Pipeline News V9.60 public route before homepage promotion
+name: Verify archived Pipeline News V9.60 route and rollback
 on:
   pull_request:
     paths:
@@ -43,7 +43,7 @@ jobs:
               assert '<html' in text.lower(), f'Rollback path {old} not served'
           catalog=json.load(open('data/homepage.json'))
           p=next(x for x in catalog['entities'] if x['id']=='pipeline-news')
-          assert p['operative_release_id']=='202611212344'
-          assert len([x for x in p['releases'] if x['id']=='202611212344'])==1
-          print('PASS: public V9.60 HTML, JS, CSS; V9.59/V9.57 rollback; homepage pointer exact')
+          assert p['operative_release_id'] in [x['id'] for x in p['releases'] if x['status']=='available'], 'Invalid operative release'
+          assert len([x for x in p['releases'] if x['id']=='202611212344' and x['status']=='available'])==1, 'V9.60 rollback missing'
+          print('PASS: archived V9.60 HTML, JS, CSS and V9.59/V9.57 rollback, current homepage pointer valid')
           PY
