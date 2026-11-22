@@ -209,8 +209,15 @@ jobs:
           assert releases[v966]["url"]=="https://globalgrid2050.com/uk_renewables_pipeline/202611221500/", "V9.66 URL"
           assert releases[v966]["source_ref"]=="https://github.com/Ventusltd/globalgrid2050/tree/9d88781aa89ccfbd6ad4ade4fecf6cf4889d7b1b/uk_renewables_pipeline/202611221500", "V9.66 source"
           assert releases[v966]["published_at"] is None, "No unverified publication timestamp"
-          assert news[-1]["from_release_id"]==v965 and news[-1]["to_release_id"]==v966, "V9.66 promotion audit"
-          assert e["operative_release_id"]==v966, "unexpected operative target"
+          assert any(x["from_release_id"]==v965 and x["to_release_id"]==v966 for x in news), "V9.66 promotion history"
+          v967="202611221625"
+          assert v967 in releases and releases[v967]["status"]=="available", "V9.67 missing"
+          assert releases[v967]["label"]=="V9.67 - Native Expanded REPD, all columns and pinch zoom", "V9.67 label"
+          assert releases[v967]["url"]=="https://globalgrid2050.com/uk_renewables_pipeline/202611221625/", "V9.67 URL"
+          assert releases[v967]["source_ref"]=="https://github.com/Ventusltd/globalgrid2050/tree/b474a304c07982f25fc43dfa8ec40f9fbd8c3bc3/uk_renewables_pipeline/202611221625", "V9.67 source"
+          assert releases[v967]["published_at"] is None, "Do not invent publication timestamp"
+          assert news[-1]["from_release_id"]==v966 and news[-1]["to_release_id"]==v967, "V9.67 latest promotion"
+          assert e["operative_release_id"]==v967, "unexpected operative target"
           assert len({x["to_release_id"] for x in news})==len(news), "repeated promotion target"
-          print("PASS: V9.66 red compact REPD operative; V9.65/V9.64/V9.63 rollback retained")
+          print("PASS: V9.67 native REPD operative; V9.66/V9.65/V9.64/V9.63 rollback retained")
           PY
