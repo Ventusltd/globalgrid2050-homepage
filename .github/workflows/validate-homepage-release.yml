@@ -187,8 +187,15 @@ jobs:
               assert releases[rid]["url"]==f"https://globalgrid2050.com/uk_renewables_pipeline/{rid}/", f"{label} app route"
               assert releases[rid]["source_ref"]==f"https://github.com/Ventusltd/globalgrid2050/tree/{pinned}/uk_renewables_pipeline/{rid}", f"{label} immutable source"
               assert releases[rid]["published_at"] is None, f"{label} publication clock must remain unasserted"
-          assert news[-1]["from_release_id"]=="202611212344" and news[-1]["to_release_id"]=="202611220220", "V9.63 promotion audit"
-          assert e["operative_release_id"]=="202611220220", "unexpected operative target"
+          assert any(x["from_release_id"]=="202611212344" and x["to_release_id"]=="202611220220" for x in news), "V9.63 immutable promotion history"
+          v964="202611221243"
+          assert v964 in releases and releases[v964]["status"]=="available", "V9.64 missing"
+          assert releases[v964]["url"]==f"https://globalgrid2050.com/uk_renewables_pipeline/{v964}/", "V9.64 URL"
+          assert releases[v964]["source_ref"]=="https://github.com/Ventusltd/globalgrid2050/tree/f9c55e56de3f56de2aa9ca8156ff09e1dcceaa1c/uk_renewables_pipeline/202611221243", "V9.64 immutable source"
+          assert releases[v964]["published_at"] is None, "V9.64 publication clock remains unasserted"
+          assert releases["202611220125"]["label"]=="V9.62 - Project, MW/MWp and MAP prospect scan", "V9.62 public language"
+          assert news[-1]["from_release_id"]=="202611220220" and news[-1]["to_release_id"]==v964, "V9.64 promotion audit"
+          assert e["operative_release_id"]==v964, "unexpected operative target"
           assert len({x["to_release_id"] for x in news})==len(news), "repeated promotion target"
-          print("PASS: V9.60 rollback, V9.61/V9.62 archived, V9.63 operative, auditable source pins")
+          print("PASS: V9.63 A4 rollback and independent V9.64 HTML REPD overview operative")
           PY
