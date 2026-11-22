@@ -1,0 +1,49 @@
+name: Verify Pipeline News V9.60 public route before homepage promotion
+on:
+  pull_request:
+    paths:
+      - 'data/homepage.json'
+      - 'index.html'
+      - '.github/workflows/pipeline-v960-public-route.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  served:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify actual served V9.60 and immutable rollback routes
+        run: |
+          python3 - <<'PY'
+          import urllib.request, urllib.error, time, json
+          base='https://globalgrid2050.com/uk_renewables_pipeline/'
+          def get(path):
+              url=base+path
+              for attempt in range(4):
+                  try:
+                      req=urllib.request.Request(url,headers={'User-Agent':'Ventus-Release-Validation/1.0'})
+                      with urllib.request.urlopen(req,timeout=25) as response:
+                          body=response.read()
+                          assert response.status==200,(url,response.status)
+                          return body.decode('utf-8','replace')
+                  except (urllib.error.HTTPError,urllib.error.URLError,TimeoutError) as e:
+                      if attempt==3: raise
+                      time.sleep(3)
+          html=get('202611212344/')
+          assert 'V9.60' in html and '202611212344' in html, 'Missing exact V9.60 served HTML'
+          assert 'repd-landscape.mjs' in html and 'styles/repd-landscape.css' in html, 'REPD plugin imports absent'
+          js=get('202611212344/repd-landscape.mjs')
+          css=get('202611212344/styles/repd-landscape.css')
+          assert 'pnRepdWideToggle' in js and 'orientation' in js, 'Served JS mismatch'
+          assert 'pn-repd-wide' in css, 'Served CSS mismatch'
+          for old in ['202611212340/','202611201709/']:
+              text=get(old)
+              assert '<html' in text.lower(), f'Rollback path {old} not served'
+          catalog=json.load(open('data/homepage.json'))
+          p=next(x for x in catalog['entities'] if x['id']=='pipeline-news')
+          assert p['operative_release_id']=='202611212344'
+          assert len([x for x in p['releases'] if x['id']=='202611212344'])==1
+          print('PASS: public V9.60 HTML, JS, CSS; V9.59/V9.57 rollback; homepage pointer exact')
+          PY

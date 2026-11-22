@@ -167,8 +167,19 @@ jobs:
           assert releases[v957]["url"]=="https://globalgrid2050.com/uk_renewables_pipeline/202611201709/"
           assert releases[v957]["source_ref"]=="https://github.com/Ventusltd/globalgrid2050/tree/577233737689e1289c89436d76ae50a272fb3677/uk_renewables_pipeline/202611201709"
           assert releases[v957]["status"]=="available"
-          assert news[-1]["from_release_id"]==v956 and news[-1]["to_release_id"]==v957
-          assert e["operative_release_id"]==v957, "unexpected operative target"
+          assert any(x["from_release_id"]==v956 and x["to_release_id"]==v957 for x in news), "V9.56 to V9.57 history missing"
+          releases_expected={
+              "202611212308":("V9.58","6e958cef7da74f042f75f7d2a6c19f3ebc7a2f89"),
+              "202611212340":("V9.59","78915774f690996dd4a745ce8af4fcdd59187a0a"),
+              "202611212344":("V9.60","3b9716e13c93c5e3ee84038339701279c79a90a5"),
+          }
+          for rid,(tag,sha) in releases_expected.items():
+              assert rid in releases and releases[rid]["status"]=="available", f"{tag} missing"
+              assert releases[rid]["url"]==f"https://globalgrid2050.com/uk_renewables_pipeline/{rid}/",f"{tag} route"
+              assert releases[rid]["source_ref"]==f"https://github.com/Ventusltd/globalgrid2050/tree/{sha}/uk_renewables_pipeline/{rid}", f"{tag} immutable source"
+              assert releases[rid]["published_at"] is None, "Unknown publication clocks must remain unknown"
+          assert news[-1]["from_release_id"]==v957 and news[-1]["to_release_id"]=="202611212344"
+          assert e["operative_release_id"]=="202611212344", "unexpected operative target"
           assert len({x["to_release_id"] for x in news})==len(news), "repeated promotion target"
-          print("PASS: historical releases retained and exact-source V9.57 operative")
+          print("PASS: historical V9.57 rollback, V9.58/V9.59 and pinned V9.60 operative")
           PY
