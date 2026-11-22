@@ -366,7 +366,7 @@
       "subtitle": "Follow renewable energy projects",
       "description": "Explore the project register and follow the renewable energy pipeline.",
       "launch_label": "Open Pipeline News",
-      "operative_release_id": "202611221900",
+      "operative_release_id": "202611221930",
       "releases": [
         {
           "id": "202609082224",
@@ -663,6 +663,14 @@
           "published_at": null,
           "status": "available",
           "source_ref": "https://github.com/Ventusltd/globalgrid2050/tree/3717ea87413f25410168d982d898e873b87ea6bf/uk_renewables_pipeline/202611221900"
+        },
+        {
+          "id": "202611221930",
+          "label": "V9.71 - Simplified REPD expanded-view controls",
+          "url": "https://globalgrid2050.com/uk_renewables_pipeline/202611221930/",
+          "published_at": null,
+          "status": "available",
+          "source_ref": "https://github.com/Ventusltd/globalgrid2050/tree/0f8b1b925851e5d20073eab27d01b804f2bbb305/uk_renewables_pipeline/202611221930"
         }
       ]
     },
@@ -1500,6 +1508,13 @@
       "to_release_id": "202611221900",
       "reason": "Owner urgent fix: preserve V9.69 layout, make second-column expanded MAP open the same live GridAtlas route as normal MAP on iPhone and desktop. Source V9.70 Chromium and WebKit actual navigation acceptance passed in six profiles; A4 unchanged. V9.69 retained for rollback. Homepage/public served-byte verification remains separate.",
       "promoted_at": "2026-11-22T19:00:06.876Z"
+    },
+    {
+      "entity_id": "pipeline-news",
+      "from_release_id": "202611221900",
+      "to_release_id": "202611221930",
+      "reason": "Owner requests removal of redundant old top-right REPD maximise arrow. V9.71 removes only the obsolete landscape-only launcher and rotate-device prompt bootstrap while retaining the newer EXPANDED REPD VIEW. Chromium/WebKit portrait/landscape, MAP/A4, sorting, restore and live GridAtlas navigation CI passed; all earlier editions remain intact.",
+      "promoted_at": "2026-11-22T19:13:42.175Z"
     }
   ]
 }
