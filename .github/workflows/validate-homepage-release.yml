@@ -178,8 +178,17 @@ jobs:
               assert releases[rid]["url"]==f"https://globalgrid2050.com/uk_renewables_pipeline/{rid}/",f"{tag} route"
               assert releases[rid]["source_ref"]==f"https://github.com/Ventusltd/globalgrid2050/tree/{sha}/uk_renewables_pipeline/{rid}", f"{tag} immutable source"
               assert releases[rid]["published_at"] is None, "Unknown publication clocks must remain unknown"
-          assert news[-1]["from_release_id"]==v957 and news[-1]["to_release_id"]=="202611212344"
-          assert e["operative_release_id"]=="202611212344", "unexpected operative target"
+          # Preserve the audited V9.60 promotion, now succeeded by the approved V9.63.
+          assert any(x["from_release_id"]==v957 and x["to_release_id"]=="202611212344" for x in news), "original V9.60 promotion must remain"
+          latest={"202611220100":"V9.61","202611220125":"V9.62","202611220220":"V9.63"}
+          pinned="f01902f5751cb412e950663a1903641fa8ffa456"
+          for rid,label in latest.items():
+              assert rid in releases and releases[rid]["status"]=="available", f"{label} missing"
+              assert releases[rid]["url"]==f"https://globalgrid2050.com/uk_renewables_pipeline/{rid}/", f"{label} app route"
+              assert releases[rid]["source_ref"]==f"https://github.com/Ventusltd/globalgrid2050/tree/{pinned}/uk_renewables_pipeline/{rid}", f"{label} immutable source"
+              assert releases[rid]["published_at"] is None, f"{label} publication clock must remain unasserted"
+          assert news[-1]["from_release_id"]=="202611212344" and news[-1]["to_release_id"]=="202611220220", "V9.63 promotion audit"
+          assert e["operative_release_id"]=="202611220220", "unexpected operative target"
           assert len({x["to_release_id"] for x in news})==len(news), "repeated promotion target"
-          print("PASS: historical V9.57 rollback, V9.58/V9.59 and pinned V9.60 operative")
+          print("PASS: V9.60 rollback, V9.61/V9.62 archived, V9.63 operative, auditable source pins")
           PY
