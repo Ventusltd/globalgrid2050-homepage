@@ -243,8 +243,15 @@ jobs:
           assert releases[v971]["url"]=="https://globalgrid2050.com/uk_renewables_pipeline/202611221930/", "V9.71 route"
           assert releases[v971]["source_ref"]=="https://github.com/Ventusltd/globalgrid2050/tree/0f8b1b925851e5d20073eab27d01b804f2bbb305/uk_renewables_pipeline/202611221930", "V9.71 merged source"
           assert releases[v971]["published_at"] is None, "Do not invent publication timestamp"
-          assert news[-1]["from_release_id"]==v970 and news[-1]["to_release_id"]==v971, "V9.71 latest promotion"
-          assert e["operative_release_id"]==v971, "unexpected operative target"
+          assert any(x["from_release_id"]==v970 and x["to_release_id"]==v971 for x in news), "V9.71 promotion history"
+          v972="202611222222"
+          assert v972 in releases and releases[v972]["status"]=="available", "V9.72 missing"
+          assert releases[v972]["label"]=="V9.72 - VICINITY MAP and A4/PDF link parity", "V9.72 release label"
+          assert releases[v972]["url"]=="https://globalgrid2050.com/uk_renewables_pipeline/202611222222/", "V9.72 URL"
+          assert releases[v972]["source_ref"]=="https://github.com/Ventusltd/globalgrid2050/tree/384de6d2789ba5947613728ec348ed2fe50a3384/uk_renewables_pipeline/202611222222", "V9.72 immutable source SHA"
+          assert releases[v972]["published_at"] is None, "Do not invent actual publication clock"
+          assert news[-1]["from_release_id"]==v971 and news[-1]["to_release_id"]==v972, "V9.72 latest promotion"
+          assert e["operative_release_id"]==v972, "Unexpected operative target"
           assert len({x["to_release_id"] for x in news})==len(news), "repeated promotion target"
-          print("PASS: V9.71 clean REPD expansion operative; V9.70-V9.63 rollback preserved")
+          print("PASS: V9.72 MAP and A4/PDF parity operative; V9.71 through V9.63 rollbacks preserved")
           PY
