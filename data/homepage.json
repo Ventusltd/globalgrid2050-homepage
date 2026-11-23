@@ -366,7 +366,7 @@
       "subtitle": "Follow renewable energy projects",
       "description": "Explore the project register and follow the renewable energy pipeline.",
       "launch_label": "Open Pipeline News",
-      "operative_release_id": "202611222330",
+      "operative_release_id": "202611231400",
       "releases": [
         {
           "id": "202609082224",
@@ -687,6 +687,14 @@
           "published_at": null,
           "status": "available",
           "source_ref": "https://github.com/Ventusltd/globalgrid2050/tree/477e8fa8ec4986c1b525f5c29e5b11decee991fa/uk_renewables_pipeline/202611222330"
+        },
+        {
+          "id": "202611231400",
+          "label": "V9.74 - Technology-filtered Operator MW cockpit",
+          "url": "https://globalgrid2050.com/uk_renewables_pipeline/202611231400/",
+          "published_at": null,
+          "status": "available",
+          "source_ref": "https://github.com/Ventusltd/globalgrid2050/tree/a7f49fa4af3c69944cede29f90837f1f7877e8ef/uk_renewables_pipeline/202611231400"
         }
       ]
     },
@@ -1545,6 +1553,13 @@
       "to_release_id": "202611222330",
       "reason": "Owner-approved V9.73 reporting publication: Operator MW, all official REPD Status MW, Region MW; source exact 7,775-record reconciliation, Chromium/WebKit portrait/landscape report actions, inherited MAP/A4/PDF parity, source-preservation and rollback. Public served verification follows separately.",
       "promoted_at": "2026-11-22T23:48:20.838Z"
+    },
+    {
+      "entity_id": "pipeline-news",
+      "from_release_id": "202611222330",
+      "to_release_id": "202611231400",
+      "reason": "Owner-approved 23 November 2026 V9.74 publication. Same cockpit Operator MW, Status MW and Region MW grouped by selected Solar/BESS/Onshore/Offshore technology, every source REPD status and intersecting operator/region facets. Exact 7,775 REPD IDs, six Chromium/WebKit viewport tests, V9.73 full 342-file preservation, untouched REPD palette, MAP/A4/PDF/VICINITY/expanded regression and green Spider checks. V9.73 remains rollback. Separate visual donor PR #228 is not promoted. Public served SHA verification pending.",
+      "promoted_at": "2026-11-23T13:59:40.882Z"
     }
   ]
 }
