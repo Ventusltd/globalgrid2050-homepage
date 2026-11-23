@@ -257,8 +257,15 @@ jobs:
           assert releases[v973]["url"]=="https://globalgrid2050.com/uk_renewables_pipeline/202611222330/", "V9.73 URL"
           assert releases[v973]["source_ref"]=="https://github.com/Ventusltd/globalgrid2050/tree/477e8fa8ec4986c1b525f5c29e5b11decee991fa/uk_renewables_pipeline/202611222330", "V9.73 immutable source"
           assert releases[v973]["published_at"] is None, "Unverified publication timestamp"
-          assert news[-1]["from_release_id"]==v972 and news[-1]["to_release_id"]==v973, "V9.73 latest promotion"
-          assert e["operative_release_id"]==v973, "Unexpected operative target"
+          assert any(x["from_release_id"]==v972 and x["to_release_id"]==v973 for x in news), "V9.73 audited promotion missing"
+          v974="202611231400"
+          assert v974 in releases and releases[v974]["status"]=="available", "V9.74 release missing"
+          assert releases[v974]["label"]=="V9.74 - Technology-filtered Operator MW cockpit", "V9.74 exact label"
+          assert releases[v974]["url"]==f"https://globalgrid2050.com/uk_renewables_pipeline/{v974}/", "V9.74 route"
+          assert releases[v974]["source_ref"]=="https://github.com/Ventusltd/globalgrid2050/tree/a7f49fa4af3c69944cede29f90837f1f7877e8ef/uk_renewables_pipeline/202611231400", "V9.74 immutable source SHA"
+          assert releases[v974]["published_at"] is None, "Do not claim public served timestamp before verification"
+          assert news[-1]["from_release_id"]==v973 and news[-1]["to_release_id"]==v974, "V9.74 must follow V9.73"
+          assert e["operative_release_id"]==v974, "Unexpected operative target"
           assert len({x["to_release_id"] for x in news})==len(news), "repeated promotion target"
-          print("PASS: V9.73 operator/status/region reports operative; V9.72-V9.63 rollbacks preserved")
+          print("PASS: V9.74 cross-filtered Operator MW operative; V9.73/V9.72 and all history preserved")
           PY
