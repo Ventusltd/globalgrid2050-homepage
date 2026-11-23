@@ -366,7 +366,7 @@
       "subtitle": "Follow renewable energy projects",
       "description": "Explore the project register and follow the renewable energy pipeline.",
       "launch_label": "Open Pipeline News",
-      "operative_release_id": "202611231600",
+      "operative_release_id": "202611232245",
       "releases": [
         {
           "id": "202609082224",
@@ -703,6 +703,14 @@
           "published_at": null,
           "status": "available",
           "source_ref": "https://github.com/Ventusltd/globalgrid2050/tree/5cb111911073a149dd4a69992a02ff52b61f55bb/uk_renewables_pipeline/202611231600"
+        },
+        {
+          "id": "202611232245",
+          "label": "V9.76 - Mobile REPD report readability",
+          "url": "https://globalgrid2050.com/uk_renewables_pipeline/202611232245/",
+          "published_at": null,
+          "status": "available",
+          "source_ref": "https://github.com/Ventusltd/globalgrid2050/tree/032e28629125515650ea14d99091362ba46ee457/uk_renewables_pipeline/202611232245"
         }
       ]
     },
@@ -1575,6 +1583,13 @@
       "to_release_id": "202611231600",
       "reason": "Owner-requested V9.75 native original REPD filter integration, 23 November 2026. Exact official status/operator/region selections use one original project table dataset for gauges, Operator/Status/Region capacity reports and CSV; conservative only reviewed Low Carbon spelling aliases in reporting without rewriting any of 7,775 official REPD records. Full Python source-closure of 344 inherited files, 7 intentional source modifications, zero changed CSS/colour, data, MAP/A4/PDF/VICINITY; 6/6 Chromium/WebKit screens, 16 inherited MAP/A4/PDF/VICINITY/expanded regression cases and source release CI PASS. V9.74 and V9.73 remain immutable rollback; public served-byte receipt follows separately. Visual donor PR #228 excluded.",
       "promoted_at": "2026-11-23T16:30:21.806Z"
+    },
+    {
+      "entity_id": "pipeline-news",
+      "from_release_id": "202611231600",
+      "to_release_id": "202611232245",
+      "reason": "Owner iPhone Safari report readability defect 23 November 2026: V9.76 preserves full immutable V9.75 345-file source while applying mobile-scoped report horizontal scrolling, nonbreaking numeric MW/MWp cells, sticky operator names, one-line horizontally scrollable official status actions and bounded operator/region selectors. Same original REPD/SCADA palette, 7,775 source records, gauges, real GridAtlas MAP/A4/PDF/VICINITY and desktop layout. 10 Chromium/WebKit 320-1280px screens plus six original V9.75 browser matrices, real 7,775 REPD alias reconciliations and historical MAP/A4/PDF/VICINITY/expanded regression PASS. V9.75 and V9.74 retained as rollback. Independent public served-byte receipt follows separately.",
+      "promoted_at": "2026-11-23T22:48:54.163Z"
     }
   ]
 }
