@@ -1119,7 +1119,7 @@
       "subtitle": "The functional dictionary of GlobalGrid2050",
       "description": "Explore what the estate's code does in plain English. Search and sort functional meanings, follow demonstrations, and inspect permanent VEDIC identities, timestamps and linked source evidence.",
       "launch_label": "Open VEDIC",
-      "operative_release_id": "20261126-v3",
+      "operative_release_id": "20261126-prose-teleprinter",
       "releases": [
         {
           "id": "v1",
@@ -1146,6 +1146,14 @@
           "published_at": "2026-11-26T16:35:18Z",
           "status": "available",
           "source_ref": "https://github.com/Ventusltd/vedic-/tree/9d6a3a35b12fc4709f4b65965ca1f17a87277a2d"
+        },
+        {
+          "id": "20261126-prose-teleprinter",
+          "label": "VEDIC — current continuous English library",
+          "url": "https://ventusltd.github.io/vedic-/",
+          "published_at": "2026-11-26T19:37:59Z",
+          "status": "available",
+          "source_ref": "https://github.com/Ventusltd/vedic-/tree/205bbd8f9be2f38d1b6f514022a494474fac79a6"
         }
       ]
     }
@@ -1644,6 +1652,13 @@
       "to_release_id": "20261126-v3",
       "reason": "Owner-authorised promotion after exact V3 Pages deployment and public-byte verification, Actions 45859699709 job 140048497907; V1/V2 preserved.",
       "promoted_at": "2026-11-26T16:35:18Z"
+    },
+    {
+      "entity_id": "vedic",
+      "from_release_id": "20261126-v3",
+      "to_release_id": "20261126-prose-teleprinter",
+      "reason": "Point to validated current prose library after successful deployment 45884721685; historical V1–V3 retained. Continuous English catalogue grows through reviewed releases.",
+      "promoted_at": "2026-11-26T19:43:20Z"
     }
   ]
 }
