@@ -1119,7 +1119,7 @@
       "subtitle": "The functional dictionary of GlobalGrid2050",
       "description": "Explore what the estate's code does in plain English. Search and sort functional meanings, follow demonstrations, and inspect permanent VEDIC identities, timestamps and linked source evidence.",
       "launch_label": "Open VEDIC",
-      "operative_release_id": "v1",
+      "operative_release_id": "202611261351",
       "releases": [
         {
           "id": "v1",
@@ -1127,7 +1127,17 @@
           "url": "https://ventusltd.github.io/vedic-/",
           "published_at": null,
           "status": "available",
-          "source_ref": "https://github.com/Ventusltd/vedic-/tree/c53f91415a5f04313868fcf5d8fcabc25ae866c6"
+          "source_ref": "https://github.com/Ventusltd/vedic-/tree/c53f91415a5f04313868fcf5d8fcabc25ae866c6",
+          "archive_url": "https://ventusltd.github.io/vedic-/releases/202611260135-v1/",
+          "archive_kind": "app"
+        },
+        {
+          "id": "202611261351",
+          "label": "VEDIC V2 — 26 November 2026 (50 meanings)",
+          "url": "https://ventusltd.github.io/vedic-/releases/202611261351/",
+          "published_at": "2026-11-26T13:57:21Z",
+          "status": "available",
+          "source_ref": "https://github.com/Ventusltd/vedic-/tree/55ff568b378acff4adae02fb5c758b4f4f8c6bcd"
         }
       ]
     }
@@ -1612,6 +1622,13 @@
       "to_release_id": "202611232245",
       "reason": "Owner iPhone Safari report readability defect 23 November 2026: V9.76 preserves full immutable V9.75 345-file source while applying mobile-scoped report horizontal scrolling, nonbreaking numeric MW/MWp cells, sticky operator names, one-line horizontally scrollable official status actions and bounded operator/region selectors. Same original REPD/SCADA palette, 7,775 source records, gauges, real GridAtlas MAP/A4/PDF/VICINITY and desktop layout. 10 Chromium/WebKit 320-1280px screens plus six original V9.75 browser matrices, real 7,775 REPD alias reconciliations and historical MAP/A4/PDF/VICINITY/expanded regression PASS. V9.75 and V9.74 retained as rollback. Independent public served-byte receipt follows separately.",
       "promoted_at": "2026-11-23T22:48:54.163Z"
+    },
+    {
+      "entity_id": "vedic",
+      "from_release_id": "v1",
+      "to_release_id": "202611261351",
+      "reason": "VEDIC main Pages run 45833847492 passed and verified all 18 public payload/manifest files; V1 immutable archive preserved.",
+      "promoted_at": "2026-11-26T13:57:21Z"
     }
   ]
 }
