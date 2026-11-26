@@ -1119,7 +1119,7 @@
       "subtitle": "The functional dictionary of GlobalGrid2050",
       "description": "Explore what the estate's code does in plain English. Search and sort functional meanings, follow demonstrations, and inspect permanent VEDIC identities, timestamps and linked source evidence.",
       "launch_label": "Open VEDIC",
-      "operative_release_id": "202611261351",
+      "operative_release_id": "20261126-v3",
       "releases": [
         {
           "id": "v1",
@@ -1138,6 +1138,14 @@
           "published_at": "2026-11-26T13:57:21Z",
           "status": "available",
           "source_ref": "https://github.com/Ventusltd/vedic-/tree/55ff568b378acff4adae02fb5c758b4f4f8c6bcd"
+        },
+        {
+          "id": "20261126-v3",
+          "label": "VEDIC V3 — 26 November 2026 (50 meanings + capability register)",
+          "url": "https://ventusltd.github.io/vedic-/releases/20261126-v3/",
+          "published_at": "2026-11-26T16:35:18Z",
+          "status": "available",
+          "source_ref": "https://github.com/Ventusltd/vedic-/tree/9d6a3a35b12fc4709f4b65965ca1f17a87277a2d"
         }
       ]
     }
@@ -1629,6 +1637,13 @@
       "to_release_id": "202611261351",
       "reason": "VEDIC main Pages run 45833847492 passed and verified all 18 public payload/manifest files; V1 immutable archive preserved.",
       "promoted_at": "2026-11-26T13:57:21Z"
+    },
+    {
+      "entity_id": "vedic",
+      "from_release_id": "202611261351",
+      "to_release_id": "20261126-v3",
+      "reason": "Owner-authorised promotion after exact V3 Pages deployment and public-byte verification, Actions 45859699709 job 140048497907; V1/V2 preserved.",
+      "promoted_at": "2026-11-26T16:35:18Z"
     }
   ]
 }
