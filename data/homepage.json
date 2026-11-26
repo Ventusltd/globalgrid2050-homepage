@@ -1119,7 +1119,7 @@
       "subtitle": "The functional dictionary of GlobalGrid2050",
       "description": "Explore what the estate's code does in plain English. Search and sort functional meanings, follow demonstrations, and inspect permanent VEDIC identities, timestamps and linked source evidence.",
       "launch_label": "Open VEDIC",
-      "operative_release_id": "20261126-v3",
+      "operative_release_id": "20261126-commands",
       "releases": [
         {
           "id": "v1",
@@ -1146,6 +1146,14 @@
           "published_at": "2026-11-26T16:35:18Z",
           "status": "available",
           "source_ref": "https://github.com/Ventusltd/vedic-/tree/9d6a3a35b12fc4709f4b65965ca1f17a87277a2d"
+        },
+        {
+          "id": "20261126-commands",
+          "label": "VEDIC - Compact command dictionary",
+          "url": "https://ventusltd.github.io/vedic-/",
+          "published_at": "2026-11-26T20:10:42Z",
+          "status": "available",
+          "source_ref": "https://github.com/Ventusltd/vedic-/tree/501bdee9f49672b3b8d6c1ce5f25dfd19a293809"
         }
       ]
     }
@@ -1644,6 +1652,13 @@
       "to_release_id": "20261126-v3",
       "reason": "Owner-authorised promotion after exact V3 Pages deployment and public-byte verification, Actions 45859699709 job 140048497907; V1/V2 preserved.",
       "promoted_at": "2026-11-26T16:35:18Z"
+    },
+    {
+      "entity_id": "vedic",
+      "from_release_id": "20261126-v3",
+      "to_release_id": "20261126-commands",
+      "reason": "Link to the verified command dictionary after VEDIC Pages run 45888772345. Archive links preserved.",
+      "promoted_at": "2026-11-26T20:10:42Z"
     }
   ]
 }
