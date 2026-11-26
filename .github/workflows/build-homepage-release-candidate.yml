@@ -33,89 +33,6 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Verify public V3 and stage owner catalogue promotion
-        if: env.TARGET_BRANCH == 'release/tacit6b-vedic-v3-20261126'
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          set -euo pipefail
-          python3 - <<'PY'
-          import datetime, hashlib, json, os, pathlib, time
-          from urllib.request import Request, urlopen
-          from scripts.releases import load, promote, write_validated
-          base = "https://ventusltd.github.io/vedic-/"
-          raw = "https://raw.githubusercontent.com/Ventusltd/vedic-/"
-          files = ("index.html","data/anatomy.json","data/translation-geodesy.json","data/nearest-spider.json","data/dictionary.json")
-          merge = "faf6ec6e1473ff869dc00849c6c2681fd76da4ab"
-          versions = [
-              ("releases/202611260135-v1/","202611260135-v1","b17a153a6c0698902bfa89516a34ec8a956c11e7"),
-              ("releases/202611261351/","202611261351","55ff568b378acff4adae02fb5c758b4f4f8c6bcd"),
-              ("releases/20261126-v3/","20261126-v3","9d6a3a35b12fc4709f4b65965ca1f17a87277a2d"),
-          ]
-          def get(url, api=False):
-              headers = {"User-Agent":"GlobalGrid2050-V3-owner-preflight","Cache-Control":"no-cache"}
-              if api:
-                  assert url.startswith("https://api.github.com/")
-                  headers["Authorization"] = "Bearer " + os.environ["GH_TOKEN"]
-                  headers["Accept"] = "application/vnd.github+json"
-              with urlopen(Request(url,headers=headers),timeout=20) as response:
-                  assert response.status == 200
-                  return response.read(4000001)
-          def digest(data):
-              return hashlib.sha256(data).hexdigest()
-          catalogue = pathlib.Path("data/homepage.json")
-          doc = load(catalogue)
-          vedic = next(e for e in doc["entities"] if e["id"]=="vedic")
-          if vedic["operative_release_id"] == "20261126-v3":
-              print("V3 already staged; no duplicate promotion")
-              raise SystemExit(0)
-          assert vedic["operative_release_id"] == "202611261351"
-          assert len(vedic["releases"]) == 2
-          api = "https://api.github.com/repos/Ventusltd/vedic-/actions/"
-          verified = None
-          for attempt in range(12):
-              try:
-                  runs=json.loads(get(api+"runs?head_sha="+merge+"&event=push",True))["workflow_runs"]
-                  for run in runs:
-                      if run["head_sha"] != merge or run["conclusion"] != "success":
-                          continue
-                      jobs=json.loads(get(api+"runs/"+str(run["id"])+"/jobs",True))["jobs"]
-                      job=next((j for j in jobs if j["name"]=="publish" and j["conclusion"]=="success"),None)
-                      if job:
-                          verified=(run["id"],job["completed_at"])
-                          break
-                  if not verified:
-                      raise ValueError("exact main publish job not successful yet")
-                  manifests={}
-                  payload={}
-                  for route,version,commit in versions:
-                      source={name:get(raw+commit+"/"+name) for name in files}
-                      manifest={"schema":"vedic.pages.release.v1","version":version,"source_commit":commit,"row_count":len(json.loads(source["data/dictionary.json"])["entries"]),"files":{name:digest(data) for name,data in source.items()}}
-                      wanted=(json.dumps(manifest,sort_keys=True,indent=2)+"\n").encode()
-                      manifests[version]=wanted
-                      payload[version]=source
-                      for name,data in {**source,"release.json":wanted}.items():
-                          assert get(base+route+name+"?v3preflight="+str(attempt))==data,(route,name)
-                          print("MATCH",route+name,digest(data),flush=True)
-                  for name,data in {**payload["20261126-v3"],"release.json":manifests["20261126-v3"]}.items():
-                      assert get(base+name+"?v3preflight="+str(attempt))==data,name
-                      print("MATCH root",name,digest(data),flush=True)
-                  assert payload["202611261351"]["data/dictionary.json"]==payload["20261126-v3"]["data/dictionary.json"]
-                  assert len(json.loads(payload["20261126-v3"]["data/dictionary.json"])["entries"])==50
-                  print("PASS 24/24 public files; deployment",verified,"manifest",digest(manifests["20261126-v3"]),flush=True)
-                  break
-              except Exception as error:
-                  verified=None
-                  print("Preflight retry",attempt+1,type(error).__name__,str(error),flush=True)
-                  if attempt==11:
-                      raise
-                  time.sleep(10)
-          assert verified
-          run_id,published_at=verified
-          vedic["releases"].append({"id":"20261126-v3","label":"VEDIC V3 — 26 November 2026 (50 meanings + capability register)","url":base+"releases/20261126-v3/","published_at":published_at,"status":"available","source_ref":"https://github.com/Ventusltd/vedic-/tree/9d6a3a35b12fc4709f4b65965ca1f17a87277a2d"})
-          doc=promote(doc,"vedic","20261126-v3","Owner-authorised V3; exact Pages publish run "+str(run_id)+" and 24 public file byte matches; historical releases preserved")
-          write_validated(catalogue,doc)
-          PY
       - name: Validate and regenerate fallback from the pinned owner catalogue
         run: |
           set -euo pipefail
@@ -133,23 +50,12 @@ jobs:
           esac
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          if [[ "$TARGET_BRANCH" == release/tacit6b-vedic-v3-20261126 ]]; then
-            git add -- data/homepage.json
-          fi
           git add -- index.html
           if git diff --cached --quiet; then
             echo 'Fallback already matches the catalogue'
             exit 0
           fi
-          if [[ "$TARGET_BRANCH" == release/tacit6b-vedic-v3-20261126 ]]; then
-            if git diff --cached --name-only | grep -Ev '^(index\.html|data/homepage\.json)
-          git commit -m 'build(homepage): regenerate operative release fallback'
-          git push origin HEAD:"$TARGET_BRANCH"
-          echo 'Generated fallback committed to isolated release branch'
-; then exit 1; fi
-          else
-            git diff --cached --name-only | grep -Fx index.html
-          fi
+          git diff --cached --name-only | grep -Fx index.html
           git commit -m 'build(homepage): regenerate operative release fallback'
           git push origin HEAD:"$TARGET_BRANCH"
           echo 'Generated fallback committed to isolated release branch'
