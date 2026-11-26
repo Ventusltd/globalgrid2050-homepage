@@ -7,6 +7,7 @@ on:
       - release/tacit15-vedic-v2-20261126
     paths:
       - data/homepage.json
+      - tests/test_vedic_entry.py
       - .github/workflows/build-homepage-release-candidate.yml
   workflow_dispatch:
 
