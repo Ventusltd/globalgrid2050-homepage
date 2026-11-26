@@ -1,9 +1,10 @@
-name: Build and commit homepage fallback on isolated Q3 release branch
+name: Build and commit homepage fallback on isolated release branch
 
 on:
   push:
     branches:
       - release/pipeline-news-202611132345-20261114
+      - release/tacit15-vedic-v2-20261126
     paths:
       - data/homepage.json
       - .github/workflows/build-homepage-release-candidate.yml
@@ -20,10 +21,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    env:
+      TARGET_BRANCH: ${{ github.event_name == 'push' && github.ref_name || 'release/pipeline-news-202611132345-20261114' }}
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: release/pipeline-news-202611132345-20261114
+          ref: ${{ env.TARGET_BRANCH }}
           persist-credentials: true
       - uses: actions/setup-python@v5
         with:
@@ -39,6 +42,10 @@ jobs:
       - name: Commit only generated fallback HTML to release branch
         run: |
           set -euo pipefail
+          case "$TARGET_BRANCH" in
+            release/pipeline-news-202611132345-20261114|release/tacit15-vedic-v2-20261126) ;;
+            *) echo 'Refusing unreserved branch'; exit 1 ;;
+          esac
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add -- index.html
@@ -47,6 +54,6 @@ jobs:
             exit 0
           fi
           git diff --cached --name-only | grep -Fx index.html
-          git commit -m 'build(homepage): regenerate Q3 operative Pipeline News fallback'
-          git push origin HEAD:release/pipeline-news-202611132345-20261114
+          git commit -m 'build(homepage): regenerate operative release fallback'
+          git push origin HEAD:"$TARGET_BRANCH"
           echo 'Generated fallback committed to isolated release branch'
