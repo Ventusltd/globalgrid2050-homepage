@@ -1112,6 +1112,24 @@
           "source_ref": "https://github.com/Ventusltd/cyber-resilience/commit/51e10d52be3916b50801cdd2510ea32c4ce4a490"
         }
       ]
+    },
+    {
+      "id": "vedic",
+      "title": "VEDIC",
+      "subtitle": "The functional dictionary of GlobalGrid2050",
+      "description": "Explore what the estate's code does in plain English. Search and sort functional meanings, follow demonstrations, and inspect permanent VEDIC identities, timestamps and linked source evidence.",
+      "launch_label": "Open VEDIC",
+      "operative_release_id": "v1",
+      "releases": [
+        {
+          "id": "v1",
+          "label": "VEDIC V1 — 26 November 2026",
+          "url": "https://ventusltd.github.io/vedic-/",
+          "published_at": null,
+          "status": "available",
+          "source_ref": "https://github.com/Ventusltd/vedic-/tree/c53f91415a5f04313868fcf5d8fcabc25ae866c6"
+        }
+      ]
     }
   ],
   "view": {
@@ -1154,6 +1172,10 @@
       },
       {
         "entity_id": "cyber-resilience-log",
+        "open": false
+      },
+      {
+        "entity_id": "vedic",
         "open": false
       }
     ],

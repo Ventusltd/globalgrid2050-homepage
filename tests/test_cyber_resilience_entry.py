@@ -15,7 +15,7 @@ class CyberResilienceEntryTests(unittest.TestCase):
         self.assertEqual(len(by_id), len(catalogue["entities"]))
         self.assertGreaterEqual(len(by_id), 28)
         self.assertEqual(set(by_id), set(metadata["records"]))
-        self.assertEqual(catalogue["view"]["items"][-1], {"entity_id": ID, "open": False})
+        self.assertEqual(catalogue["view"]["items"][9], {"entity_id": ID, "open": False})
         self.assertEqual([item["entity_id"] for item in catalogue["view"]["items"][:9]],
                          ["solar-design-studio","kuiper","gridatlas","ventus-grid-engine",
                           "pipeline-news","identity-registry","electricity-market-intelligence",

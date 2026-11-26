@@ -275,6 +275,20 @@
         "learners"
       ],
       "roles": []
+    },
+    "vedic": {
+      "type": "catalogue",
+      "purpose": "Explain and discover reusable functions in plain English, with demonstrations and traceable source identities. Multiple meanings per word are intentional.",
+      "audience": [
+        "learners",
+        "developers",
+        "researchers",
+        "non-coders"
+      ],
+      "roles": [
+        "functional-dictionary",
+        "knowledge-discovery"
+      ]
     }
   }
 }
