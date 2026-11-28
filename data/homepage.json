@@ -270,9 +270,9 @@
       "id": "satnav-concept",
       "title": "SatNav",
       "subtitle": "Field navigation preview",
-      "description": "Place pins on the map and use your phone’s GPS to see the distance and bearing to the next pin.",
+      "description": "Tap TO, choose a destination on the map and tap Start walk to see the live distance and bearing.",
       "launch_label": "Open SatNav",
-      "operative_release_id": "202611281330",
+      "operative_release_id": "202611281345",
       "releases": [
         {
           "id": "20261124-scope",
@@ -305,6 +305,14 @@
           "published_at": "2026-11-28T13:33:53Z",
           "status": "available",
           "source_ref": "https://github.com/Ventusltd/gridatlas/commit/61c91ca8c56a30de1ca2b26131cfd4bb9bdbec76"
+        },
+        {
+          "id": "202611281345",
+          "label": "Start walk field preview",
+          "url": "https://ventusltd.github.io/gridatlas/atlas/v/satnav-walk-202611281345/",
+          "published_at": "2026-11-28T13:43:56Z",
+          "status": "available",
+          "source_ref": "https://github.com/Ventusltd/gridatlas/commit/da5917738eadf8cc60568fe7197b6fb91c8cc3fb"
         }
       ]
     },
@@ -1749,6 +1757,13 @@
       "to_release_id": "202611281330",
       "reason": "Select the latest published field map and retain its earlier versions.",
       "promoted_at": "2026-11-28T13:35:56Z"
+    },
+    {
+      "entity_id": "satnav-concept",
+      "from_release_id": "202611281330",
+      "to_release_id": "202611281345",
+      "reason": "Select the latest published field map and retain its earlier versions.",
+      "promoted_at": "2026-11-28T13:44:45Z"
     }
   ]
 }
