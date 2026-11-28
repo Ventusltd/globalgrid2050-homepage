@@ -272,7 +272,7 @@
       "subtitle": "Field navigation preview",
       "description": "Place pins on the map and use your phone’s GPS to see the distance and bearing to the next pin.",
       "launch_label": "Open SatNav",
-      "operative_release_id": "202611281300",
+      "operative_release_id": "202611281330",
       "releases": [
         {
           "id": "20261124-scope",
@@ -289,6 +289,22 @@
           "published_at": "2026-11-28T13:11:56Z",
           "status": "available",
           "source_ref": "https://github.com/Ventusltd/gridatlas/commit/dcc6146cf36e44818a1f07674a7bce7d131f8314"
+        },
+        {
+          "id": "202611281318",
+          "label": "Survey map and GPS tracks",
+          "url": "https://ventusltd.github.io/gridatlas/atlas/v/satnav-survey-202611281318/",
+          "published_at": "2026-11-28T13:33:25Z",
+          "status": "available",
+          "source_ref": "https://github.com/Ventusltd/gridatlas/commit/1a8fa8958e6a3cd09ce15324d41efa2a2f15e2dd"
+        },
+        {
+          "id": "202611281330",
+          "label": "Site layouts and walking paths preview",
+          "url": "https://ventusltd.github.io/gridatlas/atlas/v/satnav-layout-202611281330/",
+          "published_at": "2026-11-28T13:33:53Z",
+          "status": "available",
+          "source_ref": "https://github.com/Ventusltd/gridatlas/commit/61c91ca8c56a30de1ca2b26131cfd4bb9bdbec76"
         }
       ]
     },
@@ -1726,6 +1742,13 @@
       "to_release_id": "202611281300",
       "reason": "Open the published multi-pin field map from the SatNav homepage entry.",
       "promoted_at": "2026-11-28T13:33:26Z"
+    },
+    {
+      "entity_id": "satnav-concept",
+      "from_release_id": "202611281300",
+      "to_release_id": "202611281330",
+      "reason": "Select the latest published field map and retain its earlier versions.",
+      "promoted_at": "2026-11-28T13:35:56Z"
     }
   ]
 }
