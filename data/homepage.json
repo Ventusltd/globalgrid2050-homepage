@@ -366,7 +366,7 @@
       "subtitle": "Follow renewable energy projects",
       "description": "Explore the project register and follow the renewable energy pipeline.",
       "launch_label": "Open Pipeline News",
-      "operative_release_id": "202611280048",
+      "operative_release_id": "202611280922",
       "releases": [
         {
           "id": "202609082224",
@@ -719,6 +719,14 @@
           "published_at": "2026-11-28",
           "status": "available",
           "source_ref": "https://github.com/Ventusltd/globalgrid2050/tree/d062f31be9e2eb206e5b92ed5e4cd74982c1b1d4/uk_renewables_pipeline/202611280048"
+        },
+        {
+          "id": "202611280922",
+          "label": "V9.78 · Project A4 reports",
+          "url": "https://globalgrid2050.com/uk_renewables_pipeline/202611280922/",
+          "published_at": "2026-11-28",
+          "status": "available",
+          "source_ref": "https://github.com/Ventusltd/globalgrid2050/tree/f0de25a1b48b06a8f1015f8522e5952309aee73e/uk_renewables_pipeline/202611280922"
         }
       ]
     },
@@ -1674,6 +1682,13 @@
       "to_release_id": "202611280048",
       "reason": "Open official legal evidence from the selected REPD project and preserve the source edition.",
       "promoted_at": "2026-11-28T00:50:22Z"
+    },
+    {
+      "entity_id": "pipeline-news",
+      "from_release_id": "202611280048",
+      "to_release_id": "202611280922",
+      "reason": "Make the project A4 report the sole Pipeline News entry to legal evidence.",
+      "promoted_at": "2026-11-28T09:34:32Z"
     }
   ]
 }

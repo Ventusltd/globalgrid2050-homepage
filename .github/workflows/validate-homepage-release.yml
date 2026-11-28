@@ -285,8 +285,15 @@ jobs:
           assert release["label"]=="V9.77 · Legal evidence by REPD project"
           assert release["url"]==f"https://globalgrid2050.com/uk_renewables_pipeline/{v977}/"
           assert release["source_ref"]==f"https://github.com/Ventusltd/globalgrid2050/tree/d062f31be9e2eb206e5b92ed5e4cd74982c1b1d4/uk_renewables_pipeline/{v977}"
-          assert news[-1]["from_release_id"]==v976 and news[-1]["to_release_id"]==v977, "V9.77 audit must follow V9.76"
-          assert e["operative_release_id"]==v977, "Unexpected operative target"
+          assert any(x["from_release_id"]==v976 and x["to_release_id"]==v977 for x in news), "V9.77 audit must follow V9.76"
+          v978="202611280922"
+          release=releases[v978]
+          assert release["status"]=="available" and release["published_at"]=="2026-11-28"
+          assert release["label"]=="V9.78 · Project A4 reports"
+          assert release["url"]==f"https://globalgrid2050.com/uk_renewables_pipeline/{v978}/"
+          assert release["source_ref"]=="https://github.com/Ventusltd/globalgrid2050/tree/f0de25a1b48b06a8f1015f8522e5952309aee73e/uk_renewables_pipeline/202611280922"
+          assert news[-1]["from_release_id"]==v977 and news[-1]["to_release_id"]==v978, "V9.78 audit must follow V9.77"
+          assert e["operative_release_id"]==v978, "Unexpected operative target"
           assert len({x["to_release_id"] for x in news})==len(news), "repeated promotion target"
-          print("PASS: V9.77 is operative and its predecessors retain immutable evidence")
+          print("PASS: V9.78 is operative and its predecessors retain immutable evidence")
           PY
