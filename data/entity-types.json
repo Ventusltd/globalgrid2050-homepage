@@ -289,6 +289,15 @@
         "functional-dictionary",
         "knowledge-discovery"
       ]
+    },
+    "satnav-concept": {
+      "type": "application",
+      "purpose": "Select map pins and use GPS to follow an ordered field plan.",
+      "audience": [
+        "field surveyors",
+        "site visitors"
+      ],
+      "roles": []
     }
   }
 }
