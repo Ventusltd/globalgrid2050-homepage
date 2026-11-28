@@ -366,7 +366,7 @@
       "subtitle": "Follow renewable energy projects",
       "description": "Explore the project register and follow the renewable energy pipeline.",
       "launch_label": "Open Pipeline News",
-      "operative_release_id": "202611232245",
+      "operative_release_id": "202611280048",
       "releases": [
         {
           "id": "202609082224",
@@ -711,6 +711,14 @@
           "published_at": null,
           "status": "available",
           "source_ref": "https://github.com/Ventusltd/globalgrid2050/tree/032e28629125515650ea14d99091362ba46ee457/uk_renewables_pipeline/202611232245"
+        },
+        {
+          "id": "202611280048",
+          "label": "V9.77 · Legal evidence by REPD project",
+          "url": "https://globalgrid2050.com/uk_renewables_pipeline/202611280048/",
+          "published_at": "2026-11-28",
+          "status": "available",
+          "source_ref": "https://github.com/Ventusltd/globalgrid2050/tree/d062f31be9e2eb206e5b92ed5e4cd74982c1b1d4/uk_renewables_pipeline/202611280048"
         }
       ]
     },
@@ -1659,6 +1667,13 @@
       "to_release_id": "20261126-commands",
       "reason": "Link to the verified command dictionary after VEDIC Pages run 45888772345. Archive links preserved.",
       "promoted_at": "2026-11-26T20:10:42Z"
+    },
+    {
+      "entity_id": "pipeline-news",
+      "from_release_id": "202611232245",
+      "to_release_id": "202611280048",
+      "reason": "Open official legal evidence from the selected REPD project and preserve the source edition.",
+      "promoted_at": "2026-11-28T00:50:22Z"
     }
   ]
 }
